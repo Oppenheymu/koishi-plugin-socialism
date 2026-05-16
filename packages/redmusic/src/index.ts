@@ -8,6 +8,8 @@ export const name = "redmusic";
 
 export const usage = `
 ## 使用说明
+插件是我vibe的
+所有歌曲均已获得“小市民红球”授权
 本插件注入 \`redmusic\` 服务，可供其他插件通过 \`ctx.redmusic\` 调用：
 
 - \`ctx.redmusic.random(概率?, 过滤?)\` — 按概率随机选取一首，返回音频元素
@@ -24,15 +26,20 @@ export const usage = `
 `;
 
 export interface Config {
-  /** 点歌冷却时间（秒） */
-  cooldown: number
-  /** 是否在语音前显示歌名 */
-  showName: boolean
+	/** 点歌冷却时间（秒） */
+	cooldown: number;
+	/** 是否在语音前显示歌名 */
+	showName: boolean;
 }
 
 export const Config: Schema<Config> = Schema.object({
-  cooldown: Schema.number().default(30).min(0).description('点歌冷却时间（秒）'),
-  showName: Schema.boolean().default(true).description('是否在语音前显示歌名和标签'),
+	cooldown: Schema.number()
+		.default(30)
+		.min(0)
+		.description("点歌冷却时间（秒）"),
+	showName: Schema.boolean()
+		.default(true)
+		.description("是否在语音前显示歌名和标签"),
 });
 
 // ── Service ──────────────────────────────────────────────
