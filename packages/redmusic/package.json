@@ -17,14 +17,29 @@
 	"homepage": "https://github.com/Oppenheymu/koishi-plugin-infra/tree/main/packages/redmusic",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Oppenheymu/koishi-plugin-socialism.gi		    "directory": "packages/redmus	"
- 	,
-  "keywords"		    "chatbo		    "koish		    "plug	"
- 	,
-  "scripts"		    "build": "tsc 	"
- 	,
-  "peerDependencies"		    "koishi": "^4.17	"
- 	,
-  "koishi"		    "description"			    "en": "Collect some redmusi			    "zh": "收集了一些红歌，注入到ctx供其它插件使用		   		    "service"			    "implements"				    "redmus			  		  	}
-  }
+		"url": "git+https://github.com/Oppenheymu/koishi-plugin-socialism.git",
+		"directory": "packages/redmusic"
+	},
+	"keywords": [
+		"chatbot",
+		"koishi",
+		"plugin"
+	],
+	"scripts": {
+		"build": "tsc -b"
+	},
+	"peerDependencies": {
+		"koishi": "^4.17.5"
+	},
+	"koishi": {
+		"description": {
+			"en": "Collect some redmusic",
+			"zh": "收集了一些红歌，注入到ctx供其它插件使用"
+		},
+		"service": {
+			"implements": [
+				"redmusic"
+			]
+		}
+	}
 }
