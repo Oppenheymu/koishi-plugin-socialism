@@ -1,0 +1,19 @@
+{
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  "search.exclude": {
+    "**/lib": true,
+    "**/dist": true,
+    "**/node_modules": true
+  },
+  "files.watcherExclude": {
+    "**/lib/**": true,
+    "**/dist/**": true,
+    "**/node_modules/**": true
+  }
+}
