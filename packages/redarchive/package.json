@@ -1,0 +1,47 @@
+{
+	"name": "koishi-plugin-redarchive",
+	"version": "2.0.0",
+	"contributors": [
+		"Oppenheymu <266071743+Oppenheymu@users.noreply.github.com>"
+	],
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"files": [
+		"lib"
+	],
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"homepage": "https://github.com/Oppenheymu/koishi-plugin-socialism/tree/main/packages/redarchive",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Oppenheymu/koishi-plugin-socialism.git",
+		"directory": "packages/redarchive"
+	},
+	"keywords": [
+		"chatbot",
+		"koishi",
+		"plugin",
+		"marxists",
+		"archive"
+	],
+	"scripts": {
+		"build": "tsc -b"
+	},
+	"peerDependencies": {
+		"koishi": "^4.17.5"
+	},
+	"dependencies": {
+		"cheerio": "^1.0.0",
+		"domhandler": "^5.0.3",
+		"iconv-lite": "^0.6.3"
+	},
+	"koishi": {
+		"description": {
+			"en": "Download files from the Chinese Marxist Library",
+			"zh": "爬取中文马克思主义文库文件"
+		},
+		"service": {}
+	}
+}
