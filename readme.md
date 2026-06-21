@@ -2,8 +2,6 @@
 
 > Koishi「社会主义」插件集合 · 单仓多包管理
 
-本仓库收录一组围绕红色文化与马克思主义文献的 Koishi 插件，统一在 `packages/` 下以 monorepo 形式维护，使用 pnpm workspace + changesets 管理版本与发布。
-
 ## 子包导航
 
 | 包名 | 路径 | 版本 | 简介 |
@@ -26,21 +24,6 @@
 - 支持配置多个镜像入口，按优先级依次尝试
 - 仅使用 HTTP 抓取，无需 Playwright
 - 内置分类列表 / 文件列表缓存，可配 TTL
-
-## 开发
-
-```bash
-# 安装依赖
-pnpm install
-
-# 构建全部子包
-pnpm build
-
-# 并行开发（监听模式）
-pnpm dev
-```
-
-环境要求：Node.js ≥ 18，pnpm ≥ 10。
 
 ## 交流与反馈
 
