@@ -2,7 +2,6 @@
 	"files": [],
 	"references": [
 		{ "path": "./packages/redarchive" },
-		{ "path": "./packages/redmusic" },
-		{ "path": "./packages/redposter" }
+		{ "path": "./packages/redmusic" }
 	]
 }

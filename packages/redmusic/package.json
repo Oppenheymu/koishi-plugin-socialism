@@ -1,8 +1,8 @@
 {
-	"name": "koishi-plugin-redmusic",
-	"version": "1.2.0",
+	"name": "@socialism/koishi-plugin-redmusic",
+	"version": "1.2.1",
 	"contributors": [
-		"oppenheymu@gmail.com"
+		"Oppenheymu <oppenheymu@gmail.com>"
 	],
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
@@ -40,7 +40,7 @@
 		"koishi": "^4.17.5"
 	},
 	"dependencies": {
-		"adm-zip": "^0.5.16"
+		"adm-zip": "^0.5.17"
 	},
 	"koishi": {
 		"description": {

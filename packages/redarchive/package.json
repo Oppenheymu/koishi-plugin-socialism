@@ -1,8 +1,8 @@
 {
-	"name": "koishi-plugin-redarchive",
-	"version": "2.1.0",
+	"name": "@socialism/koishi-plugin-redarchive",
+	"version": "2.1.1",
 	"contributors": [
-		"oppenheymu@gmail.com"
+		"Oppenheymu <oppenheymu@gmail.com>"
 	],
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
