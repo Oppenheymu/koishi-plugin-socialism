@@ -1,5 +1,5 @@
 import type { Context } from 'koishi'
-import { randomPick, exactPick, listSongs } from './core'
+import { randomPick, exactPick, listSongs, isAssetsReady } from './core'
 import type { SongFilter } from './types'
 
 export interface ListenConfig {
@@ -9,7 +9,11 @@ export interface ListenConfig {
   showName: boolean
 }
 
-export function registerListenCommands(ctx: Context, config: ListenConfig) {
+export function registerListenCommands(
+  ctx: Context,
+  config: ListenConfig,
+  onRedownload: () => Promise<boolean>,
+) {
   const cooldowns = new Map<string, number>()
 
   function checkCooldown(userId: string): number {
@@ -33,6 +37,11 @@ export function registerListenCommands(ctx: Context, config: ListenConfig) {
     .example('红歌 /纯曲 /交响乐')
     .action(async ({ session }, query) => {
       if (!session?.userId) return
+
+      // 资源就绪检查
+      if (!isAssetsReady()) {
+        return '红歌音频资源尚未下载完成，请稍后再试，或联系管理员执行「红歌重载」'
+      }
 
       // 冷却检查
       const remaining = checkCooldown(session.userId)
@@ -114,6 +123,26 @@ export function registerListenCommands(ctx: Context, config: ListenConfig) {
         return `${name} ${versions.join(' ')}`
       })
 
-      return `共 ${songs.length} 首歌曲：\n${lines.join('\n')}`
+      const readyNote = isAssetsReady() ? '' : '\n\n⚠️ 音频资源尚未下载完成，点歌暂不可用'
+      return `共 ${songs.length} 首歌曲：\n${lines.join('\n')}${readyNote}`
+    })
+
+  // ── 红歌重载（管理员手动触发重新下载） ────────────────
+
+  ctx.command('红歌重载', '重新下载红歌音频资源（管理员）')
+    .alias('红歌reload')
+    .userFields(['authority'])
+    .action(async ({ session }) => {
+      if (!session) return
+      // 需要 2 级及以上权限（koishi 默认 owner=5，admin=4，user=1）
+      const user = session.user as { authority?: number } | undefined
+      if ((user?.authority ?? 0) < 2) {
+        return '权限不足，需要 2 级及以上权限'
+      }
+      await session.send('开始重新下载红歌音频资源，可能需要数分钟…')
+      const ok = await onRedownload()
+      return ok
+        ? '红歌音频资源下载完成，可以正常点歌了'
+        : '下载失败，请查看日志（可能网络不通，或稍后重试）'
     })
 }

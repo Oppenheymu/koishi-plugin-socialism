@@ -1,6 +1,6 @@
 {
 	"name": "koishi-plugin-redmusic",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"contributors": [
 		"oppenheymu@gmail.com"
 	],
@@ -16,7 +16,7 @@
 	},
 	"files": [
 		"lib",
-		"assets"
+		"assets/index.json"
 	],
 	"license": "MIT",
 	"publishConfig": {
@@ -39,6 +39,9 @@
 	"peerDependencies": {
 		"koishi": "^4.17.5"
 	},
+	"dependencies": {
+		"adm-zip": "^0.5.16"
+	},
 	"koishi": {
 		"description": {
 			"en": "Collect some redmusic",
@@ -49,5 +52,8 @@
 				"redmusic"
 			]
 		}
+	},
+	"devDependencies": {
+		"@types/adm-zip": "^0.5.8"
 	}
 }
