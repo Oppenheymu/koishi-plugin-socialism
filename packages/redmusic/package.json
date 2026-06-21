@@ -1,6 +1,6 @@
 {
-	"name": "@socialism/koishi-plugin-redmusic",
-	"version": "1.2.1",
+	"name": "koishi-plugin-redmusic",
+	"version": "1.2.2",
 	"contributors": [
 		"Oppenheymu <oppenheymu@gmail.com>"
 	],

@@ -1,5 +1,5 @@
 {
-	"name": "@socialism/koishi-plugin-redarchive",
+	"name": "koishi-plugin-redarchive",
 	"version": "2.1.1",
 	"contributors": [
 		"Oppenheymu <oppenheymu@gmail.com>"

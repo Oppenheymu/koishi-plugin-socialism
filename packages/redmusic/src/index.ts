@@ -138,7 +138,7 @@ export function apply(ctx: Context, config: Config) {
   ctx.on("ready", async () => {
     if (isCacheReady(cacheDir, catalog)) {
       setAssetsDir(cacheDir);
-      ctx.logger("redmusic").info("音频缓存已就绪，跳过下载");
+      ctx.logger("redmusic").info("音频缓存已就绪，跳过下载，路径: %s", cacheDir);
       return;
     }
 

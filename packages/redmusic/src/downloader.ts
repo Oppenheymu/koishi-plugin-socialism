@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { Context } from "koishi";
 import { Logger } from "koishi";
@@ -40,7 +40,9 @@ export function isCacheReady(cacheDir: string, catalog: SongEntry[]): boolean {
 
   try {
     const expected = catalog.length;
-    const content = require(markerPath) as { count?: number };
+    // ⚠️ 不能用 require()：.ready 无 .json 扩展名，require 会当 JS 解析失败
+    const raw = readFileSync(markerPath, "utf-8");
+    const content = JSON.parse(raw) as { count?: number };
     if (content.count !== expected) return false;
 
     // 进一步抽查：所有 catalog 里的文件都应该在
@@ -121,7 +123,7 @@ export async function downloadAssets(
       JSON.stringify({ count: catalog.length, ts: Date.now() }),
       "utf-8",
     );
-    logger.info("红歌音频缓存就绪 (%d 首)", catalog.length);
+    logger.info("红歌音频缓存就绪 (%d 首)，路径: %s", catalog.length, cacheDir);
     return true;
   } catch (e) {
     logger.error("下载/解压红歌音频失败: %s", (e as Error).message ?? e);
