@@ -6,10 +6,20 @@ import { registerCommand } from "./command";
 export const name = "redarchive";
 
 export const usage = `
-## 使用说明
-- 抓取中文马克思主义文库文档，以进行学术研究
-- 支持配置多个镜像入口，按优先级依次尝试
-- 仅使用 HTTP 抓取，无需 Playwright
+<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+  <h2 style="margin-top: 0; color: #4a6ee0;">📖 使用说明</h2>
+  <ul>
+    <li>📚 抓取<strong>中文马克思主义文库</strong>文档，以进行学术研究</li>
+    <li>🔗 支持配置多个镜像入口，按优先级依次尝试</li>
+    <li>⚡ 仅使用 HTTP 抓取，无需 Playwright</li>
+  </ul>
+</div>
+
+<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+  <h2 style="margin-top: 0; color: #e0574a;">💬 交流与反馈</h2>
+  <p>🌟 喜欢这个插件？欢迎加入 QQ 群 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;"><strong>1071284605</strong></a>【晓基地插件工坊】进行交流</p>
+  <p>🐛 遇到问题？欢迎在群内反馈，或点击 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;">此链接</a> 加入群聊</p>
+</div>
 `;
 
 export const Config: Schema<ConfigType> = Schema.object({

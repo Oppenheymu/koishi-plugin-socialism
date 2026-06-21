@@ -2,10 +2,18 @@
 	"name": "koishi-plugin-redmusic",
 	"version": "1.1.0",
 	"contributors": [
-		"Oppenheymu <266071743+Oppenheymu@users.noreply.github.com>"
+		"oppenheymu@gmail.com"
 	],
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./lib/index.d.ts",
+			"development": "./src/index.ts",
+			"default": "./lib/index.js"
+		},
+		"./package.json": "./package.json"
+	},
 	"files": [
 		"lib",
 		"assets"

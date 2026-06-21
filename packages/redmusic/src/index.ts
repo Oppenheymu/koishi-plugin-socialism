@@ -1,28 +1,40 @@
 import type { Context, Session } from "koishi";
 import { Schema, Service } from "koishi";
-import { randomPick, exactPick, listSongs } from "./core";
+import { exactPick, listSongs, randomPick } from "./core";
 import { registerListenCommands } from "./listen";
-import type { SongEntry, SongFilter, RandomOutcome } from "./types";
+import type { RandomOutcome, SongEntry, SongFilter } from "./types";
 
 export const name = "redmusic";
 
 export const usage = `
-## 使用说明
-插件是我vibe的
-所有歌曲均已获得“小市民红球”授权
-本插件注入 \`redmusic\` 服务，可供其他插件通过 \`ctx.redmusic\` 调用：
+<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+  <h2 style="margin-top: 0; color: #4a6ee0;">📖 使用说明</h2>
+  <p>✨ 插件是我 vibe 的</p>
+  <p>🎵 所有歌曲均已获得 <strong>"小市民红球"</strong> 授权</p>
+  <p>🔌 本插件注入 <code>redmusic</code> 服务，可供其他插件通过 <code>ctx.redmusic</code> 调用：</p>
+  <ul>
+    <li><code>ctx.redmusic.random(概率?, 过滤?)</code> — 按概率随机选取一首，返回音频元素</li>
+    <li><code>ctx.redmusic.pick(过滤)</code> — 精确选取一首（同名多版本时随机），返回音频元素</li>
+    <li><code>ctx.redmusic.list(过滤?)</code> — 列出匹配歌曲的元数据（不发送音频）</li>
+    <li><code>ctx.redmusic.send(session, 概率?, 过滤?)</code> — 按概率直接发送语音</li>
+  </ul>
+</div>
 
-- \`ctx.redmusic.random(概率?, 过滤?)\` — 按概率随机选取一首，返回音频元素
-- \`ctx.redmusic.pick(过滤)\` — 精确选取一首（同名多版本时随机），返回音频元素
-- \`ctx.redmusic.list(过滤?)\` — 列出匹配歌曲的元数据（不发送音频）
-- \`ctx.redmusic.send(session, 概率?, 过滤?)\` — 按概率直接发送语音
+<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+  <h2 style="margin-top: 0; color: #e0574a;">⚡ 命令</h2>
+  <ul>
+    <li><code>红歌 [歌名]</code> — 随机点一首红歌，或指定歌名；用 /前缀筛选标签</li>
+    <li><code>红歌列表</code> — 查看所有可用红歌</li>
+  </ul>
+  <h3 style="color: #e0574a;">🏷️ 标签列表</h3>
+  <p>纯曲、中版、交响乐、电音、军乐、器乐、稀有版、阅兵版、TNO版、单曲版、波兰、罗马尼亚语</p>
+</div>
 
-## 命令
-- \`红歌 [歌名]\` — 随机点一首红歌，或指定歌名；用 /前缀筛选标签
-- \`红歌列表\` — 查看所有可用红歌
-
-### 标签列表
-纯曲、中版、交响乐、电音、军乐、器乐、稀有版、阅兵版、TNO版、单曲版、波兰、罗马尼亚语
+<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+  <h2 style="margin-top: 0; color: #4a6ee0;">💬 交流与反馈</h2>
+  <p>🌟 喜欢这个插件？欢迎加入 QQ 群 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#4a6ee0;text-decoration:none;"><strong>1071284605</strong></a>【晓基地插件工坊】进行交流</p>
+  <p>🐛 遇到问题？欢迎在群内反馈，或点击 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#4a6ee0;text-decoration:none;">此链接</a> 加入群聊</p>
+</div>
 `;
 
 export interface Config {
