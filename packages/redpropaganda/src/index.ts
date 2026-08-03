@@ -1,3 +1,6 @@
+import { createReadStream } from "node:fs";
+import { resolve } from "node:path";
+import type { } from "@koishijs/plugin-server";
 import { type Context, Schema } from "koishi";
 import type { } from "koishi-plugin-cron-fix";
 import type { } from "koishi-plugin-redarchive";
@@ -110,7 +113,7 @@ export const usage = `
     </ul>
   </div>
 </div>
-<img src="https://i0.hdslb.com/bfs/archive/f03cc4cc1b32799e9f8dcc4d69a6cdb653883aa2.jpg" style="max-width:100%;border-radius:10px;display:block;margin-top:8px;" alt="世界人民大团结万岁">`;
+<img src="/redpropaganda/cover.jpg" style="max-width:100%;border-radius:10px;display:block;margin-top:8px;" alt="世界人民大团结万岁">`;
 
 /** 来源类型的中文描述 */
 const SOURCE_NAMES: Record<SourceType, string> = {
@@ -268,10 +271,17 @@ async function runJob(ctx: Context, job: JobConfig): Promise<{ sent: boolean; pa
 
 export const inject = {
     required: ["cron"],
+    optional: ["server"],
 };
 
 export function apply(ctx: Context, config: Config) {
     const logger = ctx.logger("redpropaganda");
+
+    // 注册 usage 封面图路由（需要 @koishijs/plugin-server 提供的 server 服务）
+    ctx.server?.get("/redpropaganda/cover.jpg", (koa) => {
+        koa.type = "image/jpeg";
+        koa.body = createReadStream(resolve(__dirname, "..", "assets", "cover.jpg"));
+    });
 
     // 注册定时任务
     for (const job of config.jobs) {
