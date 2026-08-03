@@ -53,6 +53,9 @@ export const Config: Schema<Config> = Schema.object({
         Schema.object({
             cron: Schema.string()
                 .default("0 8 * * *")
+                .pattern(
+                    /^(\*|[0-9]{1,2})(\/(\*|[0-9]{1,2}))? ([1-5]?[0-9](\/[1-5]?[0-9])?|\*)( (\*|[1-5]?[0-9])(\/(\*|[1-5]?[0-9])?)?)( (\*|[1-5]?[0-9])(\/(\*|[1-5]?[0-9])?)?)( (\*|[1-5]?[0-9])(\/(\*|[1-5]?[0-9])?)?)$/
+                )
                 .required()
                 .description("cron 表达式（5 段：分 时 日 月 周）"),
             sources: Schema.array(
