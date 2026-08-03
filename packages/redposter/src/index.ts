@@ -243,7 +243,7 @@ export function apply(ctx: Context, config: Config) {
         .alias("红海报")
         .usage(
             "直接输入「红色海报」随机发送一张；输入「红色海报 大跃进」按主题筛选；" +
-                "支持中文别名与英文关键词，也支持年份（如 1958）",
+            "支持中文别名与英文关键词，也支持年份（如 1958）",
         )
         .example("红色海报")
         .example("红色海报 大跃进")
