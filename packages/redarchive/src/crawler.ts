@@ -1,35 +1,13 @@
-import type { AnyNode } from 'domhandler'
 import * as cheerio from 'cheerio'
+import type { AnyNode } from 'domhandler'
 import { Logger } from 'koishi'
 import { readCache, writeCache } from './cache'
-import { cleanTitle, decodeHtml, isDirectFile, isHtmlPage, resolveUrl } from './utils'
 import type { CategoryItem, CrawlConfig, DocumentItem } from './types'
+import { cleanTitle, httpGet, isDirectFile, isHtmlPage, resolveUrl } from './utils'
 
 const logger = new Logger('redarchive')
 
 // ── HTTP 抓取 ──────────────────────────────
-
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
-
-async function httpGet(url: string, timeout: number): Promise<string> {
-  const controller = new AbortController()
-  const timer = setTimeout(() => controller.abort(), timeout)
-  try {
-    const res = await fetch(url, {
-      signal: controller.signal,
-      redirect: 'follow',
-      headers: {
-        'User-Agent': UA,
-        Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-      },
-    })
-    const buffer = Buffer.from(await res.arrayBuffer())
-    return decodeHtml(buffer, res.headers.get('content-type'))
-  } finally {
-    clearTimeout(timer)
-  }
-}
 
 /** 依次尝试入口 URL 列表，返回首个成功抓取的 HTML */
 async function tryFetchEntry(urls: string[], timeout: number): Promise<{ html: string; usedUrl: string }> {

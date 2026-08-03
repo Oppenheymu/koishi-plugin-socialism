@@ -12,6 +12,8 @@ export const usage = `
     <li>📚 抓取<strong>中文马克思主义文库</strong>文档，以进行学术研究</li>
     <li>🔗 支持配置多个镜像入口，按优先级依次尝试</li>
     <li>⚡ 仅使用 HTTP 抓取，无需 Playwright</li>
+    <li>🧹 HTML 页面自动<strong>清洗正文</strong>（去除导航/页脚/注释噪音），生成 <strong>.md</strong> 文件发送</li>
+    <li>📎 直接文件（pdf/epub 等）原样发送；清洗失败自动回退原文件</li>
   </ul>
 </div>
 

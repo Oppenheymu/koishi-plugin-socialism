@@ -1,8 +1,8 @@
 import type { Context, Session } from 'koishi'
 import { Logger } from 'koishi'
 import { Crawler } from './crawler'
-import { sendAsset } from './utils'
 import type { Config } from './types'
+import { sendAsset } from './utils'
 
 const logger = new Logger('redarchive')
 
@@ -123,7 +123,7 @@ export function registerCommand(ctx: Context, config: Config): void {
         if (!doc) return
 
         await session.send(`📄 已选择：${doc.title}\n正在发送文件...`)
-        await sendAsset(session, { title: doc.title, url: doc.url })
+        await sendAsset(session, { title: doc.title, url: doc.url, isDirectFile: doc.isDirectFile }, config)
       } catch (e) {
         logger.error(`[Command Error] ${e}`)
         return `❌ 抓取过程中发生错误：${e instanceof Error ? e.message : '未知错误'}`
