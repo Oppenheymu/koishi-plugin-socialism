@@ -38,16 +38,32 @@
         "build": "tsc -b"
     },
     "peerDependencies": {
-        "koishi": "^4.17.5"
+        "koishi": "^4.17.5",
+        "koishi-plugin-cron-fix": "^0.1.0"
+    },
+    "devDependencies": {
+        "koishi-plugin-redarchive": "workspace:*",
+        "koishi-plugin-redmusic": "workspace:*",
+        "koishi-plugin-redposter": "workspace:*",
+        "koishi-plugin-redquote": "workspace:*"
     },
     "koishi": {
         "description": {
             "en": "Propaganda broadcast messages and slogans",
-            "zh": "红色宣传口号语料，注入 ctx 供其它插件使用"
+            "zh": "红色宣传口号语料与定时推送，注入 ctx 供其它插件使用"
         },
         "service": {
             "implements": [
                 "redpropaganda"
+            ],
+            "required": [
+                "cron"
+            ],
+            "optional": [
+                "redquote",
+                "redarchive",
+                "redmusic",
+                "redposter"
             ]
         }
     }
