@@ -110,7 +110,7 @@ export const usage = `
     </ul>
   </div>
 </div>
-`;
+<img src="https://i0.hdslb.com/bfs/archive/f03cc4cc1b32799e9f8dcc4d69a6cdb653883aa2.jpg" style="max-width:100%;border-radius:10px;display:block;margin-top:8px;" alt="世界人民大团结万岁">`;
 
 /** 来源类型的中文描述 */
 const SOURCE_NAMES: Record<SourceType, string> = {
