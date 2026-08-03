@@ -1,10 +1,10 @@
 import type { Context, Session } from "koishi";
 import { Schema, Service } from "koishi";
-import type {} from "koishi-plugin-cron-fix";
-import type {} from "koishi-plugin-redarchive";
-import type {} from "koishi-plugin-redmusic";
-import type {} from "koishi-plugin-redposter";
-import type {} from "koishi-plugin-redquote";
+import type { } from "koishi-plugin-cron-fix";
+import type { } from "koishi-plugin-redarchive";
+import type { } from "koishi-plugin-redmusic";
+import type { } from "koishi-plugin-redposter";
+import type { } from "koishi-plugin-redquote";
 import type { JobConfig, SourceConfig, SourceType } from "./types";
 
 export const name = "redpropaganda";
