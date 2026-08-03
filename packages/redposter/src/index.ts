@@ -17,7 +17,7 @@ export const usage = `
 <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
   <h2 style="margin-top: 0; color: #4a6ee0;">📖 使用说明</h2>
   <p>🖼️ 发送「红色海报」即可随机收到一张中国社会主义宣传画海报图片</p>
-  <p>🗂️ 海报数据来自 <a href="https://chineseposters.net" style="color:#4a6ee0;">chineseposters.net</a>（Stefan Landsberger 的中国宣传画收藏站），索引随包发布，图片按需下载缓存到本地 <code>data/redposter/</code></p>
+  <p>🗂️ 海报数据来自 <a href="https://chineseposters.net" style="color:#4a6ee0;">chineseposters.net</a>（Stefan Landsberger 的中国宣传画收藏站），索引随包发布，图片按需下载缓存到本地 <code>data/red/redposter/</code></p>
   <p>🔤 支持中文别名（大跃进、文革、雷锋、毛主席…）与英文关键词（leap、mao、leifeng…），也支持按年份（如 1958）筛选</p>
   <p>�️ 默认开启<strong>国内政治敏感过滤器</strong>，过滤习近平、文化大革命、江青、四人帮等主题的海报，可在插件配置中关闭</p>
   <p>�🔌 注入 <code>redposter</code> 服务，其他插件可通过 <code>ctx.redposter</code> 调用</p>
