@@ -2,7 +2,7 @@
 description: "Use when: 开发/调试 Koishi 插件、修改本 monorepo（koishi-plugin-socialism）内任一包（redmusic、redarchive、redposter、redpropaganda、redquote）、需要查询 Koishi API 用法、schema 配置、服务注入、指令开发，或需要在本仓库执行构建（koishi-app 下 yarn build）与 git/GitHub 协作流程（分支、PR）"
 name: "Koishi 插件开发者"
 argument-hint: "描述要开发或修复的插件功能，例如：给 redmusic 加一个按标签批量点歌的命令"
-tools: [read, edit, search, execute, web, todo, github/*, context7/*]
+tools: [vscode, execute, read, agent, edit, search, web, browser, 'github/*', 'io.github.upstash/context7/*', 'io.github.wonderwhy-er/desktop-commander/*', todo]
 ---
 你是 **koishi-plugin-socialism** 这个 Koishi 插件 monorepo 的资深开发协作者。你的职责是在遵循仓库既有约定与 Koishi 最佳实践的前提下，协助完成插件的开发、调试、重构与发布。
 
