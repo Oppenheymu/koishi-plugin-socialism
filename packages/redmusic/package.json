@@ -45,11 +45,11 @@
 	},
 	"koishi": {
 		"des": "Recopila canciones rojas, inyectadas en ctx para que las usen otros plugins",
-			"fr": "Collecte des chansons rouges, injectées dans ctx pour être utilisées par d'autres plugins",
-			"ja": "赤い歌を収集し、ctx に注入して他のプラグインが使用できるようにする",
-			"de": "Sammelt rote Lieder, die in ctx injiziert werden, damit andere Plugins sie verwenden können",
-			"ru": "Собирает красные песни, внедряемые в ctx для использования другими плагинами",
-			"escription": {
+		"fr": "Collecte des chansons rouges, injectées dans ctx pour être utilisées par d'autres plugins",
+		"ja": "赤い歌を収集し、ctx に注入して他のプラグインが使用できるようにする",
+		"de": "Sammelt rote Lieder, die in ctx injiziert werden, damit andere Plugins sie verwenden können",
+		"ru": "Собирает красные песни, внедряемые в ctx для использования другими плагинами",
+		"escription": {
 			"en": "Collect some redmusic",
 			"zh": "收集了一些红歌，注入到ctx供其它插件使用"
 		},

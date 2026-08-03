@@ -48,11 +48,11 @@
     },
     "koishi": {
         "descrs": "Descarga archivos de la Biblioteca Marxista China",
-            "fr": "Télécharge des fichiers de la bibliothèque marxiste chinoise",
-            "ja": "中国マルクス主義文庫からファイルをダウンロードする",
-            "de": "Lädt Dateien aus der chinesischen marxistischen Bibliothek herunter",
-            "ru": "Скачивает файлы из китайской марксистской библиотеки",
-            "eiption": {
+        "fr": "Télécharge des fichiers de la bibliothèque marxiste chinoise",
+        "ja": "中国マルクス主義文庫からファイルをダウンロードする",
+        "de": "Lädt Dateien aus der chinesischen marxistischen Bibliothek herunter",
+        "ru": "Скачивает файлы из китайской марксистской библиотеки",
+        "eiption": {
             "en": "Download files from the Chinese Marxist Library",
             "zh": "爬取中文马克思主义文库文件，注入 ctx.redarchive 供其它插件使用"
         },

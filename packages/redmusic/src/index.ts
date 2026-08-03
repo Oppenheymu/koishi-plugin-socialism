@@ -133,116 +133,116 @@ export const usage = `
 `;
 
 export interface Config {
-    /** 点歌冷却时间（秒） */
-    cooldown: number;
-    /** 是否在语音前显示歌名 */
-    showName: boolean;
-    /** 插件启动时是否自动下载音频资源 */
-    autoDownload: boolean;
+  /** 点歌冷却时间（秒） */
+  cooldown: number;
+  /** 是否在语音前显示歌名 */
+  showName: boolean;
+  /** 插件启动时是否自动下载音频资源 */
+  autoDownload: boolean;
 }
 
 export const Config: Schema<Config> = Schema.object({
-    cooldown: Schema.number().default(30).min(0).description("点歌冷却时间（秒）"),
-    showName: Schema.boolean().default(true).description("是否在语音前显示歌名和标签"),
-    autoDownload: Schema.boolean()
-        .default(true)
-        .description("插件启动时自动下载音频资源（约 110MB）。关闭后需手动执行「红歌重载」"),
+  cooldown: Schema.number().default(30).min(0).description("点歌冷却时间（秒）"),
+  showName: Schema.boolean().default(true).description("是否在语音前显示歌名和标签"),
+  autoDownload: Schema.boolean()
+    .default(true)
+    .description("插件启动时自动下载音频资源（约 110MB）。关闭后需手动执行「红歌重载」"),
 });
 
 // ── Service ──────────────────────────────────────────────
 
 export class RedMusicService extends Service {
-    constructor(ctx: Context) {
-        super(ctx, "redmusic", true);
-    }
+  constructor(ctx: Context) {
+    super(ctx, "redmusic", true);
+  }
 
-    /**
-     * 按概率随机选取一首歌，返回音频 h 元素。
-     * 未命中时 hit=false，可直接判断后决定是否发送。
-     */
-    random(probability = 1, filter?: SongFilter): RandomOutcome {
-        return randomPick(probability, filter);
-    }
+  /**
+   * 按概率随机选取一首歌，返回音频 h 元素。
+   * 未命中时 hit=false，可直接判断后决定是否发送。
+   */
+  random(probability = 1, filter?: SongFilter): RandomOutcome {
+    return randomPick(probability, filter);
+  }
 
-    /**
-     * 精确选取一首歌（同名多版本时随机），返回音频 h 元素。
-     */
-    pick(filter: SongFilter): { entry: SongEntry; audio: string } | null {
-        return exactPick(filter);
-    }
+  /**
+   * 精确选取一首歌（同名多版本时随机），返回音频 h 元素。
+   */
+  pick(filter: SongFilter): { entry: SongEntry; audio: string } | null {
+    return exactPick(filter);
+  }
 
-    /**
-     * 列出匹配歌曲的元数据（不涉及文件、不生成元素）。
-     */
-    list(filter?: SongFilter): SongEntry[] {
-        return listSongs(filter);
-    }
+  /**
+   * 列出匹配歌曲的元数据（不涉及文件、不生成元素）。
+   */
+  list(filter?: SongFilter): SongEntry[] {
+    return listSongs(filter);
+  }
 
-    /**
-     * 按概率直接 session.send 语音消息。
-     * @returns 是否命中并发送
-     */
-    async send(session: Session, probability = 1, filter?: SongFilter): Promise<boolean> {
-        const result = randomPick(probability, filter);
-        if (!result.hit) return false;
-        await session.send(result.audio);
-        return true;
-    }
+  /**
+   * 按概率直接 session.send 语音消息。
+   * @returns 是否命中并发送
+   */
+  async send(session: Session, probability = 1, filter?: SongFilter): Promise<boolean> {
+    const result = randomPick(probability, filter);
+    if (!result.hit) return false;
+    await session.send(result.audio);
+    return true;
+  }
 }
 
 declare module "koishi" {
-    interface Context {
-        redmusic: RedMusicService;
-    }
+  interface Context {
+    redmusic: RedMusicService;
+  }
 }
 
 // ── 插件入口 ──────────────────────────────────────────────
 
 export function apply(ctx: Context, config: Config) {
-    ctx.i18n.define("zh", require("../locales/zh_CN"));
-    ctx.i18n.define("en", require("../locales/en"));
+  ctx.i18n.define("zh", require("../locales/zh_CN"));
+  ctx.i18n.define("en", require("../locales/en"));
 
-    ctx.plugin(RedMusicService);
+  ctx.plugin(RedMusicService);
 
-    // 加载元数据索引（始终可用，几 KB）
-    const catalog = loadCatalog();
-    const cacheDir = getCacheDir(ctx);
+  // 加载元数据索引（始终可用，几 KB）
+  const catalog = loadCatalog();
+  const cacheDir = getCacheDir(ctx);
 
-    // 触发下载并注入 assetsDir 的统一入口
-    async function ensureAssets(force = false): Promise<boolean> {
-        const ok = await downloadAssets(ctx, cacheDir, catalog, force);
-        if (ok) {
-            setAssetsDir(cacheDir);
-        }
-        return ok;
+  // 触发下载并注入 assetsDir 的统一入口
+  async function ensureAssets(force = false): Promise<boolean> {
+    const ok = await downloadAssets(ctx, cacheDir, catalog, force);
+    if (ok) {
+      setAssetsDir(cacheDir);
+    }
+    return ok;
+  }
+
+  // 注册指令（把重载回调传进去）
+  registerListenCommands(ctx, config, () => ensureAssets(true));
+
+  // 启动时若已就绪，直接注入目录；否则按配置决定是否自动下载
+  ctx.on("ready", async () => {
+    if (isCacheReady(cacheDir, catalog)) {
+      setAssetsDir(cacheDir);
+      ctx.logger("redmusic").info("音频缓存已就绪，跳过下载，路径: %s", cacheDir);
+      return;
     }
 
-    // 注册指令（把重载回调传进去）
-    registerListenCommands(ctx, config, () => ensureAssets(true));
+    if (!config.autoDownload) {
+      ctx.logger("redmusic").warn(
+        "autoDownload 已关闭且本地缓存未就绪，点歌暂不可用。可执行「红歌重载」手动下载。",
+      );
+      return;
+    }
 
-    // 启动时若已就绪，直接注入目录；否则按配置决定是否自动下载
-    ctx.on("ready", async () => {
-        if (isCacheReady(cacheDir, catalog)) {
-            setAssetsDir(cacheDir);
-            ctx.logger("redmusic").info("音频缓存已就绪，跳过下载，路径: %s", cacheDir);
-            return;
-        }
-
-        if (!config.autoDownload) {
-            ctx.logger("redmusic").warn(
-                "autoDownload 已关闭且本地缓存未就绪，点歌暂不可用。可执行「红歌重载」手动下载。",
-            );
-            return;
-        }
-
-        // 异步下载，不阻塞插件启动（其他指令如「红歌列表」仍可用）
-        ctx.logger("redmusic").info("开始下载红歌音频资源（后台）…");
-        void ensureAssets(false).then((ok) => {
-            if (!ok) {
-                ctx.logger("redmusic").warn(
-                    "音频资源下载失败，点歌暂不可用。可执行「红歌重载」重试。",
-                );
-            }
-        });
+    // 异步下载，不阻塞插件启动（其他指令如「红歌列表」仍可用）
+    ctx.logger("redmusic").info("开始下载红歌音频资源（后台）…");
+    void ensureAssets(false).then((ok) => {
+      if (!ok) {
+        ctx.logger("redmusic").warn(
+          "音频资源下载失败，点歌暂不可用。可执行「红歌重载」重试。",
+        );
+      }
     });
+  });
 }
