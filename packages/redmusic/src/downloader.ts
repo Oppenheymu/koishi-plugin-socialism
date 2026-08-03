@@ -22,11 +22,11 @@ export const ASSETS_ZIP_URL =
 const READY_MARKER = ".ready";
 
 /**
- * 计算音频缓存目录：使用 koishi 的 baseDir/data/redmusic。
- * koishi 在 ctx 上提供 baseDir（实例根目录）。
+ * 计算音频缓存目录：使用 koishi 的 baseDir/data/red/redmusic。
+ * 红色系列插件统一聚合在 data/red/ 下，koishi 在 ctx 上提供 baseDir（实例根目录）。
  */
 export function getCacheDir(ctx: Context): string {
-  return resolve(ctx.baseDir, "data", "redmusic");
+  return resolve(ctx.baseDir, "data", "red", "redmusic");
 }
 
 /**

@@ -4,7 +4,7 @@
 
 收集了一些红歌，注入到 `ctx` 供其它插件使用。所有歌曲均已获得"小市民红球"授权。
 
-> **音频托管说明**：约 110MB 的音频资源不随 npm 包发布，而是托管在 [GitHub Release](https://github.com/Oppenheymu/koishi-plugin-socialism/releases/tag/redmusic-assets-v1) 上。插件首次启动时会自动下载到本地缓存目录（`<koishi数据目录>/data/redmusic/`），下载完成前点歌指令暂不可用，`红歌列表` 可正常使用。
+> **音频托管说明**：约 110MB 的音频资源不随 npm 包发布，而是托管在 [GitHub Release](https://github.com/Oppenheymu/koishi-plugin-socialism/releases/tag/redmusic-assets-v1) 上。插件首次启动时会自动下载到本地缓存目录（`<koishi数据目录>/data/red/redmusic/`），下载完成前点歌指令暂不可用，`红歌列表` 可正常使用。
 
 ## 指令
 
@@ -38,7 +38,7 @@
 
 ## 缓存目录
 
-音频文件下载并解压到 `<koishi数据目录>/data/redmusic/`，包含：
+音频文件下载并解压到 `<koishi数据目录>/data/red/redmusic/`，包含：
 
 - 69 个 `.ogg` 音频文件
 - `.ready` 标记文件（记录歌曲数量和下载时间）
