@@ -15,6 +15,19 @@ const MAX_PARAGRAPH_LEN = 500;
 /** 随机抽取时的最大尝试次数（网络失败/无合适段落时重试） */
 const MAX_TRIES = 5;
 
+/**
+ * 噪音段落特征（译注/来源注/编辑注/人物小传/作者头注等）。
+ * 文库页面清洗后这些注释常混在正文中，随机抽取时应剔除。
+ */
+const NOISE_PARAGRAPH_RE = [
+    /^\s*[*]/, // 编辑注：* 这是毛泽东为中共中央起草的对党内的指示。
+    /^\s*[〔【]/, // 作者头注：〔美〕 H.马尔库塞
+    /^\s*[（(][^)）]{1,60}[)）]\s*$/, // 纯括号注释：（《马布利选集》，商务印书馆1960年版）
+    /(译自|载于|来源[:：]|责任编辑|编译|出版社|年版|编辑注|译者注|整理者注|中译者|译者按|校者注|press|translated by|published by)/i, // 译注/来源
+    /^\[\d+\]/, // 正文注释：[7] 指1927年…
+    /（(?:19|20)\d{2}年.*?—.*?(?:19|20)\d{2}年?）/i, // 人物小传：（1887年—1954年）
+];
+
 /** 一篇文档 + 其所属分类，供随机段落引用 */
 export interface PickedDocument {
     category: CategoryItem;
@@ -73,20 +86,32 @@ export class RedarchiveService extends Service {
         return markdown;
     }
 
-    /** 从 Markdown 中拆出可发送的正文段落（过滤标题/引用块/过短/过长） */
+    /** 从 Markdown 中拆出可发送的正文段落（过滤标题/引用块/过短/过长/注释噪音） */
     private splitParagraphs(markdown: string): string[] {
         return markdown
             .split(/\n{2,}/)
             .map((p) => p.replace(/\n/g, " ").replace(/\s+/g, " ").trim())
             .filter((p) => p.length >= MIN_PARAGRAPH_LEN && p.length <= MAX_PARAGRAPH_LEN)
-            .filter((p) => !/^[#>]/.test(p));
+            .filter((p) => !/^[#>]/.test(p))
+            .filter((p) => !NOISE_PARAGRAPH_RE.some((re) => re.test(p)));
     }
 
     /** 随机挑一个分类 */
     async randomCategory(): Promise<CategoryItem | null> {
         const categories = await this.listCategories();
         if (!categories.length) return null;
-        return categories[Math.floor(Math.random() * categories.length)] ?? null;
+
+        // 马恩列毛优先：以 70% 概率只从马恩列毛分类中抽取，
+        // 其余 30% 从全部分类抽取，提升核心作者著作的被抽中率。
+        const core = categories.filter((c) => this.isCoreAuthor(c));
+        const pool = core.length && Math.random() < 0.7 ? core : categories;
+        return pool[Math.floor(Math.random() * pool.length)] ?? null;
+    }
+
+    /** 判断分类是否属于马恩列毛（按标题关键词） */
+    private isCoreAuthor(category: CategoryItem): boolean {
+        const title = category.title;
+        return /马克思|恩格斯|列宁|毛泽东|斯大林/.test(title);
     }
 
     /** 随机挑一个可清洗的 HTML 文档（跳过 pdf 等直接文件） */
