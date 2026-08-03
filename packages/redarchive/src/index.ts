@@ -2,6 +2,7 @@ import type { Context } from "koishi";
 import { Schema } from "koishi";
 import { registerCommand } from "./command";
 import { RedarchiveService } from "./service";
+export { RedarchiveService } from "./service";
 import type { Config as ConfigType } from "./types";
 
 export const name = "redarchive";
