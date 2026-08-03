@@ -1,0 +1,14 @@
+commands:
+  红色语录:
+    description: 随机获取革命导师语录
+    usage: |
+      直接输入「红色语录」随机一条；输入「红色语录 毛泽东」按作者；输入「红色语录 3」取 3 条；支持「红色语录 毛泽东 2」组合
+    messages:
+      author-not-found: 未找到作者「{0}」的语录，试试「红色语录列表」
+      no-quotes: 暂无可用语录
+  红色语录列表:
+    description: 查看所有作者及语录数量
+    messages:
+      no-quotes: 暂无可用语录
+      author-line: "- {0}（{1}）：{2} 条"
+      author-list: "共 {0} 位作者：\n{1}"

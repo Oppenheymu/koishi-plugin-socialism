@@ -1,0 +1,38 @@
+commands:
+  马克思:
+    description: 抓取马克思主义文库文件并发送下载附件
+    messages:
+      session-unsupported: 当前上下文不支持会话交互。
+      task-busy: ⚠️ 当前频道已有正在进行的抓取任务，请稍后再试。
+      cooldown: 🕒 操作过于频繁，请 {0} 秒后再试。
+      fetching-categories: 🔍 正在抓取分类，请稍候...
+      no-categories: ❌ 未找到可用分类，请检查网络或入口 URL。
+      category-selected: "📂 已选择分类：{0}\n正在读取文件列表..."
+      no-documents: 该分类下没有可用文件。
+      document-selected: "📄 已选择：{0}\n正在发送文件..."
+      fetch-error: ❌ 抓取过程中发生错误：{0}
+      unknown-error: 未知错误
+  马克思段落:
+    description: 从文库文档中随机选一段话
+    messages:
+      session-unsupported: 当前上下文不支持会话交互。
+      task-busy: ⚠️ 当前频道已有正在进行的任务，请稍后再试。
+      cooldown: 🕒 操作过于频繁，请 {0} 秒后再试。
+      fetching-paragraph: 📖 正在随机选取文库段落...
+      no-paragraph: ❌ 暂时没有可用的文库段落，请稍后再试。
+      fetch-error: ❌ 随机段落过程中发生错误：{0}
+
+redarchive:
+  category-list: 分类列表
+  file-list: 文件列表
+  ask-hint: 👉 输入编号/关键字选择，n下一页，p上一页，q取消
+  ask-hint-simple: 👉 输入编号或关键字选择，q取消
+  ask-timeout: ⌛ 交互超时，已自动取消。
+  ask-cancelled: 🚫 已取消操作。
+  ask-no-match: ⚠️ 未能匹配，请输入编号/关键字，或 n/p 翻页。
+  quote: "「{0}」\n——{1}（{2}）"
+  file-ready: 已获取下载文件：{0}
+  cleaning: 📄 正在清洗正文并生成 Markdown 文件...
+  extract-failed: ⚠️ 正文提取失败（仅 {0} 字），改为发送原文件。
+  markdown-ready: 已生成清洗后的 Markdown 文件：{0}（{1} KB）
+  clean-failed: ⚠️ 正文清洗失败（{0}），改为发送原文件。

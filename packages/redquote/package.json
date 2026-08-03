@@ -1,6 +1,6 @@
 {
     "name": "koishi-plugin-redquote",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "contributors": [
         "Oppenheymu <oppenheymu@gmail.com>"
     ],
@@ -16,6 +16,7 @@
     },
     "files": [
         "lib",
+        "locales",
         "assets/quote-index.json"
     ],
     "license": "MIT",
@@ -47,6 +48,11 @@
     },
     "koishi": {
         "description": {
+            "es": "Citas revolucionarias de Wikiquote y Marxists.org",
+            "fr": "Citations révolutionnaires de Wikiquote et Marxists.org",
+            "ja": "Wikiquote と Marxists.org の革命家の言葉",
+            "de": "Revolutionäre Zitate von Wikiquote und Marxists.org",
+            "ru": "Революционные цитаты из Wikiquote и Marxists.org",
             "en": "Revolutionary quotations from Wikiquote and Marxists.org",
             "zh": "收录革命导师语录（马克思/恩格斯/列宁/毛泽东/切格瓦拉/斯大林），中英双语 1200+ 条，注入 ctx.redquote 供其它插件使用"
         },

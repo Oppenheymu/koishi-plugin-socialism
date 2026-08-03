@@ -1,0 +1,38 @@
+commands:
+  马克思:
+    description: Scrape a Marxist Internet Archive document and send the downloaded attachment
+    messages:
+      session-unsupported: Session interaction is not supported in this context.
+      task-busy: ⚠️ A scraping task is already running in this channel, please try again later.
+      cooldown: 🕒 Too frequent, please try again in {0} seconds.
+      fetching-categories: 🔍 Fetching categories, please wait...
+      no-categories: ❌ No categories found, please check the network or entry URLs.
+      category-selected: "📂 Selected category: {0}\nLoading file list..."
+      no-documents: No files available in this category.
+      document-selected: "📄 Selected: {0}\nSending file..."
+      fetch-error: "❌ An error occurred while scraping: {0}"
+      unknown-error: unknown error
+  马克思段落:
+    description: Send a random paragraph from a library document
+    messages:
+      session-unsupported: Session interaction is not supported in this context.
+      task-busy: ⚠️ A task is already running in this channel, please try again later.
+      cooldown: 🕒 Too frequent, please try again in {0} seconds.
+      fetching-paragraph: 📖 Picking a random library paragraph...
+      no-paragraph: ❌ No library paragraphs available for now, please try again later.
+      fetch-error: "❌ An error occurred while picking a random paragraph: {0}"
+
+redarchive:
+  category-list: Category list
+  file-list: File list
+  ask-hint: 👉 Enter a number/keyword to select, n for next page, p for previous page, q to cancel
+  ask-hint-simple: 👉 Enter a number or keyword to select, q to cancel
+  ask-timeout: ⌛ Interaction timed out and was cancelled.
+  ask-cancelled: 🚫 Operation cancelled.
+  ask-no-match: ⚠️ No match, please enter a number/keyword, or use n/p to flip pages.
+  quote: "“{0}”\n—{1} ({2})"
+  file-ready: "Download file ready: {0}"
+  cleaning: 📄 Cleaning the content and generating a Markdown file...
+  extract-failed: ⚠️ Content extraction failed (only {0} characters), sending the original file instead.
+  markdown-ready: "Cleaned Markdown file generated: {0} ({1} KB)"
+  clean-failed: ⚠️ Content cleaning failed ({0}), sending the original file instead.

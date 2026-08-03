@@ -42,13 +42,13 @@ export function registerListenCommands(
 
             // 资源就绪检查
             if (!isAssetsReady()) {
-                return "红歌音频资源尚未下载完成，请稍后再试，或联系管理员执行「红歌重载」";
+                return session.text(".assets-not-ready");
             }
 
             // 冷却检查
             const remaining = checkCooldown(session.userId);
             if (remaining > 0) {
-                return `请等待 ${(remaining / 1000).toFixed(0)} 秒后再点歌`;
+                return session.text(".cooldown", [(remaining / 1000).toFixed(0)]);
             }
 
             // 解析输入
@@ -86,9 +86,11 @@ export function registerListenCommands(
             }
 
             if (!result) {
-                if (name)
-                    return `未找到歌曲"${name}"${tags.length ? `（标签: ${tags.join(", ")}）` : ""}`;
-                return "暂无可用歌曲";
+                if (name) {
+                    const tagHint = tags.length ? session.text(".tag-hint", [tags.join(", ")]) : "";
+                    return session.text(".song-not-found", [name, tagHint]);
+                }
+                return session.text(".no-songs");
             }
 
             // 设置冷却
@@ -112,7 +114,7 @@ export function registerListenCommands(
             if (!session) return;
             const songs = listSongs();
 
-            if (!songs.length) return "暂无可用歌曲";
+            if (!songs.length) return session.text(".no-songs");
 
             // 按歌名分组（同名不同版本合并展示）
             const groups = new Map<string, string[]>();
@@ -126,8 +128,8 @@ export function registerListenCommands(
                 return `${name} ${versions.join(" ")}`;
             });
 
-            const readyNote = isAssetsReady() ? "" : "\n\n⚠️ 音频资源尚未下载完成，点歌暂不可用";
-            return `共 ${songs.length} 首歌曲：\n${lines.join("\n")}${readyNote}`;
+            const readyNote = isAssetsReady() ? "" : session.text(".assets-pending");
+            return session.text(".list", [songs.length, lines.join("\n"), readyNote]);
         });
 
     // ── 红歌重载（管理员手动触发重新下载） ────────────────
@@ -140,12 +142,10 @@ export function registerListenCommands(
             // 需要 2 级及以上权限（koishi 默认 owner=5，admin=4，user=1）
             const user = session.user as { authority?: number } | undefined;
             if ((user?.authority ?? 0) < 2) {
-                return "权限不足，需要 2 级及以上权限";
+                return session.text(".permission-denied");
             }
-            await session.send("开始重新下载红歌音频资源，可能需要数分钟…");
+            await session.send(session.text(".reload-start"));
             const ok = await onRedownload();
-            return ok
-                ? "红歌音频资源下载完成，可以正常点歌了"
-                : "下载失败，请查看日志（可能网络不通，或稍后重试）";
+            return ok ? session.text(".reload-ok") : session.text(".reload-fail");
         });
 }

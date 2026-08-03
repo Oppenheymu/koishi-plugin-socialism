@@ -1,0 +1,22 @@
+commands:
+  红色海报:
+    description: Send a random Chinese propaganda poster, or filter by theme/keyword
+    usage: |
+      Enter 「红色海报」 for a random poster; 「红色海报 大跃进」 to filter by theme; Chinese aliases and English keywords are supported, as well as year filtering (e.g. 1958)
+    messages:
+      cache-not-ready: Poster cache is not ready yet, please try again later
+      cooldown: Please wait {0} seconds before sending again
+      not-found: No posters found for 「{0}」, try 「红色海报列表」 to see available themes
+      no-posters: No posters available
+  红色海报列表:
+    description: List all available themes and poster counts
+    messages:
+      theme-not-found: No themes found matching 「{0}」
+      no-themes: No themes available
+      theme-list: "{0} themes in total:\n{1}{2}"
+      theme-hint: "\n\nEnter 「红色海报 <theme>」 to send posters of that theme, e.g. 「红色海报 大跃进」"
+  红色海报重载:
+    description: Clear the poster image cache (admin)
+    messages:
+      permission-denied: Insufficient permission, level 2 or above is required
+      cache-cleared: Poster image cache cleared, images will be re-downloaded on next send

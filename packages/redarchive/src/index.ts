@@ -150,6 +150,9 @@ export const Config: Schema<ConfigType> = Schema.object({
 });
 
 export function apply(ctx: Context, config: ConfigType) {
+    ctx.i18n.define("zh", require("../locales/zh_CN"));
+    ctx.i18n.define("en", require("../locales/en"));
+
     ctx.plugin(RedarchiveService, config);
     registerCommand(ctx, config);
 }

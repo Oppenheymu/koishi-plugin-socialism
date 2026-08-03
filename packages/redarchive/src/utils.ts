@@ -157,19 +157,19 @@ export async function sendAsset(
 
     // 非 HTML 页面直接原样发送
     if (asset.isDirectFile || !isHtmlPage(asset.url)) {
-        await session.send(`已获取下载文件：${fileName}`);
+        await session.send(session.text("redarchive.file-ready", [fileName]));
         await session.send(h("file", { src: asset.url, title: fileName }));
         return;
     }
 
     // HTML 页面：清洗正文并转为 Markdown 文件
     try {
-        await session.send(`📄 正在清洗正文并生成 Markdown 文件...`);
+        await session.send(session.text("redarchive.cleaning"));
         const html = await httpGet(asset.url, config.navigationTimeout);
         const markdown = extractMarkdown(html);
         if (markdown.length < 100) {
             // 提取到的内容过少，判定为清洗失败
-            await session.send(`⚠️ 正文提取失败（仅 ${markdown.length} 字），改为发送原文件。`);
+            await session.send(session.text("redarchive.extract-failed", [markdown.length]));
             await session.send(h("file", { src: asset.url, title: fileName }));
             return;
         }
@@ -182,12 +182,15 @@ export async function sendAsset(
         await writeFile(mdPath, markdown, "utf8");
 
         await session.send(
-            `已生成清洗后的 Markdown 文件：${mdName}（${(markdown.length / 1000).toFixed(1)} KB）`,
+            session.text("redarchive.markdown-ready", [
+                mdName,
+                (markdown.length / 1000).toFixed(1),
+            ]),
         );
         await session.send(h("file", { src: pathToFileURL(mdPath).href, title: mdName }));
     } catch (e) {
         const reason = e instanceof Error ? e.message : String(e);
-        await session.send(`⚠️ 正文清洗失败（${reason}），改为发送原文件。`);
+        await session.send(session.text("redarchive.clean-failed", [reason]));
         await session.send(h("file", { src: asset.url, title: fileName }));
     }
 }

@@ -1,0 +1,25 @@
+commands:
+  红宣传推送:
+    description: 立即向配置的目标群推送一次
+    messages:
+      no-jobs: 当前没有配置定时任务。
+      invalid-index: 任务序号无效，当前共 {0} 个任务。
+      pushed: ✅ 已推送任务 {0}（{1}）
+      push-failed: ⚠️ 推送失败，请查看日志。
+      push-ok: ✅ 已推送
+      push-fail: ⚠️ 失败
+      push-all-result: "任务 {0}（{1}）: {2}"
+  红宣传推送列表:
+    description: 查看已配置的定时任务
+    messages:
+      no-jobs: 当前没有配置定时任务。
+      source-label: "来源:"
+      target-label: "目标:"
+      no-targets: (未配置)
+      job-list: "任务 {0}: {1}\n  - {2} {3}\n  - {4} {5}"
+
+sources:
+  quote: 语录
+  paragraph: 文库段落
+  music: 歌曲
+  poster: 海报

@@ -218,6 +218,9 @@ declare module "koishi" {
 // ── 插件入口 ──────────────────────────────────────────────
 
 export function apply(ctx: Context, config: Config) {
+    ctx.i18n.define("zh", require("../locales/zh_CN"));
+    ctx.i18n.define("en", require("../locales/en"));
+
     ctx.plugin(RedPosterService);
     setSensitiveFilter(config.filterSensitive);
 
@@ -250,12 +253,12 @@ export function apply(ctx: Context, config: Config) {
             if (!session?.userId) return;
 
             if (!isCacheReady()) {
-                return "海报缓存尚未就绪，请稍后再试";
+                return session.text(".cache-not-ready");
             }
 
             const remaining = checkCooldown(session.userId);
             if (remaining > 0) {
-                return `请等待 ${(remaining / 1000).toFixed(0)} 秒后再发送`;
+                return session.text(".cooldown", [(remaining / 1000).toFixed(0)]);
             }
 
             const raw = keyword?.trim();
@@ -263,8 +266,8 @@ export function apply(ctx: Context, config: Config) {
             const result = await ctx.redposter.random(filter);
             if (!result.hit) {
                 return raw
-                    ? `未找到与「${raw}」相关的海报，试试「红色海报列表」查看可用主题`
-                    : "暂无可用海报";
+                    ? session.text(".not-found", [raw])
+                    : session.text(".no-posters");
             }
 
             cooldowns.set(session.userId, Date.now());
@@ -288,7 +291,9 @@ export function apply(ctx: Context, config: Config) {
 
             const themes = listThemes(keyword?.trim());
             if (!themes.length) {
-                return keyword ? `未找到匹配「${keyword.trim()}」的主题` : "暂无可用主题";
+                return keyword
+                    ? session.text(".theme-not-found", [keyword.trim()])
+                    : session.text(".no-themes");
             }
 
             const counts = countByTheme();
@@ -309,8 +314,12 @@ export function apply(ctx: Context, config: Config) {
 
             const note = keyword
                 ? ""
-                : "\n\n输入「红色海报 <主题>」可发送该主题的海报，如「红色海报 大跃进」";
-            return `共 ${themes.length} 个主题：\n${lines.join("\n")}${note}`;
+                : session.text(".theme-hint");
+            return session.text(".theme-list", [
+                themes.length,
+                lines.join("\n"),
+                note,
+            ]);
         });
 
     // ── 红色海报重载（管理员） ────────────────────────
@@ -322,9 +331,9 @@ export function apply(ctx: Context, config: Config) {
             if (!session) return;
             const user = session.user as { authority?: number } | undefined;
             if ((user?.authority ?? 0) < 2) {
-                return "权限不足，需要 2 级及以上权限";
+                return session.text(".permission-denied");
             }
             clearCache();
-            return "海报图片缓存已清空，下次发送时会重新下载";
+            return session.text(".cache-cleared");
         });
 }

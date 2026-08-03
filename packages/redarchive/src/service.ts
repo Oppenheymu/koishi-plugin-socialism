@@ -132,7 +132,7 @@ export class RedarchiveService extends Service {
         const result = await this.randomParagraph();
         if (!result) return false;
         const { category, doc, text } = result;
-        await session.send(`「${text}」\n——${doc.title}（${category.title}）`);
+        await session.send(session.text("redarchive.quote", [text, doc.title, category.title]));
         return true;
     }
 }

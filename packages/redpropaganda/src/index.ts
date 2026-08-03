@@ -275,6 +275,9 @@ export const inject = {
 };
 
 export function apply(ctx: Context, config: Config) {
+    ctx.i18n.define("zh", require("../locales/zh_CN"));
+    ctx.i18n.define("en", require("../locales/en"));
+
     const logger = ctx.logger("redpropaganda");
 
     // 注册 usage 封面图路由（需要 @koishijs/plugin-server 提供的 server 服务）
@@ -298,37 +301,53 @@ export function apply(ctx: Context, config: Config) {
     // 红宣传推送 命令（手动触发定时任务）
     ctx.command("红宣传推送 [index:number]", "立即向配置的目标群推送一次")
         .alias("红宣传手动推送")
-        .action(async (_, index) => {
+        .action(async ({ session }, index) => {
+            if (!session) return;
             const jobs = config.jobs;
-            if (jobs.length === 0) return "当前没有配置定时任务。";
+            if (jobs.length === 0) return session.text(".no-jobs");
 
             // 指定任务序号（从 1 开始）
             if (index !== undefined) {
                 const job = jobs[index - 1];
-                if (!job) return `任务序号无效，当前共 ${jobs.length} 个任务。`;
+                if (!job) return session.text(".invalid-index", [jobs.length]);
                 const { sent } = await runJob(ctx, job);
-                return sent ? `✅ 已推送任务 ${index}（${job.cron}）` : "⚠️ 推送失败，请查看日志。";
+                return sent
+                    ? session.text(".pushed", [index, job.cron])
+                    : session.text(".push-failed");
             }
 
             // 未指定则推送所有任务
             const results = [];
             for (let i = 0; i < jobs.length; i++) {
                 const { sent } = await runJob(ctx, jobs[i]);
-                results.push(`任务 ${i + 1}（${jobs[i].cron}）: ${sent ? "✅ 已推送" : "⚠️ 失败"}`);
+                results.push(
+                    session.text(".push-all-result", [
+                        i + 1,
+                        jobs[i].cron,
+                        sent ? session.text(".push-ok") : session.text(".push-fail"),
+                    ]),
+                );
             }
             return results.join("\n");
         });
 
     // 红宣传推送列表 命令（查看任务）
-    ctx.command("红宣传推送列表", "查看已配置的定时任务").action(() => {
+    ctx.command("红宣传推送列表", "查看已配置的定时任务").action(({ session }) => {
+        if (!session) return;
         const jobs = config.jobs;
-        if (jobs.length === 0) return "当前没有配置定时任务。";
+        if (jobs.length === 0) return session.text(".no-jobs");
         return jobs
-            .map(
-                (job, i) =>
-                    `任务 ${i + 1}: ${job.cron}\n  - 来源: ${job.sources
-                        .map((s) => `${SOURCE_NAMES[s.type]} ×${s.count}`)
-                        .join(", ")}\n  - 目标: ${job.targets.join(", ") || "(未配置)"}`,
+            .map((job, i) =>
+                session.text(".job-list", [
+                    i + 1,
+                    job.cron,
+                    session.text(".source-label"),
+                    job.sources
+                        .map((s) => `${session.text(`sources.${s.type}`)} ×${s.count}`)
+                        .join(", "),
+                    session.text(".target-label"),
+                    job.targets.join(", ") || session.text(".no-targets"),
+                ]),
             )
             .join("\n");
     });

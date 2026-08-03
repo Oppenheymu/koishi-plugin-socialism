@@ -1,0 +1,22 @@
+commands:
+  红色海报:
+    description: 随机发送一张中国宣传画海报，或按主题/关键词筛选
+    usage: |
+      直接输入「红色海报」随机发送一张；输入「红色海报 大跃进」按主题筛选；支持中文别名与英文关键词，也支持年份（如 1958）
+    messages:
+      cache-not-ready: 海报缓存尚未就绪，请稍后再试
+      cooldown: 请等待 {0} 秒后再发送
+      not-found: 未找到与「{0}」相关的海报，试试「红色海报列表」查看可用主题
+      no-posters: 暂无可用海报
+  红色海报列表:
+    description: 查看所有可用主题及海报数量
+    messages:
+      theme-not-found: 未找到匹配「{0}」的主题
+      no-themes: 暂无可用主题
+      theme-list: "共 {0} 个主题：\n{1}{2}"
+      theme-hint: "\n\n输入「红色海报 <主题>」可发送该主题的海报，如「红色海报 大跃进」"
+  红色海报重载:
+    description: 清空海报图片缓存（管理员）
+    messages:
+      permission-denied: 权限不足，需要 2 级及以上权限
+      cache-cleared: 海报图片缓存已清空，下次发送时会重新下载

@@ -1,0 +1,24 @@
+commands:
+  红歌:
+    description: Play a random red song, or specify a song name
+    usage: |
+      Enter "红歌" for a random song; "红歌 国际歌" for a specific name; "红歌 /纯曲" to filter by tags (/ prefix means a tag)
+    messages:
+      assets-not-ready: Red song audio assets are not fully downloaded yet, please try again later, or ask an admin to run 「红歌重载」
+      cooldown: Please wait {0} seconds before requesting another song
+      tag-hint: " (tags: {0})"
+      song-not-found: Song "{0}" not found{1}
+      no-songs: No songs available
+  红歌列表:
+    description: List all available red songs
+    messages:
+      no-songs: No songs available
+      list: "{0} songs in total:\n{1}{2}"
+      assets-pending: "\n\n⚠️ Audio assets are not fully downloaded yet, songs are unavailable for now"
+  红歌重载:
+    description: Re-download red song audio assets (admin)
+    messages:
+      permission-denied: Insufficient permission, level 2 or above is required
+      reload-start: Starting to re-download red song audio assets, this may take a few minutes…
+      reload-ok: Red song audio assets downloaded, songs are ready to play
+      reload-fail: Download failed, please check the logs (network issues, or try again later)

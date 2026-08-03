@@ -1,0 +1,14 @@
+commands:
+  红色语录:
+    description: Get random quotes from revolutionary mentors
+    usage: |
+      Enter 「红色语录」 for a random quote; 「红色语录 毛泽东」 to filter by author; 「红色语录 3」 for 3 quotes; combinations like 「红色语录 毛泽东 2」 are supported
+    messages:
+      author-not-found: No quotes found for author 「{0}」, try 「红色语录列表」
+      no-quotes: No quotes available
+  红色语录列表:
+    description: List all authors and quote counts
+    messages:
+      no-quotes: No quotes available
+      author-line: "- {0} ({1}): {2} quotes"
+      author-list: "{0} authors in total:\n{1}"

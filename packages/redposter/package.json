@@ -1,6 +1,6 @@
 {
     "name": "koishi-plugin-redposter",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "contributors": [
         "Oppenheymu <oppenheymu@gmail.com>"
     ],
@@ -16,6 +16,7 @@
     },
     "files": [
         "lib",
+        "locales",
         "assets/poster-index.json"
     ],
     "license": "MIT",
@@ -47,6 +48,11 @@
     },
     "koishi": {
         "description": {
+            "es": "Carteles de propaganda china de Chineseposters.net",
+            "fr": "Affiches de propagande chinoises de Chineseposters.net",
+            "ja": "Chineseposters.net の中国プロパガンダポスター",
+            "de": "Chinesische Propagandaplakate von Chineseposters.net",
+            "ru": "Китайские пропагандистские плакаты с Chineseposters.net",
             "en": "Chinese propaganda posters from Chineseposters.net",
             "zh": "从 chineseposters.net 抓取的中国宣传画海报库，支持按主题/关键词发送海报图片，注入 ctx.redposter 供其它插件使用"
         },

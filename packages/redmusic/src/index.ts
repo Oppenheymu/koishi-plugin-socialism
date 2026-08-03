@@ -199,6 +199,9 @@ declare module "koishi" {
 // ── 插件入口 ──────────────────────────────────────────────
 
 export function apply(ctx: Context, config: Config) {
+    ctx.i18n.define("zh", require("../locales/zh_CN"));
+    ctx.i18n.define("en", require("../locales/en"));
+
     ctx.plugin(RedMusicService);
 
     // 加载元数据索引（始终可用，几 KB）

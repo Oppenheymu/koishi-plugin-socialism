@@ -1,0 +1,24 @@
+commands:
+  红歌:
+    description: 随机点一首红歌，或指定歌名
+    usage: |
+      直接输入"红歌"随机一首；输入"红歌 国际歌"指定歌名；输入"红歌 /纯曲"按标签筛选（/前缀表示标签）
+    messages:
+      assets-not-ready: 红歌音频资源尚未下载完成，请稍后再试，或联系管理员执行「红歌重载」
+      cooldown: 请等待 {0} 秒后再点歌
+      tag-hint: "（标签: {0}）"
+      song-not-found: 未找到歌曲"{0}"{1}
+      no-songs: 暂无可用歌曲
+  红歌列表:
+    description: 查看所有可用红歌
+    messages:
+      no-songs: 暂无可用歌曲
+      list: "共 {0} 首歌曲：\n{1}{2}"
+      assets-pending: "\n\n⚠️ 音频资源尚未下载完成，点歌暂不可用"
+  红歌重载:
+    description: 重新下载红歌音频资源（管理员）
+    messages:
+      permission-denied: 权限不足，需要 2 级及以上权限
+      reload-start: 开始重新下载红歌音频资源，可能需要数分钟…
+      reload-ok: 红歌音频资源下载完成，可以正常点歌了
+      reload-fail: 下载失败，请查看日志（可能网络不通，或稍后重试）

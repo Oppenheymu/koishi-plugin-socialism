@@ -1,0 +1,25 @@
+commands:
+  红宣传推送:
+    description: Manually push once to the configured target groups
+    messages:
+      no-jobs: No scheduled jobs are configured.
+      invalid-index: Invalid job index, there are {0} jobs in total.
+      pushed: ✅ Pushed job {0} ({1})
+      push-failed: ⚠️ Push failed, please check the logs.
+      push-ok: ✅ Pushed
+      push-fail: ⚠️ Failed
+      push-all-result: "Job {0} ({1}): {2}"
+  红宣传推送列表:
+    description: View the configured scheduled jobs
+    messages:
+      no-jobs: No scheduled jobs are configured.
+      source-label: "Sources:"
+      target-label: "Targets:"
+      no-targets: (not configured)
+      job-list: "Job {0}: {1}\n  - {2} {3}\n  - {4} {5}"
+
+sources:
+  quote: Quote
+  paragraph: Archive paragraph
+  music: Song
+  poster: Poster

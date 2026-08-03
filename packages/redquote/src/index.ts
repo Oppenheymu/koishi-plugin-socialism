@@ -208,6 +208,9 @@ declare module "koishi" {
 // ── 插件入口 ──────────────────────────────────────────────
 
 export function apply(ctx: Context, config: Config) {
+    ctx.i18n.define("zh", require("../locales/zh_CN"));
+    ctx.i18n.define("en", require("../locales/en"));
+
     ctx.plugin(RedquoteService);
     setSensitiveFilter(config.filterSensitive);
 
@@ -243,12 +246,12 @@ export function apply(ctx: Context, config: Config) {
             const pool = ctx.redquote.list(filter);
             if (!pool.length) {
                 return authorName
-                    ? `未找到作者「${authorName}」的语录，试试「红色语录列表」`
-                    : "暂无可用语录";
+                    ? session.text(".author-not-found", [authorName])
+                    : session.text(".no-quotes");
             }
 
             const quotes = ctx.redquote.pick(Math.min(n, pool.length), filter);
-            if (!quotes.length) return "暂无可用语录";
+            if (!quotes.length) return session.text(".no-quotes");
             return quotes.map((q) => ctx.redquote.format(q, config.showSource)).join("\n\n");
         });
 
@@ -259,12 +262,12 @@ export function apply(ctx: Context, config: Config) {
         .action(({ session }) => {
             if (!session) return;
             const authors = listAuthors();
-            if (!authors.length) return "暂无可用语录";
+            if (!authors.length) return session.text(".no-quotes");
             const counts = countByAuthor();
             const lines = authors.map((a) => {
                 const n = counts.get(a.id) ?? 0;
-                return `- ${a.name}（${a.nameEn}）：${n} 条`;
+                return session.text(".author-line", [a.name, a.nameEn, n]);
             });
-            return `共 ${authors.length} 位作者：\n${lines.join("\n")}`;
+            return session.text(".author-list", [authors.length, lines.join("\n")]);
         });
 }

@@ -25,7 +25,7 @@ function pageText<T extends Pageable>(
     const end = Math.min(start + pageSize, total);
     const lines = items.slice(start, end).map((it, i) => `${start + i + 1}. ${it.title}`);
     const nav = total > pageSize ? `  [${page + 1}/${totalPages}]` : "";
-    return `--- ${label}列表 (${start + 1}-${end} / ${total})${nav} ---\n${lines.join("\n")}`;
+    return `--- ${label} (${start + 1}-${end} / ${total})${nav} ---\n${lines.join("\n")}`;
 }
 
 function pickOption<T extends Pageable>(input: string, options: T[]): T | null {
@@ -66,13 +66,13 @@ async function askSelection<T extends Pageable>(
     while (true) {
         const hint =
             totalPages > 1
-                ? "👉 输入编号/关键字选择，n下一页，p上一页，q取消"
-                : "👉 输入编号或关键字选择，q取消";
+                ? session.text("redarchive.ask-hint")
+                : session.text("redarchive.ask-hint-simple");
         await session.send(hint);
 
         const input = await session.prompt(config.promptTimeoutMs);
         if (!input) {
-            await session.send("⌛ 交互超时，已自动取消。");
+            await session.send(session.text("redarchive.ask-timeout"));
             return null;
         }
 
@@ -80,7 +80,7 @@ async function askSelection<T extends Pageable>(
 
         // 取消
         if (cmd === "q") {
-            await session.send("🚫 已取消操作。");
+            await session.send(session.text("redarchive.ask-cancelled"));
             return null;
         }
 
@@ -100,7 +100,7 @@ async function askSelection<T extends Pageable>(
         const result = pickOption(input, options);
         if (result) return result;
 
-        await session.send("⚠️ 未能匹配，请输入编号/关键字，或 n/p 翻页。");
+        await session.send(session.text("redarchive.ask-no-match"));
     }
 }
 
@@ -114,40 +114,48 @@ export function registerCommand(ctx: Context, config: Config): void {
     ctx.command("马克思", "抓取马克思主义文库文件并发送下载附件")
         .alias("marxists")
         .action(async ({ session }) => {
-            if (!session?.channelId || !session?.userId) return "当前上下文不支持会话交互。";
-
+            if (!session) return;
+            if (!session.channelId || !session.userId) return session.text(".session-unsupported");
             const { userId, channelId } = session;
             const now = Date.now();
 
-            if (activeChannels.has(channelId))
-                return "⚠️ 当前频道已有正在进行的抓取任务，请稍后再试。";
+            if (activeChannels.has(channelId)) return session.text(".task-busy");
 
             if (config.cooldownMs > 0) {
                 const remain = config.cooldownMs - (now - (cooldownMap.get(userId) ?? 0));
-                if (remain > 0)
-                    return `🕒 操作过于频繁，请 ${(remain / 1000).toFixed(1)} 秒后再试。`;
+                if (remain > 0) return session.text(".cooldown", [(remain / 1000).toFixed(1)]);
             }
 
             activeChannels.add(channelId);
             cooldownMap.set(userId, now);
 
             try {
-                await session.send("🔍 正在抓取分类，请稍候...");
+                await session.send(session.text(".fetching-categories"));
 
                 const categories = await crawler.listCategories();
-                if (!categories.length) return "❌ 未找到可用分类，请检查网络或入口 URL。";
+                if (!categories.length) return session.text(".no-categories");
 
-                const category = await askSelection(session, "分类", categories, config);
+                const category = await askSelection(
+                    session,
+                    session.text("redarchive.category-list"),
+                    categories,
+                    config,
+                );
                 if (!category) return;
 
-                await session.send(`📂 已选择分类：${category.title}\n正在读取文件列表...`);
+                await session.send(session.text(".category-selected", [category.title]));
                 const documents = await crawler.listDocuments(category.url);
-                if (!documents.length) return "该分类下没有可用文件。";
+                if (!documents.length) return session.text(".no-documents");
 
-                const doc = await askSelection(session, "文件", documents, config);
+                const doc = await askSelection(
+                    session,
+                    session.text("redarchive.file-list"),
+                    documents,
+                    config,
+                );
                 if (!doc) return;
 
-                await session.send(`📄 已选择：${doc.title}\n正在发送文件...`);
+                await session.send(session.text(".document-selected", [doc.title]));
                 await sendAsset(
                     session,
                     { title: doc.title, url: doc.url, isDirectFile: doc.isDirectFile },
@@ -155,7 +163,9 @@ export function registerCommand(ctx: Context, config: Config): void {
                 );
             } catch (e) {
                 logger.error(`[Command Error] ${e}`);
-                return `❌ 抓取过程中发生错误：${e instanceof Error ? e.message : "未知错误"}`;
+                return session.text(".fetch-error", [
+                    e instanceof Error ? e.message : session.text(".unknown-error"),
+                ]);
             } finally {
                 activeChannels.delete(channelId);
             }
@@ -166,33 +176,33 @@ export function registerCommand(ctx: Context, config: Config): void {
     ctx.command("马克思段落", "从文库文档中随机选一段话")
         .alias("marxists段落")
         .action(async ({ session }) => {
-            if (!session?.channelId || !session?.userId) return "当前上下文不支持会话交互。";
+            if (!session) return;
+            if (!session.channelId || !session.userId) return session.text(".session-unsupported");
 
             const { userId, channelId } = session;
             const now = Date.now();
 
-            if (activeChannels.has(channelId))
-                return "⚠️ 当前频道已有正在进行的任务，请稍后再试。";
+            if (activeChannels.has(channelId)) return session.text(".task-busy");
 
             if (config.cooldownMs > 0) {
                 const remain = config.cooldownMs - (now - (cooldownMap.get(userId) ?? 0));
-                if (remain > 0)
-                    return `🕒 操作过于频繁，请 ${(remain / 1000).toFixed(1)} 秒后再试。`;
+                if (remain > 0) return session.text(".cooldown", [(remain / 1000).toFixed(1)]);
             }
 
             activeChannels.add(channelId);
             cooldownMap.set(userId, now);
 
             try {
-                await session.send("📖 正在随机选取文库段落...");
+                await session.send(session.text(".fetching-paragraph"));
                 const sent = await ctx.redarchive.send(session);
-                if (!sent) return "❌ 暂时没有可用的文库段落，请稍后再试。";
+                if (!sent) return session.text(".no-paragraph");
             } catch (e) {
                 logger.error(`[Paragraph Error] ${e}`);
-                return `❌ 随机段落过程中发生错误：${e instanceof Error ? e.message : "未知错误"}`;
+                return session.text(".fetch-error", [
+                    e instanceof Error ? e.message : session.text(".unknown-error"),
+                ]);
             } finally {
                 activeChannels.delete(channelId);
             }
         });
 }
-
