@@ -1,6 +1,6 @@
 {
  "source": "https://chineseposters.net",
- "generated": "2026-08-03T07:38:17.553Z",
+ "generated": "2026-08-03T14:41:09.696Z",
  "themes": [
   {
    "id": "future",
@@ -283,11 +283,6 @@
    "category": "Campaigns - 1977-2012"
   },
   {
-   "id": "peoples-movement-1989",
-   "name": "People's Movement (1989)",
-   "category": "Campaigns - 1977-2012"
-  },
-  {
    "id": "socialist-patriotic-education-campaign",
    "name": "Socialist Patriotic Education Campaign (1990)",
    "category": "Campaigns - 1977-2012"
@@ -348,16 +343,6 @@
    "category": "Campaigns - 1977-2012"
   },
   {
-   "id": "falun-gong",
-   "name": "Falun Gong (法轮功) (1999)",
-   "category": "Campaigns - 1977-2012"
-  },
-  {
-   "id": "eradicate-evil-cults",
-   "name": "Privately encourage healthy practices, eradicate evil cults (2001)",
-   "category": "Campaigns - 1977-2012"
-  },
-  {
    "id": "oppose-evil-sects",
    "name": "Oppose evil sects, happiness and health -- Warning education wall charts (2003)",
    "category": "Campaigns - 1977-2012"
@@ -385,11 +370,6 @@
   {
    "id": "shanghai-expo",
    "name": "Shanghai Expo 2010",
-   "category": "Campaigns - 1977-2012"
-  },
-  {
-   "id": "political-reform",
-   "name": "Political Reform",
    "category": "Campaigns - 1977-2012"
   },
   {
@@ -625,11 +605,6 @@
   {
    "id": "yejianying",
    "name": "Ye Jianying (叶剑英)",
-   "category": "Party and State Leaders"
-  },
-  {
-   "id": "zhaoziyang",
-   "name": "Zhao Ziyang (赵紫阳)",
    "category": "Party and State Leaders"
   },
   {
@@ -1443,11 +1418,6 @@
    "category": "Other"
   },
   {
-   "id": "christian-crimes",
-   "name": "The counter-revolutionary and restorationist crimes of Catholicism before and after Liberation (mid 1960s)",
-   "category": "Other"
-  },
-  {
    "id": "jiefang-truck",
    "name": "Jiefang Truck",
    "category": "Other"
@@ -1478,18 +1448,8 @@
    "category": "Other"
   },
   {
-   "id": "democracy-freedom-1989",
-   "name": "Democracy & Freedom series (1989)",
-   "category": "Posters from Hong Kong and Taiwan"
-  },
-  {
    "id": "taiwan-chinese-culture",
    "name": "Taiwan - Republic of China \"Chinese Culture\"",
-   "category": "Posters from Hong Kong and Taiwan"
-  },
-  {
-   "id": "umbrella-movement",
-   "name": "Umbrella Movement (2014)",
    "category": "Posters from Hong Kong and Taiwan"
   }
  ],
@@ -1874,7 +1834,6 @@
    "image": "/sites/default/files/images/d21-766.jpg",
    "page": "/posters/d21-766",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -1886,7 +1845,6 @@
    "page": "/posters/d22-100",
    "themes": [
     "beijing-hankou-railway-strike",
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -1898,19 +1856,8 @@
    "page": "/posters/d22-103",
    "themes": [
     "elections-councils",
-    "political-reform",
     "reunifications",
     "hong-kong-handover"
-   ]
-  },
-  {
-   "id": "d22-110",
-   "title": "Propaganda slogans for resolutely stopping upheavals",
-   "year": 1989,
-   "image": "/sites/default/files/images/d22-110.jpg",
-   "page": "/posters/d22-110",
-   "themes": [
-    "peoples-movement-1989"
    ]
   },
   {
@@ -1956,8 +1903,7 @@
    "image": "/sites/default/files/images/d25-100.jpg",
    "page": "/posters/d25-100",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -1966,8 +1912,7 @@
    "image": "/sites/default/files/images/d25-101.jpg",
    "page": "/posters/d25-101",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -1980,8 +1925,7 @@
     "monsters-demons",
     "foreign-imperialists",
     "anti-american-boardgame",
-    "women-caregivers",
-    "christian-crimes"
+    "women-caregivers"
    ]
   },
   {
@@ -1990,8 +1934,8 @@
    "image": "/sites/default/files/images/d25-103.jpg",
    "page": "/posters/d25-103",
    "themes": [
-    "women-caregivers",
-    "christian-crimes"
+    "counterrevolutionaries",
+    "women-caregivers"
    ]
   },
   {
@@ -2000,8 +1944,7 @@
    "image": "/sites/default/files/images/d25-104.jpg",
    "page": "/posters/d25-104",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2010,18 +1953,7 @@
    "image": "/sites/default/files/images/d25-105.jpg",
    "page": "/posters/d25-105",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
-   "id": "d25-106",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism after Liberation",
-   "image": "/sites/default/files/images/d25-106.jpg",
-   "page": "/posters/d25-106",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2031,8 +1963,7 @@
    "page": "/posters/d25-107",
    "themes": [
     "counterrevolutionaries",
-    "mao-slogans",
-    "christian-crimes"
+    "mao-slogans"
    ]
   },
   {
@@ -2041,8 +1972,7 @@
    "image": "/sites/default/files/images/d25-108.jpg",
    "page": "/posters/d25-108",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2051,8 +1981,7 @@
    "image": "/sites/default/files/images/d25-109.jpg",
    "page": "/posters/d25-109",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2074,8 +2003,7 @@
    "image": "/sites/default/files/images/d25-110.jpg",
    "page": "/posters/d25-110",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2084,8 +2012,7 @@
    "image": "/sites/default/files/images/d25-111.jpg",
    "page": "/posters/d25-111",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2094,8 +2021,7 @@
    "image": "/sites/default/files/images/d25-112.jpg",
    "page": "/posters/d25-112",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2104,8 +2030,7 @@
    "image": "/sites/default/files/images/d25-113.jpg",
    "page": "/posters/d25-113",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2114,8 +2039,7 @@
    "image": "/sites/default/files/images/d25-114.jpg",
    "page": "/posters/d25-114",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2124,7 +2048,7 @@
    "image": "/sites/default/files/images/d25-115.jpg",
    "page": "/posters/d25-115",
    "themes": [
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2133,8 +2057,7 @@
    "image": "/sites/default/files/images/d25-116.jpg",
    "page": "/posters/d25-116",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2143,8 +2066,7 @@
    "image": "/sites/default/files/images/d25-117.jpg",
    "page": "/posters/d25-117",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2153,18 +2075,7 @@
    "image": "/sites/default/files/images/d25-118.jpg",
    "page": "/posters/d25-118",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
-   "id": "d25-119",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism after Liberation",
-   "image": "/sites/default/files/images/d25-119.jpg",
-   "page": "/posters/d25-119",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2180,34 +2091,12 @@
    ]
   },
   {
-   "id": "d25-120",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism after Liberation",
-   "image": "/sites/default/files/images/d25-120.jpg",
-   "page": "/posters/d25-120",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
    "id": "d25-121",
    "title": "The counter-revolutionary and restorationist crimes of Catholicism after Liberation",
    "image": "/sites/default/files/images/d25-121.jpg",
    "page": "/posters/d25-121",
    "themes": [
-    "land-reform",
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
-   "id": "d25-122",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism after Liberation",
-   "image": "/sites/default/files/images/d25-122.jpg",
-   "page": "/posters/d25-122",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "land-reform"
    ]
   },
   {
@@ -2216,8 +2105,7 @@
    "image": "/sites/default/files/images/d25-123.jpg",
    "page": "/posters/d25-123",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2226,8 +2114,7 @@
    "image": "/sites/default/files/images/d25-124.jpg",
    "page": "/posters/d25-124",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2236,8 +2123,7 @@
    "image": "/sites/default/files/images/d25-125.jpg",
    "page": "/posters/d25-125",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2246,8 +2132,7 @@
    "image": "/sites/default/files/images/d25-126.jpg",
    "page": "/posters/d25-126",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2257,8 +2142,7 @@
    "page": "/posters/d25-127",
    "themes": [
     "land-reform",
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2267,8 +2151,7 @@
    "image": "/sites/default/files/images/d25-128.jpg",
    "page": "/posters/d25-128",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2277,8 +2160,7 @@
    "image": "/sites/default/files/images/d25-129.jpg",
    "page": "/posters/d25-129",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2297,8 +2179,7 @@
    "image": "/sites/default/files/images/d25-130.jpg",
    "page": "/posters/d25-130",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2307,7 +2188,7 @@
    "image": "/sites/default/files/images/d25-131.jpg",
    "page": "/posters/d25-131",
    "themes": [
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2316,8 +2197,7 @@
    "image": "/sites/default/files/images/d25-132.jpg",
    "page": "/posters/d25-132",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2326,8 +2206,7 @@
    "image": "/sites/default/files/images/d25-133.jpg",
    "page": "/posters/d25-133",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -2336,8 +2215,7 @@
    "image": "/sites/default/files/images/d25-134.jpg",
    "page": "/posters/d25-134",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -3396,7 +3274,6 @@
     "may-fourth-movement",
     "founding-chinese-communist-party",
     "dengyingchao",
-    "zhouenlai",
     "marx"
    ]
   },
@@ -3699,8 +3576,7 @@
     "dengxiaoping",
     "dengxiaoping-2",
     "huyaobang",
-    "yejianying",
-    "zhaoziyang"
+    "yejianying"
    ]
   },
   {
@@ -4663,8 +4539,7 @@
     "huaguofeng-cult",
     "huaguofeng-dazhai",
     "huaguofeng-166-middle-school",
-    "huaguofeng-earthquake-relief",
-    "zhaoziyang"
+    "huaguofeng-earthquake-relief"
    ]
   },
   {
@@ -4827,7 +4702,6 @@
    "page": "/posters/d25-468",
    "themes": [
     "sixth-plenum",
-    "xijinping",
     "dengxiaoping",
     "dengxiaoping-2",
     "hujintao",
@@ -5065,18 +4939,7 @@
    "image": "/sites/default/files/images/d25-75.jpg",
    "page": "/posters/d25-75",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
-   "id": "d25-76",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism before Liberation",
-   "image": "/sites/default/files/images/d25-76.jpg",
-   "page": "/posters/d25-76",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5085,19 +4948,7 @@
    "image": "/sites/default/files/images/d25-77.jpg",
    "page": "/posters/d25-77",
    "themes": [
-    "shanghai",
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
-   "id": "d25-78",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism before Liberation",
-   "image": "/sites/default/files/images/d25-78.jpg",
-   "page": "/posters/d25-78",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "shanghai"
    ]
   },
   {
@@ -5108,8 +4959,7 @@
    "themes": [
     "shanghai",
     "counterrevolutionaries",
-    "chiang-kai-shek",
-    "christian-crimes"
+    "chiang-kai-shek"
    ]
   },
   {
@@ -5129,8 +4979,7 @@
    "themes": [
     "shanghai",
     "second-sino-japanese-war",
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5140,8 +4989,7 @@
    "page": "/posters/d25-81",
    "themes": [
     "counterrevolutionaries",
-    "chiang-kai-shek",
-    "christian-crimes"
+    "chiang-kai-shek"
    ]
   },
   {
@@ -5151,8 +4999,7 @@
    "page": "/posters/d25-82",
    "themes": [
     "counterrevolutionaries",
-    "chiang-kai-shek",
-    "christian-crimes"
+    "chiang-kai-shek"
    ]
   },
   {
@@ -5162,8 +5009,7 @@
    "page": "/posters/d25-83",
    "themes": [
     "counterrevolutionaries",
-    "chiang-kai-shek",
-    "christian-crimes"
+    "chiang-kai-shek"
    ]
   },
   {
@@ -5174,8 +5020,7 @@
    "themes": [
     "counterrevolutionaries",
     "chiang-kai-shek",
-    "zhude",
-    "christian-crimes"
+    "zhude"
    ]
   },
   {
@@ -5185,8 +5030,7 @@
    "page": "/posters/d25-85",
    "themes": [
     "counterrevolutionaries",
-    "chiang-kai-shek",
-    "christian-crimes"
+    "chiang-kai-shek"
    ]
   },
   {
@@ -5195,8 +5039,7 @@
    "image": "/sites/default/files/images/d25-86.jpg",
    "page": "/posters/d25-86",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5205,7 +5048,7 @@
    "image": "/sites/default/files/images/d25-87.jpg",
    "page": "/posters/d25-87",
    "themes": [
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5214,8 +5057,7 @@
    "image": "/sites/default/files/images/d25-88.jpg",
    "page": "/posters/d25-88",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5224,8 +5066,7 @@
    "image": "/sites/default/files/images/d25-89.jpg",
    "page": "/posters/d25-89",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5244,8 +5085,7 @@
    "image": "/sites/default/files/images/d25-90.jpg",
    "page": "/posters/d25-90",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5254,48 +5094,7 @@
    "image": "/sites/default/files/images/d25-91.jpg",
    "page": "/posters/d25-91",
    "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
-   "id": "d25-92",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism before Liberation",
-   "image": "/sites/default/files/images/d25-92.jpg",
-   "page": "/posters/d25-92",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
-   "id": "d25-93",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism before Liberation",
-   "image": "/sites/default/files/images/d25-93.jpg",
-   "page": "/posters/d25-93",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
-   "id": "d25-94",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism before Liberation",
-   "image": "/sites/default/files/images/d25-94.jpg",
-   "page": "/posters/d25-94",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
-   ]
-  },
-  {
-   "id": "d25-95",
-   "title": "The counter-revolutionary and restorationist crimes of Catholicism before Liberation",
-   "image": "/sites/default/files/images/d25-95.jpg",
-   "page": "/posters/d25-95",
-   "themes": [
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5307,8 +5106,7 @@
     "new-year-prints",
     "new-year-prints-2",
     "new-year-prints-3",
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5320,8 +5118,7 @@
     "new-year-prints",
     "new-year-prints-2",
     "new-year-prints-3",
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5333,8 +5130,7 @@
     "new-year-prints",
     "new-year-prints-2",
     "new-year-prints-3",
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5346,8 +5142,7 @@
     "new-year-prints",
     "new-year-prints-2",
     "new-year-prints-3",
-    "counterrevolutionaries",
-    "christian-crimes"
+    "counterrevolutionaries"
    ]
   },
   {
@@ -5720,7 +5515,6 @@
    "image": "/sites/default/files/images/d85-231.jpg",
    "page": "/posters/d85-231",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover",
     "legal-knowledge"
@@ -6068,10 +5862,8 @@
    "page": "/posters/d90-407",
    "themes": [
     "elections-councils",
-    "political-reform",
     "reunifications",
-    "hong-kong-handover",
-    "umbrella-movement"
+    "hong-kong-handover"
    ]
   },
   {
@@ -6442,31 +6234,25 @@
   {
    "id": "dc-025",
    "title": "The leaders of China's take-off",
-   "year": 1989,
    "image": "/sites/default/files/images/dc-025.jpg",
    "page": "/posters/dc-025",
    "themes": [
-    "peoples-movement-1989",
     "leaders",
     "dengxiaoping",
     "dengxiaoping-2",
-    "huyaobang",
-    "zhaoziyang"
+    "huyaobang"
    ]
   },
   {
    "id": "dc-026",
    "title": "The leaders and we are together",
-   "year": 1989,
    "image": "/sites/default/files/images/dc-026.jpg",
    "page": "/posters/dc-026",
    "themes": [
-    "peoples-movement-1989",
     "leaders",
     "dengxiaoping",
     "dengxiaoping-2",
-    "huyaobang",
-    "zhaoziyang"
+    "huyaobang"
    ]
   },
   {
@@ -6515,7 +6301,6 @@
    "image": "/sites/default/files/images/e11-505.jpg",
    "page": "/posters/e11-505",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -6526,7 +6311,6 @@
    "image": "/sites/default/files/images/e11-506.jpg",
    "page": "/posters/e11-506",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -6537,7 +6321,6 @@
    "image": "/sites/default/files/images/e11-507.jpg",
    "page": "/posters/e11-507",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -6806,8 +6589,7 @@
    "image": "/sites/default/files/images/e12-597.jpg",
    "page": "/posters/e12-597",
    "themes": [
-    "elections-councils",
-    "political-reform"
+    "elections-councils"
    ]
   },
   {
@@ -7223,6 +7005,7 @@
    "image": "/sites/default/files/images/e12-726.jpg",
    "page": "/posters/e12-726",
    "themes": [
+    "women",
     "space-program"
    ]
   },
@@ -7333,7 +7116,6 @@
    "image": "/sites/default/files/images/e12-760.jpg",
    "page": "/posters/e12-760",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -7344,7 +7126,6 @@
    "image": "/sites/default/files/images/e12-765.jpg",
    "page": "/posters/e12-765",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -9575,15 +9356,6 @@
    ]
   },
   {
-   "id": "e13-364",
-   "title": "Schematic drawing of the process of casting votes in the election of the village council, early 1990s",
-   "image": "/sites/default/files/images/e13-364.jpg",
-   "page": "/posters/e13-364",
-   "themes": [
-    "political-reform"
-   ]
-  },
-  {
    "id": "e13-365",
    "title": "We are gratified",
    "year": 1995,
@@ -9745,10 +9517,8 @@
    "image": "/sites/default/files/images/e13-386.jpg",
    "page": "/posters/e13-386",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9757,10 +9527,8 @@
    "image": "/sites/default/files/images/e13-387.jpg",
    "page": "/posters/e13-387",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9769,10 +9537,8 @@
    "image": "/sites/default/files/images/e13-388.jpg",
    "page": "/posters/e13-388",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9781,10 +9547,8 @@
    "image": "/sites/default/files/images/e13-389.jpg",
    "page": "/posters/e13-389",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9802,10 +9566,8 @@
    "image": "/sites/default/files/images/e13-390.jpg",
    "page": "/posters/e13-390",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9814,10 +9576,8 @@
    "image": "/sites/default/files/images/e13-391.jpg",
    "page": "/posters/e13-391",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9826,10 +9586,8 @@
    "image": "/sites/default/files/images/e13-392.jpg",
    "page": "/posters/e13-392",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9838,10 +9596,8 @@
    "image": "/sites/default/files/images/e13-393.jpg",
    "page": "/posters/e13-393",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9850,10 +9606,8 @@
    "image": "/sites/default/files/images/e13-394.jpg",
    "page": "/posters/e13-394",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9862,10 +9616,8 @@
    "image": "/sites/default/files/images/e13-395.jpg",
    "page": "/posters/e13-395",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9874,10 +9626,8 @@
    "image": "/sites/default/files/images/e13-396.jpg",
    "page": "/posters/e13-396",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9886,10 +9636,8 @@
    "image": "/sites/default/files/images/e13-397.jpg",
    "page": "/posters/e13-397",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9898,10 +9646,8 @@
    "image": "/sites/default/files/images/e13-398.jpg",
    "page": "/posters/e13-398",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9910,10 +9656,8 @@
    "image": "/sites/default/files/images/e13-399.jpg",
    "page": "/posters/e13-399",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9923,7 +9667,6 @@
    "page": "/posters/e13-4",
    "themes": [
     "models",
-    "leifeng",
     "leifeng-2",
     "leifeng-3"
    ]
@@ -9934,10 +9677,8 @@
    "image": "/sites/default/files/images/e13-400.jpg",
    "page": "/posters/e13-400",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9946,10 +9687,8 @@
    "image": "/sites/default/files/images/e13-401.jpg",
    "page": "/posters/e13-401",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9958,10 +9697,8 @@
    "image": "/sites/default/files/images/e13-402.jpg",
    "page": "/posters/e13-402",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -9970,10 +9707,8 @@
    "image": "/sites/default/files/images/e13-403.jpg",
    "page": "/posters/e13-403",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
-    "hong-kong-handover",
-    "democracy-freedom-1989"
+    "hong-kong-handover"
    ]
   },
   {
@@ -10113,7 +9848,6 @@
    "image": "/sites/default/files/images/e13-419.jpg",
    "page": "/posters/e13-419",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -10134,7 +9868,6 @@
    "image": "/sites/default/files/images/e13-420.jpg",
    "page": "/posters/e13-420",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -10145,7 +9878,6 @@
    "image": "/sites/default/files/images/e13-421.jpg",
    "page": "/posters/e13-421",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -10506,17 +10238,6 @@
    ]
   },
   {
-   "id": "e13-460",
-   "title": "Only socialism can help China, only socialism can develop China",
-   "year": 1989,
-   "image": "/sites/default/files/images/e13-460.jpg",
-   "page": "/posters/e13-460",
-   "themes": [
-    "peoples-movement-1989",
-    "political-reform"
-   ]
-  },
-  {
    "id": "e13-461",
    "title": "The achievements in national defense science and technology are glorious",
    "year": 1989,
@@ -10777,8 +10498,7 @@
    "image": "/sites/default/files/images/e13-497.jpg",
    "page": "/posters/e13-497",
    "themes": [
-    "four-basic-principles",
-    "peoples-movement-1989"
+    "four-basic-principles"
    ]
   },
   {
@@ -10927,7 +10647,6 @@
    "themes": [
     "elections-councils",
     "up-to-the-mountains",
-    "political-reform",
     "barefoot-doctors",
     "huxian-peasant-painters",
     "elderly"
@@ -11287,11 +11006,22 @@
    ]
   },
   {
+   "id": "e13-570",
+   "title": "China-Hong Kong 1997",
+   "image": "/sites/default/files/images/e13-570.jpg",
+   "page": "/posters/e13-570",
+   "themes": [
+    "reunifications",
+    "hong-kong-handover"
+   ]
+  },
+  {
    "id": "e13-571",
    "title": "China-Hong Kong 1997",
    "image": "/sites/default/files/images/e13-571.jpg",
    "page": "/posters/e13-571",
    "themes": [
+    "reunifications",
     "hong-kong-handover"
    ]
   },
@@ -11351,7 +11081,6 @@
    "image": "/sites/default/files/images/e13-577.jpg",
    "page": "/posters/e13-577",
    "themes": [
-    "reunifications",
     "hong-kong-handover"
    ]
   },
@@ -11510,17 +11239,7 @@
    "image": "/sites/default/files/images/e13-590.jpg",
    "page": "/posters/e13-590",
    "themes": [
-    "huyaobang",
-    "zhaoziyang"
-   ]
-  },
-  {
-   "id": "e13-590-detail",
-   "title": "",
-   "image": "/sites/default/files/images/e13-590-detail.jpg",
-   "page": "/posters/e13-590-detail",
-   "themes": [
-    "zhaoziyang"
+    "huyaobang"
    ]
   },
   {
@@ -14148,18 +13867,7 @@
    "image": "/sites/default/files/images/e13-891.jpg",
    "page": "/posters/e13-891",
    "themes": [
-    "falun-gong",
     "space-program"
-   ]
-  },
-  {
-   "id": "e13-892",
-   "title": "Firmly support the decision of the Central Committee to deal with the illegal organization of ‘Falun Gong’",
-   "year": 1999,
-   "image": "/sites/default/files/images/e13-892.jpg",
-   "page": "/posters/e13-892",
-   "themes": [
-    "falun-gong"
    ]
   },
   {
@@ -14629,6 +14337,7 @@
     "pla",
     "pla-1954",
     "pla-1958",
+    "pla-1960",
     "pla-1962",
     "pla-1980s",
     "pla-children",
@@ -16887,15 +16596,6 @@
    ]
   },
   {
-   "id": "e15-274",
-   "title": "Lotus flower lake",
-   "image": "/sites/default/files/images/e15-274.jpg",
-   "page": "/posters/e15-274",
-   "themes": [
-    "women"
-   ]
-  },
-  {
    "id": "e15-275",
    "title": "Letting everybody know",
    "image": "/sites/default/files/images/e15-275.jpg",
@@ -17233,7 +16933,8 @@
     "pla-1962",
     "pla-1980s",
     "pla-children",
-    "pla-cultural-revolution"
+    "pla-cultural-revolution",
+    "peoples-militia"
    ]
   },
   {
@@ -18169,43 +17870,6 @@
    "page": "/posters/e15-400",
    "themes": [
     "tractor-girls"
-   ]
-  },
-  {
-   "id": "e15-401",
-   "title": "Li Hongzhi, the man and his acts",
-   "image": "/sites/default/files/images/e15-401.jpg",
-   "page": "/posters/e15-401",
-   "themes": [
-    "falun-gong"
-   ]
-  },
-  {
-   "id": "e15-402",
-   "title": "Li Hongzhi, the man and his acts",
-   "year": 1999,
-   "image": "/sites/default/files/images/e15-402.jpg",
-   "page": "/posters/e15-402",
-   "themes": [
-    "falun-gong"
-   ]
-  },
-  {
-   "id": "e15-403",
-   "title": "Devious theories and heretical ideas harm and kill people",
-   "image": "/sites/default/files/images/e15-403.jpg",
-   "page": "/posters/e15-403",
-   "themes": [
-    "falun-gong"
-   ]
-  },
-  {
-   "id": "e15-404",
-   "title": "Devious theories and heretical ideas harm and kill people",
-   "image": "/sites/default/files/images/e15-404.jpg",
-   "page": "/posters/e15-404",
-   "themes": [
-    "falun-gong"
    ]
   },
   {
@@ -22361,6 +22025,7 @@
     "pla",
     "pla-1954",
     "pla-1958",
+    "pla-1960",
     "pla-1962",
     "pla-1980s",
     "pla-children",
@@ -23332,7 +22997,6 @@
    "themes": [
     "elections-councils",
     "17th-ccp-congress",
-    "political-reform",
     "elderly"
    ]
   },
@@ -25407,8 +25071,7 @@
    "image": "/sites/default/files/images/e16-640.jpg",
    "page": "/posters/e16-640",
    "themes": [
-    "elections-councils",
-    "political-reform"
+    "elections-councils"
    ]
   },
   {
@@ -25585,7 +25248,6 @@
    "image": "/sites/default/files/images/e16-80.jpg",
    "page": "/posters/e16-80",
    "themes": [
-    "peoples-movement-1989",
     "reunifications",
     "hong-kong-handover"
    ]
@@ -26425,16 +26087,6 @@
    ]
   },
   {
-   "id": "e17-74",
-   "title": "Announcement",
-   "year": 1989,
-   "image": "/sites/default/files/images/e17-74.jpg",
-   "page": "/posters/e17-74",
-   "themes": [
-    "peoples-movement-1989"
-   ]
-  },
-  {
    "id": "e17-76",
    "title": "The Literature and Arts Black Line's crowd of clowns",
    "image": "/sites/default/files/images/e17-76.jpg",
@@ -26796,8 +26448,7 @@
    "themes": [
     "1-october",
     "land-reform",
-    "elections-councils",
-    "political-reform"
+    "elections-councils"
    ]
   },
   {
@@ -29058,7 +28709,6 @@
    "image": "/sites/default/files/images/e37-170.jpg",
    "page": "/posters/e37-170",
    "themes": [
-    "foreign-imperialists",
     "anti-american-boardgame"
    ]
   },
@@ -29340,7 +28990,6 @@
    "image": "/sites/default/files/images/e37-210.jpg",
    "page": "/posters/e37-210",
    "themes": [
-    "sports",
     "table-tennis"
    ]
   },
@@ -30191,15 +29840,6 @@
    "page": "/posters/e37-325",
    "themes": [
     "women"
-   ]
-  },
-  {
-   "id": "e37-326",
-   "title": "Untitled (People's communes) III",
-   "image": "/sites/default/files/images/e37-326.jpg",
-   "page": "/posters/e37-326",
-   "themes": [
-    "great-leap-forward"
    ]
   },
   {
@@ -31278,6 +30918,7 @@
    "image": "/sites/default/files/images/e37-482.jpg",
    "page": "/posters/e37-482",
    "themes": [
+    "dengxiaoping",
     "dengxiaoping-2",
     "jiangzemin",
     "zhouenlai",
@@ -31378,7 +31019,6 @@
    "image": "/sites/default/files/images/e37-505.jpg",
    "page": "/posters/e37-505",
    "themes": [
-    "peoples-movement-1989",
     "models"
    ]
   },
@@ -31914,7 +31554,6 @@
     "new-year-prints",
     "new-year-prints-2",
     "new-year-prints-3",
-    "withdraw-from-the-sects",
     "oppose-evil-sects"
    ]
   },
@@ -31924,7 +31563,6 @@
    "image": "/sites/default/files/images/e37-568.jpg",
    "page": "/posters/e37-568",
    "themes": [
-    "withdraw-from-the-sects",
     "oppose-evil-sects"
    ]
   },
@@ -31934,7 +31572,6 @@
    "image": "/sites/default/files/images/e37-569.jpg",
    "page": "/posters/e37-569",
    "themes": [
-    "withdraw-from-the-sects",
     "oppose-evil-sects"
    ]
   },
@@ -31944,7 +31581,6 @@
    "image": "/sites/default/files/images/e37-570.jpg",
    "page": "/posters/e37-570",
    "themes": [
-    "withdraw-from-the-sects",
     "oppose-evil-sects",
     "legal-knowledge"
    ]
@@ -31955,8 +31591,6 @@
    "image": "/sites/default/files/images/e37-571.jpg",
    "page": "/posters/e37-571",
    "themes": [
-    "withdraw-from-the-sects",
-    "falun-gong",
     "oppose-evil-sects",
     "legal-knowledge"
    ]
@@ -31967,7 +31601,6 @@
    "image": "/sites/default/files/images/e37-572.jpg",
    "page": "/posters/e37-572",
    "themes": [
-    "withdraw-from-the-sects",
     "oppose-evil-sects",
     "legal-knowledge"
    ]
@@ -31978,7 +31611,6 @@
    "image": "/sites/default/files/images/e37-573.jpg",
    "page": "/posters/e37-573",
    "themes": [
-    "withdraw-from-the-sects",
     "oppose-evil-sects",
     "legal-knowledge"
    ]
@@ -32105,25 +31737,11 @@
    ]
   },
   {
-   "id": "e37-587",
-   "title": "I want real universal suffrage #Umbrella Movement",
-   "image": "/sites/default/files/images/e37-587.jpg",
-   "page": "/posters/e37-587",
-   "themes": [
-    "elections-councils",
-    "political-reform",
-    "reunifications",
-    "hong-kong-handover",
-    "umbrella-movement"
-   ]
-  },
-  {
    "id": "e37-588",
    "title": "The generals' heroic posture",
    "image": "/sites/default/files/images/e37-588.jpg",
    "page": "/posters/e37-588",
    "themes": [
-    "peoples-movement-1989",
     "pla",
     "pla-1954",
     "pla-1958",
@@ -32812,105 +32430,12 @@
    ]
   },
   {
-   "id": "e37-710",
-   "title": "Li Hongzhi is an absolute cult leader",
-   "image": "/sites/default/files/images/e37-710.jpg",
-   "page": "/posters/e37-710",
-   "themes": [
-    "falun-gong",
-    "eradicate-evil-cults"
-   ]
-  },
-  {
-   "id": "e37-711",
-   "title": "\"Falungong's\" anti-scientific lies confuse the public",
-   "image": "/sites/default/files/images/e37-711.jpg",
-   "page": "/posters/e37-711",
-   "themes": [
-    "falun-gong",
-    "eradicate-evil-cults"
-   ]
-  },
-  {
-   "id": "e37-712",
-   "title": "\"Falungong\" is anti-human and perverse",
-   "image": "/sites/default/files/images/e37-712.jpg",
-   "page": "/posters/e37-712",
-   "themes": [
-    "falun-gong",
-    "eradicate-evil-cults"
-   ]
-  },
-  {
-   "id": "e37-713",
-   "title": "\"Falungong\" harms young people",
-   "image": "/sites/default/files/images/e37-713.jpg",
-   "page": "/posters/e37-713",
-   "themes": [
-    "falun-gong",
-    "eradicate-evil-cults"
-   ]
-  },
-  {
-   "id": "e37-714",
-   "title": "Li Hongzhi uses \"Falungong\" to defraud money",
-   "image": "/sites/default/files/images/e37-714.jpg",
-   "page": "/posters/e37-714",
-   "themes": [
-    "falun-gong",
-    "eradicate-evil-cults"
-   ]
-  },
-  {
-   "id": "e37-715",
-   "title": "\"Falungong\" opposes society and disrupts public order",
-   "image": "/sites/default/files/images/e37-715.jpg",
-   "page": "/posters/e37-715",
-   "themes": [
-    "monsters-demons",
-    "falun-gong",
-    "eradicate-evil-cults"
-   ]
-  },
-  {
-   "id": "e37-716",
-   "title": "Protect human rights and eradicate evil cults",
-   "image": "/sites/default/files/images/e37-716.jpg",
-   "page": "/posters/e37-716",
-   "themes": [
-    "falun-gong",
-    "eradicate-evil-cults"
-   ]
-  },
-  {
-   "id": "e37-717",
-   "title": "The world’s shared outcry against cults",
-   "image": "/sites/default/files/images/e37-717.jpg",
-   "page": "/posters/e37-717",
-   "themes": [
-    "falun-gong",
-    "eradicate-evil-cults"
-   ]
-  },
-  {
    "id": "e37-718",
    "title": "Crack down on the basis of the law and crack down severely",
    "image": "/sites/default/files/images/e37-718.jpg",
    "page": "/posters/e37-718",
    "themes": [
-    "falun-gong",
-    "eradicate-evil-cults",
     "legal-knowledge"
-   ]
-  },
-  {
-   "id": "e37-719",
-   "title": "Unite to educate and rescue \"Falun Gong\" practitioners",
-   "image": "/sites/default/files/images/e37-719.jpg",
-   "page": "/posters/e37-719",
-   "themes": [
-    "falun-gong",
-    "eradicate-evil-cults"
    ]
   },
   {
@@ -32923,23 +32448,11 @@
    ]
   },
   {
-   "id": "e37-720",
-   "title": "Returning from the lost path to reshape one’s life",
-   "image": "/sites/default/files/images/e37-720.jpg",
-   "page": "/posters/e37-720",
-   "themes": [
-    "falun-gong",
-    "eradicate-evil-cults"
-   ]
-  },
-  {
    "id": "e37-721",
    "title": "\"With power and to spare we must pursue the tottering foe\"",
    "image": "/sites/default/files/images/e37-721.jpg",
    "page": "/posters/e37-721",
    "themes": [
-    "falun-gong",
-    "eradicate-evil-cults",
     "mao-slogans"
    ]
   },
@@ -33030,12 +32543,10 @@
   },
   {
    "id": "e37-770",
-   "title": "Great wall of steel - The spirit of the defenders of the Republic will shine forever gloriously",
-   "year": 1989,
+   "title": "Great wall of steel -- The spirit of the defenders of the Republic will shine forever gloriously",
    "image": "/sites/default/files/images/e37-770.jpg",
    "page": "/posters/e37-770",
    "themes": [
-    "peoples-movement-1989",
     "pla",
     "pla-1954",
     "pla-1958",
@@ -33965,7 +33476,6 @@
    "page": "/posters/e37-890",
    "themes": [
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -33977,7 +33487,6 @@
    "page": "/posters/e37-891",
    "themes": [
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -33989,7 +33498,6 @@
    "page": "/posters/e37-892",
    "themes": [
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -34002,7 +33510,6 @@
    "themes": [
     "national-minorities",
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -34014,7 +33521,6 @@
    "page": "/posters/e37-894",
    "themes": [
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -34026,7 +33532,6 @@
    "page": "/posters/e37-895",
    "themes": [
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -34038,7 +33543,6 @@
    "page": "/posters/e37-896",
    "themes": [
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -34050,7 +33554,6 @@
    "page": "/posters/e37-897",
    "themes": [
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -34062,7 +33565,6 @@
    "page": "/posters/e37-898",
    "themes": [
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -34074,7 +33576,6 @@
    "page": "/posters/e37-899",
    "themes": [
     "elections-councils",
-    "political-reform",
     "local-elections-npc",
     "legal-knowledge"
    ]
@@ -34106,8 +33607,7 @@
    "image": "/sites/default/files/images/e37-901.jpg",
    "page": "/posters/e37-901",
    "themes": [
-    "sixth-plenum",
-    "xijinping"
+    "sixth-plenum"
    ]
   },
   {
@@ -35335,11 +34835,9 @@
     "zhangside",
     "pla",
     "pla-1954",
-    "pla-1958",
     "pla-1960",
     "pla-1962",
     "pla-1980s",
-    "pla-children",
     "pla-cultural-revolution"
    ]
   },
@@ -35355,11 +34853,9 @@
     "wangjie",
     "pla",
     "pla-1954",
-    "pla-1958",
     "pla-1960",
     "pla-1962",
     "pla-1980s",
-    "pla-children",
     "pla-cultural-revolution"
    ]
   },
@@ -35778,6 +35274,7 @@
    "image": "/sites/default/files/images/e39-466.jpg",
    "page": "/posters/e39-466",
    "themes": [
+    "cultural-revolution-campaigns",
     "mao-quotations"
    ]
   },
@@ -36146,7 +35643,6 @@
    "image": "/sites/default/files/images/e39-587.jpg",
    "page": "/posters/e39-587",
    "themes": [
-    "up-to-the-mountains",
     "model-operas"
    ]
   },
@@ -36707,7 +36203,6 @@
    "image": "/sites/default/files/images/e39-835.jpg",
    "page": "/posters/e39-835",
    "themes": [
-    "foreign-imperialists",
     "anti-american-boardgame"
    ]
   },
@@ -37905,8 +37400,7 @@
    "page": "/posters/e50-44",
    "themes": [
     "national-minorities",
-    "elections-councils",
-    "political-reform"
+    "elections-councils"
    ]
   },
   {
@@ -38055,15 +37549,6 @@
    "page": "/posters/g1-958",
    "themes": [
     "1-october"
-   ]
-  },
-  {
-   "id": "g1-961",
-   "title": "Ride the wind and cleave the waves to realise a Leap Forward in all fields",
-   "image": "/sites/default/files/images/g1-961.jpg",
-   "page": "/posters/g1-961",
-   "themes": [
-    "great-leap-forward"
    ]
   },
   {
@@ -39208,11 +38693,9 @@
   {
    "id": "l4-599",
    "title": "Long live the socialist mother country!",
-   "year": 1989,
    "image": "/sites/default/files/images/l4-599.jpg",
    "page": "/posters/l4-599",
    "themes": [
-    "peoples-movement-1989",
     "pla",
     "pla-1954",
     "pla-1958",
@@ -40436,8 +39919,7 @@
    "image": "/sites/default/files/images/pc-1951-s-013.jpg",
    "page": "/posters/pc-1951-s-013",
    "themes": [
-    "elections-councils",
-    "political-reform"
+    "elections-councils"
    ]
   },
   {
@@ -40669,7 +40151,6 @@
    "page": "/posters/pc-1953-003",
    "themes": [
     "elections-councils",
-    "political-reform",
     "north-korea"
    ]
   },
@@ -42790,6 +42271,7 @@
    "image": "/sites/default/files/images/pc-1960-033.jpg",
    "page": "/posters/pc-1960-033",
    "themes": [
+    "great-leap-forward",
     "women"
    ]
   },
@@ -45341,7 +44823,6 @@
    "page": "/posters/pc-1974-l-003",
    "themes": [
     "criticize-lin-biao-confucius",
-    "linbiao",
     "sports"
    ]
   },
@@ -45608,15 +45089,6 @@
    "themes": [
     "study-theory",
     "lenin"
-   ]
-  },
-  {
-   "id": "pc-1975-l-003",
-   "title": "Leap to a new high level",
-   "image": "/sites/default/files/images/pc-1975-l-003.jpg",
-   "page": "/posters/pc-1975-l-003",
-   "themes": [
-    "sports"
    ]
   },
   {
@@ -46962,26 +46434,6 @@
    ]
   },
   {
-   "id": "pc-1989-002",
-   "title": "The flag of the republic will wave forever",
-   "year": 1989,
-   "image": "/sites/default/files/images/pc-1989-002.jpg",
-   "page": "/posters/pc-1989-002",
-   "themes": [
-    "peoples-movement-1989"
-   ]
-  },
-  {
-   "id": "pc-1989-003",
-   "title": "Good morning, nation",
-   "year": 1989,
-   "image": "/sites/default/files/images/pc-1989-003.jpg",
-   "page": "/posters/pc-1989-003",
-   "themes": [
-    "peoples-movement-1989"
-   ]
-  },
-  {
    "id": "pc-1989-006",
    "title": "Patrol along the Southern border",
    "image": "/sites/default/files/images/pc-1989-006.jpg",
@@ -47711,8 +47163,7 @@
    "image": "/sites/default/files/images/pc-2014-001.jpg",
    "page": "/posters/pc-2014-001",
    "themes": [
-    "sixth-plenum",
-    "xijinping"
+    "sixth-plenum"
    ]
   },
   {

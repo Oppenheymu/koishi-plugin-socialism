@@ -9,10 +9,22 @@ let _index: PosterIndex | null = null;
 
 /**
  * 国内平台敏感主题 slug（启用 filterSensitive 时过滤）。
- * 由用户点名：习近平、文化大革命、江青、四人帮。
- * 注意：大跃进、人民公社等主题不在此列，不做过度过滤。
+ * 分为两级：
+ * - 绝对红线（国内平台直接封号/封群级别）：法轮功、六四、赵紫阳、占中、八九民主墙
+ * - 高度敏感：习近平、文革、江青、四人帮
+ * 注意：大跃进、人民公社、雷锋等主题不在此列，不做过度过滤。
  */
 const SENSITIVE_THEMES: string[] = [
+    // ── 绝对红线 ──
+    "falun-gong", // 法轮功
+    "peoples-movement-1989", // 六四（1989 人民运动）
+    "democracy-freedom-1989", // 八九民主与自由系列
+    "zhaoziyang", // 赵紫阳
+    "umbrella-movement", // 占中（2014）
+    "christian-crimes", // 批判天主教（宗教敏感）
+    "eradicate-evil-cults", // 取缔邪教（海报标题含法轮功）
+    "political-reform", // 政治改革（含占中海报）
+    // ── 高度敏感 ──
     "xijinping", // 习近平
     "cultural-revolution-campaigns", // 文化大革命
     "jiangqing", // 江青
