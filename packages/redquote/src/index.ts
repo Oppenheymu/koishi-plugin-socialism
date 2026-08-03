@@ -6,34 +6,124 @@ import type { AuthorEntry, QuoteEntry, QuoteFilter } from "./types";
 export const name = "redquote";
 
 export const usage = `
-<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-  <h2 style="margin-top: 0; color: #4a6ee0;">📖 使用说明</h2>
-  <p>📜 发送「红色语录」即可随机收到一条革命导师语录</p>
-  <p>📚 语录来自 <a href="https://zh.wikiquote.org" style="color:#4a6ee0;">中文维基语录</a> 与 <a href="https://www.marxists.org" style="color:#4a6ee0;">Marxists.org</a>，收录马克思、恩格斯、列宁、毛泽东、切·格瓦拉、斯大林 6 位人物，中英双语共 1200+ 条，索引随包发布</p>
-  <p>🛡️ 默认开启<strong>敏感内容过滤器</strong>，过滤文革/江青/四人帮/习近平等敏感内容，可在插件配置中关闭</p>
-  <p>🔌 注入 <code>redquote</code> 服务，其他插件可通过 <code>ctx.redquote</code> 调用</p>
+<style>
+  .rq-radio-zh, .rq-radio-en, .rq-radio-ru { display: none; }
+  .rq-content-en, .rq-content-ru { display: none; }
+  .rq-radio-en:checked ~ .rq-content-zh { display: none; }
+  .rq-radio-en:checked ~ .rq-content-en { display: block; }
+  .rq-radio-ru:checked ~ .rq-content-zh { display: none; }
+  .rq-radio-ru:checked ~ .rq-content-ru { display: block; }
+  .rq-lang-switch { text-align: right; margin-bottom: 16px; user-select: none; }
+  .rq-lang-switch label {
+    display: inline-block;
+    padding: 4px 14px;
+    font-size: 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #fff;
+    color: #666;
+    margin-left: 8px;
+    transition: all 0.2s;
+  }
+  .rq-lang-switch label:hover { border-color: #4a6ee0; color: #4a6ee0; }
+  .rq-radio-zh:checked ~ .rq-lang-switch label[for="rq-zh"],
+  .rq-radio-en:checked ~ .rq-lang-switch label[for="rq-en"],
+  .rq-radio-ru:checked ~ .rq-lang-switch label[for="rq-ru"] {
+    background: #4a6ee0; color: #fff; border-color: #4a6ee0;
+  }
+</style>
+<input type="radio" name="rq-lang" id="rq-zh" class="rq-radio-zh" checked>
+<input type="radio" name="rq-lang" id="rq-en" class="rq-radio-en">
+<input type="radio" name="rq-lang" id="rq-ru" class="rq-radio-ru">
+<div class="rq-lang-switch">
+  <label for="rq-zh">🇨🇳 中文</label>
+  <label for="rq-en">🇬🇧 English</label>
+  <label for="rq-ru">🇷🇺 Русский</label>
 </div>
 
-<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-  <h2 style="margin-top: 0; color: #e0574a;">⚡ 命令</h2>
-  <ul>
-    <li><code>红色语录 [作者] [数量]</code> — 随机获取语录，可按作者（如「红色语录 毛泽东」）和数量（如「红色语录 3」）筛选</li>
-    <li><code>红色语录列表</code> — 查看所有作者及语录数量</li>
-  </ul>
-  <h3 style="color: #e0574a;">🔌 服务 API</h3>
-  <ul>
-    <li><code>ctx.redquote.random(筛选?)</code> — 随机一条语录</li>
-    <li><code>ctx.redquote.pick(n, 筛选?)</code> — 随机 n 条语录</li>
-    <li><code>ctx.redquote.list(筛选?)</code> — 列出匹配语录</li>
-    <li><code>ctx.redquote.authors()</code> — 列出作者</li>
-    <li><code>ctx.redquote.send(session, 筛选?)</code> — 直接发送一条语录</li>
-  </ul>
+<div class="rq-content-zh">
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #4a6ee0;">📖 使用说明</h2>
+    <p>📜 发送「红色语录」即可随机收到一条革命导师语录</p>
+    <p>📚 语录来自 <a href="https://zh.wikiquote.org" style="color:#4a6ee0;">中文维基语录</a> 与 <a href="https://www.marxists.org" style="color:#4a6ee0;">Marxists.org</a>，收录马克思、恩格斯、列宁、毛泽东、切·格瓦拉、斯大林 6 位人物，中英双语共 1200+ 条，索引随包发布</p>
+    <p>🛡️ 默认开启<strong>敏感内容过滤器</strong>，过滤文革/江青/四人帮/习近平等敏感内容，可在插件配置中关闭</p>
+    <p>🔌 注入 <code>redquote</code> 服务，其他插件可通过 <code>ctx.redquote</code> 调用</p>
+  </div>
+
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #e0574a;">⚡ 命令</h2>
+    <ul>
+      <li><code>红色语录 [作者] [数量]</code> — 随机获取语录，可按作者（如「红色语录 毛泽东」）和数量（如「红色语录 3」）筛选</li>
+      <li><code>红色语录列表</code> — 查看所有作者及语录数量</li>
+    </ul>
+    <h3 style="color: #e0574a;">🔌 服务 API</h3>
+    <ul>
+      <li><code>ctx.redquote.random(筛选?)</code> — 随机一条语录</li>
+      <li><code>ctx.redquote.pick(n, 筛选?)</code> — 随机 n 条语录</li>
+      <li><code>ctx.redquote.list(筛选?)</code> — 列出匹配语录</li>
+      <li><code>ctx.redquote.authors()</code> — 列出作者</li>
+      <li><code>ctx.redquote.send(session, 筛选?)</code> — 直接发送一条语录</li>
+    </ul>
+  </div>
+
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #e0574a;">💬 交流与反馈</h2>
+    <p>🌟 喜欢这个插件？欢迎加入 QQ 群 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;"><strong>1071284605</strong></a>【晓插件工坊】进行交流</p>
+    <p>🐛 遇到问题？欢迎在群内反馈，或点击 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;">此链接</a> 加入群聊</p>
+  </div>
 </div>
 
-<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-  <h2 style="margin-top: 0; color: #e0574a;">💬 交流与反馈</h2>
-  <p>🌟 喜欢这个插件？欢迎加入 QQ 群 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;"><strong>1071284605</strong></a>【晓基地插件工坊】进行交流</p>
-  <p>🐛 遇到问题？欢迎在群内反馈，或点击 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;">此链接</a> 加入群聊</p>
+<div class="rq-content-en">
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #4a6ee0;">📖 Usage</h2>
+    <p>📜 Send <code>红色语录</code> to receive a random quote from a revolutionary mentor</p>
+    <p>📚 Quotes come from <a href="https://zh.wikiquote.org" style="color:#4a6ee0;">Chinese Wikiquote</a> and <a href="https://www.marxists.org" style="color:#4a6ee0;">Marxists.org</a>, covering 6 figures — Marx, Engels, Lenin, Mao Zedong, Che Guevara, Stalin — 1200+ bilingual (Chinese/English) quotes, index shipped with the package</p>
+    <p>🛡️ The <strong>sensitive content filter</strong> is enabled by default, filtering content on Cultural Revolution/Jiang Qing/Gang of Four/Xi Jinping etc.; can be disabled in plugin config</p>
+    <p>🔌 Injects the <code>redquote</code> service, callable via <code>ctx.redquote</code></p>
+  </div>
+
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #e0574a;">⚡ Commands</h2>
+    <ul>
+      <li><code>红色语录 [author] [count]</code> — get random quotes, filterable by author (e.g. 「红色语录 毛泽东」) and count (e.g. 「红色语录 3」)</li>
+      <li><code>红色语录列表</code> — view all authors and quote counts</li>
+    </ul>
+    <h3 style="color: #e0574a;">🔌 Service API</h3>
+    <ul>
+      <li><code>ctx.redquote.random(filter?)</code> — one random quote</li>
+      <li><code>ctx.redquote.pick(n, filter?)</code> — n random quotes</li>
+      <li><code>ctx.redquote.list(filter?)</code> — list matching quotes</li>
+      <li><code>ctx.redquote.authors()</code> — list authors</li>
+      <li><code>ctx.redquote.send(session, filter?)</code> — send one quote directly</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rq-content-ru">
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #4a6ee0;">📖 Использование</h2>
+    <p>📜 Отправьте <code>红色语录</code>, чтобы получить случайную цитату революционного наставника</p>
+    <p>📚 Цитаты взяты из <a href="https://zh.wikiquote.org" style="color:#4a6ee0;">китайской Викицитатника</a> и <a href="https://www.marxists.org" style="color:#4a6ee0;">Marxists.org</a>: 6 авторов — Маркс, Энгельс, Ленин, Мао Цзэдун, Че Гевара, Сталин — более 1200 цитат на китайском и английском, индекс входит в пакет</p>
+    <p>🛡️ По умолчанию включён <strong>фильтр чувствительного контента</strong>, отсекающий темы Культурной революции/Цзян Цин/Банды четырёх/Си Цзиньпина и др.; можно отключить в конфигурации плагина</p>
+    <p>🔌 Внедряет сервис <code>redquote</code>, доступный через <code>ctx.redquote</code></p>
+  </div>
+
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #e0574a;">⚡ Команды</h2>
+    <ul>
+      <li><code>红色语录 [автор] [количество]</code> — случайные цитаты, фильтр по автору (например, 「红色语录 毛泽东」) и количеству (например, 「红色语录 3」)</li>
+      <li><code>红色语录列表</code> — список всех авторов и количества цитат</li>
+    </ul>
+    <h3 style="color: #e0574a;">🔌 Сервисный API</h3>
+    <ul>
+      <li><code>ctx.redquote.random(фильтр?)</code> — одна случайная цитата</li>
+      <li><code>ctx.redquote.pick(n, фильтр?)</code> — n случайных цитат</li>
+      <li><code>ctx.redquote.list(фильтр?)</code> — список подходящих цитат</li>
+      <li><code>ctx.redquote.authors()</code> — список авторов</li>
+      <li><code>ctx.redquote.send(session, фильтр?)</code> — отправить цитату напрямую</li>
+    </ul>
+  </div>
 </div>
 `;
 
@@ -130,7 +220,7 @@ export function apply(ctx: Context, config: Config) {
         .alias("红语录")
         .usage(
             "直接输入「红色语录」随机一条；输入「红色语录 毛泽东」按作者；" +
-                "输入「红色语录 3」取 3 条；支持「红色语录 毛泽东 2」组合",
+            "输入「红色语录 3」取 3 条；支持「红色语录 毛泽东 2」组合",
         )
         .example("红色语录")
         .example("红色语录 毛泽东")

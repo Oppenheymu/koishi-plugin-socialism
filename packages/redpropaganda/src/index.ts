@@ -9,28 +9,106 @@ import type { JobConfig, SourceConfig, SourceType } from "./types";
 export const name = "redpropaganda";
 
 export const usage = `
-<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-  <h2 style="margin-top: 0; color: #4a6ee0;">📖 使用说明</h2>
-  <ul>
-    <li>📣 定时向群内发送红色宣传内容（语录/文库段落/歌曲/海报）</li>
-    <li>🕐 依赖 <code>cron</code> 服务（koishi-plugin-cron-fix），使用 cron 表达式定时触发</li>
-    <li>🔌 内容全部来自可选依赖 <code>redquote</code> / <code>redarchive</code> / <code>redmusic</code> / <code>redposter</code>，未安装对应服务时自动跳过对应来源</li>
-    <li>📝 可配置多个定时任务（jobs），每个任务独立配置来源与目标群</li>
-  </ul>
+<style>
+  .rpg-radio-zh, .rpg-radio-en, .rpg-radio-ru { display: none; }
+  .rpg-content-en, .rpg-content-ru { display: none; }
+  .rpg-radio-en:checked ~ .rpg-content-zh { display: none; }
+  .rpg-radio-en:checked ~ .rpg-content-en { display: block; }
+  .rpg-radio-ru:checked ~ .rpg-content-zh { display: none; }
+  .rpg-radio-ru:checked ~ .rpg-content-ru { display: block; }
+  .rpg-lang-switch { text-align: right; margin-bottom: 16px; user-select: none; }
+  .rpg-lang-switch label {
+    display: inline-block;
+    padding: 4px 14px;
+    font-size: 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #fff;
+    color: #666;
+    margin-left: 8px;
+    transition: all 0.2s;
+  }
+  .rpg-lang-switch label:hover { border-color: #4a6ee0; color: #4a6ee0; }
+  .rpg-radio-zh:checked ~ .rpg-lang-switch label[for="rpg-zh"],
+  .rpg-radio-en:checked ~ .rpg-lang-switch label[for="rpg-en"],
+  .rpg-radio-ru:checked ~ .rpg-lang-switch label[for="rpg-ru"] {
+    background: #4a6ee0; color: #fff; border-color: #4a6ee0;
+  }
+</style>
+<input type="radio" name="rpg-lang" id="rpg-zh" class="rpg-radio-zh" checked>
+<input type="radio" name="rpg-lang" id="rpg-en" class="rpg-radio-en">
+<input type="radio" name="rpg-lang" id="rpg-ru" class="rpg-radio-ru">
+<div class="rpg-lang-switch">
+  <label for="rpg-zh">🇨🇳 中文</label>
+  <label for="rpg-en">🇬🇧 English</label>
+  <label for="rpg-ru">🇷🇺 Русский</label>
 </div>
 
-<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-  <h2 style="margin-top: 0; color: #4a6ee0;">⚡ 命令</h2>
-  <ul>
-    <li><code>红宣传推送 [任务序号]</code> — 立即向配置的目标群手动推送一次（省略序号则推送所有任务）</li>
-    <li><code>红宣传推送列表</code> — 查看已配置的定时任务</li>
-  </ul>
+<div class="rpg-content-zh">
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #4a6ee0;">📖 使用说明</h2>
+    <ul>
+      <li>📣 定时向群内发送红色宣传内容（语录/文库段落/歌曲/海报）</li>
+      <li>🕐 依赖 <code>cron</code> 服务（koishi-plugin-cron-fix），使用 cron 表达式定时触发</li>
+      <li>🔌 内容全部来自可选依赖 <code>redquote</code> / <code>redarchive</code> / <code>redmusic</code> / <code>redposter</code>，未安装对应服务时自动跳过对应来源</li>
+      <li>📝 可配置多个定时任务（jobs），每个任务独立配置来源与目标群</li>
+    </ul>
+  </div>
+
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #4a6ee0;">⚡ 命令</h2>
+    <ul>
+      <li><code>红宣传推送 [任务序号]</code> — 立即向配置的目标群手动推送一次（省略序号则推送所有任务）</li>
+      <li><code>红宣传推送列表</code> — 查看已配置的定时任务</li>
+    </ul>
+  </div>
+
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #e0574a;">💬 交流与反馈</h2>
+    <p>🌟 喜欢这个插件？欢迎加入 QQ 群 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;"><strong>1071284605</strong></a>【晓插件工坊】进行交流</p>
+    <p>🐛 遇到问题？欢迎在群内反馈，或点击 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;">此链接</a> 加入群聊</p>
+  </div>
 </div>
 
-<div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-  <h2 style="margin-top: 0; color: #e0574a;">💬 交流与反馈</h2>
-  <p>🌟 喜欢这个插件？欢迎加入 QQ 群 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;"><strong>1071284605</strong></a>【晓基地插件工坊】进行交流</p>
-  <p>🐛 遇到问题？欢迎在群内反馈，或点击 <a href="https://qm.qq.com/q/WngX4RQoca" style="color:#e0574a;text-decoration:none;">此链接</a> 加入群聊</p>
+<div class="rpg-content-en">
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #4a6ee0;">📖 Usage</h2>
+    <ul>
+      <li>📣 Sends red propaganda content (quotes/archive paragraphs/songs/posters) to groups on a schedule</li>
+      <li>🕐 Depends on the <code>cron</code> service (koishi-plugin-cron-fix), triggered by cron expressions</li>
+      <li>🔌 Content comes from optional dependencies <code>redquote</code> / <code>redarchive</code> / <code>redmusic</code> / <code>redposter</code>; sources whose service is not installed are skipped automatically</li>
+      <li>📝 Multiple scheduled jobs are supported, each with its own sources and target groups</li>
+    </ul>
+  </div>
+
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #4a6ee0;">⚡ Commands</h2>
+    <ul>
+      <li><code>红宣传推送 [job index]</code> — manually push once to the configured target groups (omit the index to push all jobs)</li>
+      <li><code>红宣传推送列表</code> — view the configured scheduled jobs</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rpg-content-ru">
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #4a6ee0;">📖 Использование</h2>
+    <ul>
+      <li>📣 Регулярно отправляет в группы красный пропагандистский контент (цитаты/абзацы из архива/песни/плакаты)</li>
+      <li>🕐 Зависит от сервиса <code>cron</code> (koishi-plugin-cron-fix), запускается по cron-выражениям</li>
+      <li>🔌 Контент поступает из опциональных зависимостей <code>redquote</code> / <code>redarchive</code> / <code>redmusic</code> / <code>redposter</code>; источники без установленного сервиса автоматически пропускаются</li>
+      <li>📝 Поддерживается несколько задач (jobs), каждая с собственными источниками и целевыми группами</li>
+    </ul>
+  </div>
+
+  <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #4a6ee0;">⚡ Команды</h2>
+    <ul>
+      <li><code>红宣传推送 [номер задачи]</code> — немедленно отправить разовое сообщение в настроенные группы (без номера — все задачи)</li>
+      <li><code>红宣传推送列表</code> — просмотр настроенных задач</li>
+    </ul>
+  </div>
 </div>
 `;
 
