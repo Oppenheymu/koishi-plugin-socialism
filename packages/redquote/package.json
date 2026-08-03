@@ -1,0 +1,54 @@
+{
+    "name": "koishi-plugin-redquote",
+    "version": "1.0.0",
+    "contributors": [
+        "Oppenheymu <oppenheymu@gmail.com>"
+    ],
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./lib/index.d.ts",
+            "development": "./src/index.ts",
+            "default": "./lib/index.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "lib"
+    ],
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "homepage": "https://github.com/Oppenheymu/koishi-plugin-socialism/tree/main/packages/redquote",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Oppenheymu/koishi-plugin-socialism.git",
+        "directory": "packages/redquote"
+    },
+    "keywords": [
+        "chatbot",
+        "koishi",
+        "plugin",
+        "quotes",
+        "marxism"
+    ],
+    "scripts": {
+        "build": "tsc -b"
+    },
+    "peerDependencies": {
+        "koishi": "^4.17.5"
+    },
+    "koishi": {
+        "description": {
+            "en": "Collection of revolutionary quotations",
+            "zh": "收录革命导师语录，注入 ctx 供其它插件使用"
+        },
+        "service": {
+            "implements": [
+                "redquote"
+            ]
+        }
+    }
+}

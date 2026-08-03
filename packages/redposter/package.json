@@ -1,0 +1,53 @@
+{
+    "name": "koishi-plugin-redposter",
+    "version": "1.0.0",
+    "contributors": [
+        "Oppenheymu <oppenheymu@gmail.com>"
+    ],
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./lib/index.d.ts",
+            "development": "./src/index.ts",
+            "default": "./lib/index.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "lib"
+    ],
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "homepage": "https://github.com/Oppenheymu/koishi-plugin-socialism/tree/main/packages/redposter",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Oppenheymu/koishi-plugin-socialism.git",
+        "directory": "packages/redposter"
+    },
+    "keywords": [
+        "chatbot",
+        "koishi",
+        "plugin",
+        "poster"
+    ],
+    "scripts": {
+        "build": "tsc -b"
+    },
+    "peerDependencies": {
+        "koishi": "^4.17.5"
+    },
+    "koishi": {
+        "description": {
+            "en": "Generate red-style text posters",
+            "zh": "生成红底白字风格文本海报，注入 ctx 供其它插件使用"
+        },
+        "service": {
+            "implements": [
+                "redposter"
+            ]
+        }
+    }
+}
