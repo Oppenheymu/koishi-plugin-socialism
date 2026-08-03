@@ -19,7 +19,7 @@
 |--------|------|--------|
 | `entryUrls` | 入口 URL 列表（按优先级排列） | marxists.org, incn.tech, architexturez.net |
 | `navigationTimeout` | 页面导航超时(ms) | 30000 |
-| `cacheDir` | 缓存目录 | cache/redarchive |
+| `cacheDir` | 缓存目录 | cache/red/redarchive |
 | `categoryCacheTtlMs` | 分类缓存有效期(ms) | 600000 |
 | `documentCacheTtlMs` | 文档缓存有效期(ms) | 600000 |
 | `promptTimeoutMs` | 用户输入等待超时(ms) | 60000 |
