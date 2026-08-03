@@ -1,9 +1,9 @@
-import { existsSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { Logger } from 'koishi';
-import type { PosterEntry, PosterFilter, PosterIndex, ThemeEntry } from './types';
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
+import { Logger } from "koishi";
+import type { PosterEntry, PosterFilter, PosterIndex, ThemeEntry } from "./types";
 
-const logger = new Logger('redposter');
+const logger = new Logger("redposter");
 
 let _index: PosterIndex | null = null;
 
@@ -13,10 +13,10 @@ let _index: PosterIndex | null = null;
  * 注意：大跃进、人民公社等主题不在此列，不做过度过滤。
  */
 const SENSITIVE_THEMES: string[] = [
-    'xijinping', // 习近平
-    'cultural-revolution-campaigns', // 文化大革命
-    'jiangqing', // 江青
-    'gang-of-four', // 四人帮
+    "xijinping", // 习近平
+    "cultural-revolution-campaigns", // 文化大革命
+    "jiangqing", // 江青
+    "gang-of-four", // 四人帮
 ];
 
 let _filterSensitive = true;
@@ -44,14 +44,14 @@ function applySensitiveFilter(posters: PosterEntry[]): PosterEntry[] {
 export function loadIndex(): PosterIndex {
     if (_index) return _index;
 
-    const indexPath = resolve(__dirname, '..', 'assets', 'poster-index.json');
+    const indexPath = resolve(__dirname, "..", "assets", "poster-index.json");
     if (!existsSync(indexPath)) {
         throw new Error(`redposter: 未找到索引文件 ${indexPath}，请先运行 scripts/crawl.mjs 生成`);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     _index = require(indexPath) as PosterIndex;
-    logger.info('已加载 %d 张海报、%d 个主题', _index.posters.length, _index.themes.length);
+    logger.info("已加载 %d 张海报、%d 个主题", _index.posters.length, _index.themes.length);
     return _index;
 }
 
@@ -68,11 +68,11 @@ export function listThemes(keyword?: string): ThemeEntry[] {
     const aliasSlugs = new Set(
         Object.entries(index.aliases)
             .filter(([zh]) => zh.includes(raw))
-            .map(([, slug]) => slug)
+            .map(([, slug]) => slug),
     );
 
     return base.filter(
-        (t) => aliasSlugs.has(t.id) || t.id.includes(kw) || t.name.toLowerCase().includes(kw)
+        (t) => aliasSlugs.has(t.id) || t.id.includes(kw) || t.name.toLowerCase().includes(kw),
     );
 }
 

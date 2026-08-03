@@ -1,9 +1,9 @@
-import type { Context, Session } from 'koishi';
-import { Schema, Service } from 'koishi';
-import { countByAuthor, filterQuotes, listAuthors, loadIndex, setSensitiveFilter } from './catalog';
-import type { AuthorEntry, QuoteEntry, QuoteFilter } from './types';
+import type { Context, Session } from "koishi";
+import { Schema, Service } from "koishi";
+import { countByAuthor, filterQuotes, listAuthors, loadIndex, setSensitiveFilter } from "./catalog";
+import type { AuthorEntry, QuoteEntry, QuoteFilter } from "./types";
 
-export const name = 'redquote';
+export const name = "redquote";
 
 export const usage = `
 <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -47,18 +47,18 @@ export interface Config {
 }
 
 export const Config: Schema<Config> = Schema.object({
-    count: Schema.number().default(1).min(1).description('每次随机抽取的条数'),
-    showSource: Schema.boolean().default(true).description('是否显示语录出处'),
+    count: Schema.number().default(1).min(1).description("每次随机抽取的条数"),
+    showSource: Schema.boolean().default(true).description("是否显示语录出处"),
     filterSensitive: Schema.boolean()
         .default(true)
-        .description('敏感内容过滤器：过滤文革/江青/四人帮/习近平等敏感语录'),
+        .description("敏感内容过滤器：过滤文革/江青/四人帮/习近平等敏感语录"),
 });
 
 // ── Service ──────────────────────────────────────────────
 
 export class RedquoteService extends Service {
     constructor(ctx: Context) {
-        super(ctx, 'redquote', true);
+        super(ctx, "redquote", true);
     }
 
     /** 随机一条语录（未命中返回 null） */
@@ -96,7 +96,7 @@ export class RedquoteService extends Service {
     format(quote: QuoteEntry, showSource = true): string {
         const author = listAuthors().find((a) => a.id === quote.author);
         const name = author?.name ?? quote.author;
-        const source = showSource && quote.source ? `\n——${quote.source}` : '';
+        const source = showSource && quote.source ? `\n——${quote.source}` : "";
         return `「${quote.text}」\n——${name}${source}`;
     }
 
@@ -109,7 +109,7 @@ export class RedquoteService extends Service {
     }
 }
 
-declare module 'koishi' {
+declare module "koishi" {
     interface Context {
         redquote: RedquoteService;
     }
@@ -126,16 +126,16 @@ export function apply(ctx: Context, config: Config) {
 
     // ── 红色语录 ──────────────────────────────────────
 
-    ctx.command('红色语录 [作者:text] [数量:number]', '随机获取革命导师语录')
-        .alias('红语录')
+    ctx.command("红色语录 [作者:text] [数量:number]", "随机获取革命导师语录")
+        .alias("红语录")
         .usage(
-            '直接输入「红色语录」随机一条；输入「红色语录 毛泽东」按作者；' +
-                '输入「红色语录 3」取 3 条；支持「红色语录 毛泽东 2」组合'
+            "直接输入「红色语录」随机一条；输入「红色语录 毛泽东」按作者；" +
+                "输入「红色语录 3」取 3 条；支持「红色语录 毛泽东 2」组合",
         )
-        .example('红色语录')
-        .example('红色语录 毛泽东')
-        .example('红色语录 3')
-        .example('红色语录 列宁 2')
+        .example("红色语录")
+        .example("红色语录 毛泽东")
+        .example("红色语录 3")
+        .example("红色语录 列宁 2")
         .action(async ({ session }, author, count) => {
             if (!session?.userId) return;
 
@@ -154,27 +154,27 @@ export function apply(ctx: Context, config: Config) {
             if (!pool.length) {
                 return authorName
                     ? `未找到作者「${authorName}」的语录，试试「红色语录列表」`
-                    : '暂无可用语录';
+                    : "暂无可用语录";
             }
 
             const quotes = ctx.redquote.pick(Math.min(n, pool.length), filter);
-            if (!quotes.length) return '暂无可用语录';
-            return quotes.map((q) => ctx.redquote.format(q, config.showSource)).join('\n\n');
+            if (!quotes.length) return "暂无可用语录";
+            return quotes.map((q) => ctx.redquote.format(q, config.showSource)).join("\n\n");
         });
 
     // ── 红色语录列表 ──────────────────────────────────
 
-    ctx.command('红色语录列表', '查看所有作者及语录数量')
-        .alias('红色语录list')
+    ctx.command("红色语录列表", "查看所有作者及语录数量")
+        .alias("红色语录list")
         .action(({ session }) => {
             if (!session) return;
             const authors = listAuthors();
-            if (!authors.length) return '暂无可用语录';
+            if (!authors.length) return "暂无可用语录";
             const counts = countByAuthor();
             const lines = authors.map((a) => {
                 const n = counts.get(a.id) ?? 0;
                 return `- ${a.name}（${a.nameEn}）：${n} 条`;
             });
-            return `共 ${authors.length} 位作者：\n${lines.join('\n')}`;
+            return `共 ${authors.length} 位作者：\n${lines.join("\n")}`;
         });
 }

@@ -1,6 +1,6 @@
-import type { Context, Session } from 'koishi';
-import { Schema, Service } from 'koishi';
-import { countByTheme, filterPosters, listThemes, loadIndex, setSensitiveFilter } from './catalog';
+import type { Context, Session } from "koishi";
+import { Schema, Service } from "koishi";
+import { countByTheme, filterPosters, listThemes, loadIndex, setSensitiveFilter } from "./catalog";
 import {
     buildImageElement,
     clearCache,
@@ -8,10 +8,10 @@ import {
     getCacheDir,
     isCacheReady,
     setCacheDir,
-} from './downloader';
-import type { PosterEntry, PosterFilter, RandomOutcome, ThemeEntry } from './types';
+} from "./downloader";
+import type { PosterEntry, PosterFilter, RandomOutcome, ThemeEntry } from "./types";
 
-export const name = 'redposter';
+export const name = "redposter";
 
 export const usage = `
 <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -57,18 +57,18 @@ export interface Config {
 }
 
 export const Config: Schema<Config> = Schema.object({
-    cooldown: Schema.number().default(30).min(0).description('发送海报冷却时间（秒）'),
-    showTitle: Schema.boolean().default(true).description('发图前是否显示海报标题'),
+    cooldown: Schema.number().default(30).min(0).description("发送海报冷却时间（秒）"),
+    showTitle: Schema.boolean().default(true).description("发图前是否显示海报标题"),
     filterSensitive: Schema.boolean()
         .default(true)
-        .description('国内政治敏感过滤器：过滤习近平、文化大革命、江青、四人帮等主题的海报'),
+        .description("国内政治敏感过滤器：过滤习近平、文化大革命、江青、四人帮等主题的海报"),
 });
 
 // ── Service ──────────────────────────────────────────────
 
 export class RedPosterService extends Service {
     constructor(ctx: Context) {
-        super(ctx, 'redposter', true);
+        super(ctx, "redposter", true);
     }
 
     /**
@@ -78,7 +78,7 @@ export class RedPosterService extends Service {
     async random(filter?: PosterFilter): Promise<RandomOutcome> {
         const pool = filterPosters(filter);
         if (!pool.length) {
-            this.ctx.logger('redposter').warn('没有匹配的海报 (filter=%j)', filter);
+            this.ctx.logger("redposter").warn("没有匹配的海报 (filter=%j)", filter);
             return { hit: false };
         }
         const entry = pool[Math.floor(Math.random() * pool.length)];
@@ -115,7 +115,7 @@ export class RedPosterService extends Service {
     }
 }
 
-declare module 'koishi' {
+declare module "koishi" {
     interface Context {
         redposter: RedPosterService;
     }
@@ -142,21 +142,21 @@ export function apply(ctx: Context, config: Config) {
 
     // ── 红色海报 ──────────────────────────────────────
 
-    ctx.command('红色海报 [关键词:text]', '随机发送一张中国宣传画海报，或按主题/关键词筛选')
-        .alias('红海报')
+    ctx.command("红色海报 [关键词:text]", "随机发送一张中国宣传画海报，或按主题/关键词筛选")
+        .alias("红海报")
         .usage(
-            '直接输入「红色海报」随机发送一张；输入「红色海报 大跃进」按主题筛选；' +
-                '支持中文别名与英文关键词，也支持年份（如 1958）'
+            "直接输入「红色海报」随机发送一张；输入「红色海报 大跃进」按主题筛选；" +
+                "支持中文别名与英文关键词，也支持年份（如 1958）",
         )
-        .example('红色海报')
-        .example('红色海报 大跃进')
-        .example('红色海报 leap')
-        .example('红色海报 1958')
+        .example("红色海报")
+        .example("红色海报 大跃进")
+        .example("红色海报 leap")
+        .example("红色海报 1958")
         .action(async ({ session }, keyword) => {
             if (!session?.userId) return;
 
             if (!isCacheReady()) {
-                return '海报缓存尚未就绪，请稍后再试';
+                return "海报缓存尚未就绪，请稍后再试";
             }
 
             const remaining = checkCooldown(session.userId);
@@ -170,7 +170,7 @@ export function apply(ctx: Context, config: Config) {
             if (!result.hit) {
                 return raw
                     ? `未找到与「${raw}」相关的海报，试试「红色海报列表」查看可用主题`
-                    : '暂无可用海报';
+                    : "暂无可用海报";
             }
 
             cooldowns.set(session.userId, Date.now());
@@ -178,23 +178,23 @@ export function apply(ctx: Context, config: Config) {
             const entry = result.entry;
             const parts: string[] = [];
             if (config.showTitle) {
-                const year = entry.year ? `（${entry.year}）` : '';
+                const year = entry.year ? `（${entry.year}）` : "";
                 parts.push(`🖼️ ${entry.title}${year}`);
             }
             parts.push(result.image);
-            await session.send(parts.join('\n'));
+            await session.send(parts.join("\n"));
         });
 
     // ── 红色海报列表 ──────────────────────────────────
 
-    ctx.command('红色海报列表 [关键词:text]', '查看所有可用主题及海报数量')
-        .alias('红色海报list')
+    ctx.command("红色海报列表 [关键词:text]", "查看所有可用主题及海报数量")
+        .alias("红色海报list")
         .action(({ session }, keyword) => {
             if (!session) return;
 
             const themes = listThemes(keyword?.trim());
             if (!themes.length) {
-                return keyword ? `未找到匹配「${keyword.trim()}」的主题` : '暂无可用主题';
+                return keyword ? `未找到匹配「${keyword.trim()}」的主题` : "暂无可用主题";
             }
 
             const counts = countByTheme();
@@ -214,23 +214,23 @@ export function apply(ctx: Context, config: Config) {
             }
 
             const note = keyword
-                ? ''
-                : '\n\n输入「红色海报 <主题>」可发送该主题的海报，如「红色海报 大跃进」';
-            return `共 ${themes.length} 个主题：\n${lines.join('\n')}${note}`;
+                ? ""
+                : "\n\n输入「红色海报 <主题>」可发送该主题的海报，如「红色海报 大跃进」";
+            return `共 ${themes.length} 个主题：\n${lines.join("\n")}${note}`;
         });
 
     // ── 红色海报重载（管理员） ────────────────────────
 
-    ctx.command('红色海报重载', '清空海报图片缓存（管理员）')
-        .alias('红色海报reload')
-        .userFields(['authority'])
+    ctx.command("红色海报重载", "清空海报图片缓存（管理员）")
+        .alias("红色海报reload")
+        .userFields(["authority"])
         .action(async ({ session }) => {
             if (!session) return;
             const user = session.user as { authority?: number } | undefined;
             if ((user?.authority ?? 0) < 2) {
-                return '权限不足，需要 2 级及以上权限';
+                return "权限不足，需要 2 级及以上权限";
             }
             clearCache();
-            return '海报图片缓存已清空，下次发送时会重新下载';
+            return "海报图片缓存已清空，下次发送时会重新下载";
         });
 }

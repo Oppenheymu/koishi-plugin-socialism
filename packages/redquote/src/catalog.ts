@@ -1,9 +1,9 @@
-import { existsSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { Logger } from 'koishi';
-import type { AuthorEntry, QuoteEntry, QuoteFilter, QuoteIndex } from './types';
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
+import { Logger } from "koishi";
+import type { AuthorEntry, QuoteEntry, QuoteFilter, QuoteIndex } from "./types";
 
-const logger = new Logger('redquote');
+const logger = new Logger("redquote");
 
 let _index: QuoteIndex | null = null;
 
@@ -11,7 +11,7 @@ let _index: QuoteIndex | null = null;
  * 国内平台敏感内容关键词（启用 filterSensitive 时过滤）。
  * 与 redposter 的敏感过滤思路一致：聚焦习近平、文革、江青、四人帮等。
  */
-const SENSITIVE_CONTENT = ['习近平', '文化大革命', '四人帮', '江青', '走资派', '斗私批修'];
+const SENSITIVE_CONTENT = ["习近平", "文化大革命", "四人帮", "江青", "走资派", "斗私批修"];
 
 let _filterSensitive = true;
 
@@ -32,14 +32,14 @@ function isSensitive(quote: QuoteEntry): boolean {
 export function loadIndex(): QuoteIndex {
     if (_index) return _index;
 
-    const indexPath = resolve(__dirname, '..', 'assets', 'quote-index.json');
+    const indexPath = resolve(__dirname, "..", "assets", "quote-index.json");
     if (!existsSync(indexPath)) {
         throw new Error(`redquote: 未找到索引文件 ${indexPath}，请先运行 scripts/crawl.mjs 生成`);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     _index = require(indexPath) as QuoteIndex;
-    logger.info('已加载 %d 条语录、%d 位作者', _index.quotes.length, _index.authors.length);
+    logger.info("已加载 %d 条语录、%d 位作者", _index.quotes.length, _index.authors.length);
     return _index;
 }
 
@@ -48,7 +48,7 @@ function resolveAuthorId(keyword: string): string | null {
     const index = loadIndex();
     const kw = keyword.trim().toLowerCase();
     const hit = index.authors.find(
-        (a) => a.id === kw || a.name === keyword.trim() || a.nameEn.toLowerCase() === kw
+        (a) => a.id === kw || a.name === keyword.trim() || a.nameEn.toLowerCase() === kw,
     );
     return hit?.id ?? null;
 }

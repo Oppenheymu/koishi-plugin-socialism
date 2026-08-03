@@ -97,7 +97,7 @@ export async function downloadAssets(
             if (entry.isDirectory) continue;
             // 只取文件名部分，防止 zip 内部带子目录导致写到意外位置
             const baseName = entry.entryName.split("/").pop();
-            if (!baseName || !baseName.toLowerCase().endsWith(".ogg")) continue;
+            if (!baseName?.toLowerCase().endsWith(".ogg")) continue;
             const targetPath = resolve(cacheDir, baseName);
             writeFileSync(targetPath, entry.getData());
             extracted++;

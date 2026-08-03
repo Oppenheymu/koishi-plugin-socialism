@@ -7,7 +7,7 @@ export interface QuoteEntry {
     /** 出处（可能缺失） */
     source?: string;
     /** 语言：zh / en */
-    lang: 'zh' | 'en';
+    lang: "zh" | "en";
 }
 
 /** 作者信息 */
@@ -34,5 +34,5 @@ export interface QuoteFilter {
     /** 关键词：匹配语录正文 */
     keyword?: string;
     /** 语言：zh / en */
-    lang?: 'zh' | 'en';
+    lang?: "zh" | "en";
 }

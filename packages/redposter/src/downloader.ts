@@ -1,18 +1,18 @@
-import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import type { Context } from 'koishi';
-import { h, Logger } from 'koishi';
-import { loadIndex } from './catalog';
-import type { PosterEntry } from './types';
+import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import type { Context } from "koishi";
+import { h, Logger } from "koishi";
+import { loadIndex } from "./catalog";
+import type { PosterEntry } from "./types";
 
-const logger = new Logger('redposter');
+const logger = new Logger("redposter");
 
 let _cacheDir: string | null = null;
 
 /** 计算图片缓存目录：<baseDir>/data/redseries/redposter（红色系列统一聚合在 data/redseries/ 下） */
 export function getCacheDir(ctx: Context): string {
-    return resolve(ctx.baseDir, 'data', 'redseries', 'redposter');
+    return resolve(ctx.baseDir, "data", "redseries", "redposter");
 }
 
 /** 由入口注入缓存目录（启动时） */
@@ -29,7 +29,7 @@ export function clearCache(): void {
     if (!_cacheDir) return;
     rmSync(_cacheDir, { recursive: true, force: true });
     mkdirSync(_cacheDir, { recursive: true });
-    logger.info('已清空图片缓存目录 %s', _cacheDir);
+    logger.info("已清空图片缓存目录 %s", _cacheDir);
 }
 
 /**
@@ -38,10 +38,10 @@ export function clearCache(): void {
  */
 export async function ensureImage(ctx: Context, entry: PosterEntry): Promise<string | null> {
     if (!_cacheDir) {
-        logger.warn('图片缓存目录未注入，无法发送海报');
+        logger.warn("图片缓存目录未注入，无法发送海报");
         return null;
     }
-    const filename = entry.image.split('/').pop();
+    const filename = entry.image.split("/").pop();
     if (!filename) return null;
 
     const filePath = resolve(_cacheDir, filename);
@@ -51,20 +51,20 @@ export async function ensureImage(ctx: Context, entry: PosterEntry): Promise<str
     try {
         mkdirSync(_cacheDir, { recursive: true });
         const buffer = await ctx.http.get<Buffer>(url, {
-            responseType: 'arraybuffer',
+            responseType: "arraybuffer",
             timeout: 60000,
         });
         writeFileSync(filePath, buffer);
-        logger.info('已缓存海报图片 %s（%d 字节）', filename, buffer.byteLength);
+        logger.info("已缓存海报图片 %s（%d 字节）", filename, buffer.byteLength);
         return filePath;
     } catch (e) {
-        logger.warn('海报图片下载失败: %s（%s）', url, (e as Error).message ?? e);
+        logger.warn("海报图片下载失败: %s（%s）", url, (e as Error).message ?? e);
         return null;
     }
 }
 
 /** 构造 image 消息元素（本地文件用 file: 协议） */
 export function buildImageElement(filePath: string): string {
-    if (!existsSync(filePath)) return '';
-    return h('image', { src: pathToFileURL(filePath).href }).toString();
+    if (!existsSync(filePath)) return "";
+    return h("image", { src: pathToFileURL(filePath).href }).toString();
 }
