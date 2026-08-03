@@ -243,7 +243,7 @@ export function apply(ctx: Context, config: Config) {
         .alias("红海报")
         .usage(
             "直接输入「红色海报」随机发送一张；输入「红色海报 大跃进」按主题筛选；" +
-            "支持中文别名与英文关键词，也支持年份（如 1958）",
+                "支持中文别名与英文关键词，也支持年份（如 1958）",
         )
         .example("红色海报")
         .example("红色海报 大跃进")
@@ -263,11 +263,15 @@ export function apply(ctx: Context, config: Config) {
 
             const raw = keyword?.trim();
             const filter: PosterFilter | undefined = raw ? { keyword: raw } : undefined;
+            // 先检查是否有匹配（纯元数据，不下载），区分「无匹配」与「下载失败」
+            const matched = ctx.redposter.list(filter);
+            if (!matched.length) {
+                return raw ? session.text(".not-found", [raw]) : session.text(".no-posters");
+            }
             const result = await ctx.redposter.random(filter);
             if (!result.hit) {
-                return raw
-                    ? session.text(".not-found", [raw])
-                    : session.text(".no-posters");
+                // 有匹配但图片下载失败（网络问题等），避免误报「未找到」
+                return session.text(".download-failed");
             }
 
             cooldowns.set(session.userId, Date.now());
@@ -312,14 +316,8 @@ export function apply(ctx: Context, config: Config) {
                 }
             }
 
-            const note = keyword
-                ? ""
-                : session.text(".theme-hint");
-            return session.text(".theme-list", [
-                themes.length,
-                lines.join("\n"),
-                note,
-            ]);
+            const note = keyword ? "" : session.text(".theme-hint");
+            return session.text(".theme-list", [themes.length, lines.join("\n"), note]);
         });
 
     // ── 红色海报重载（管理员） ────────────────────────

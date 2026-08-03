@@ -8,13 +8,14 @@ commands:
       cooldown: Please wait {0} seconds before sending again
       not-found: No posters found for 「{0}」, try 「红色海报列表」 to see available themes
       no-posters: No posters available
+      download-failed: Posters found but image download failed, please retry later or run 「红色海报重载」 to clear the cache
   红色海报列表:
     description: List all available themes and poster counts
     messages:
       theme-not-found: No themes found matching 「{0}」
       no-themes: No themes available
       theme-list: "{0} themes in total:\n{1}{2}"
-      theme-hint: "\n\nEnter 「红色海报 <theme>」 to send posters of that theme, e.g. 「红色海报 大跃进」"
+      theme-hint: "\n\nEnter 「红色海报 &lt;theme&gt;」 to send posters of that theme, e.g. 「红色海报 大跃进」"
   红色海报重载:
     description: Clear the poster image cache (admin)
     messages:

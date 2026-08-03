@@ -8,13 +8,14 @@ commands:
       cooldown: 请等待 {0} 秒后再发送
       not-found: 未找到与「{0}」相关的海报，试试「红色海报列表」查看可用主题
       no-posters: 暂无可用海报
+      download-failed: 已找到海报但图片下载失败，请稍后重试或执行「红色海报重载」清空缓存
   红色海报列表:
     description: 查看所有可用主题及海报数量
     messages:
       theme-not-found: 未找到匹配「{0}」的主题
       no-themes: 暂无可用主题
       theme-list: "共 {0} 个主题：\n{1}{2}"
-      theme-hint: "\n\n输入「红色海报 <主题>」可发送该主题的海报，如「红色海报 大跃进」"
+      theme-hint: "\n\n输入「红色海报 &lt;主题&gt;」可发送该主题的海报，如「红色海报 大跃进」"
   红色海报重载:
     description: 清空海报图片缓存（管理员）
     messages:
