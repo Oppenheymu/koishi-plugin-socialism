@@ -48,8 +48,12 @@
     "koishi": {
         "description": {
             "en": "Download files from the Chinese Marxist Library",
-            "zh": "爬取中文马克思主义文库文件"
+            "zh": "爬取中文马克思主义文库文件，注入 ctx.redarchive 供其它插件使用"
         },
-        "service": {}
+        "service": {
+            "implements": [
+                "redarchive"
+            ]
+        }
     }
 }

@@ -1,6 +1,7 @@
 import type { Context } from "koishi";
 import { Schema } from "koishi";
 import { registerCommand } from "./command";
+import { RedarchiveService } from "./service";
 import type { Config as ConfigType } from "./types";
 
 export const name = "redarchive";
@@ -14,6 +15,8 @@ export const usage = `
     <li>⚡ 仅使用 HTTP 抓取，无需 Playwright</li>
     <li>🧹 HTML 页面自动<strong>清洗正文</strong>（去除导航/页脚/注释噪音），生成 <strong>.md</strong> 文件发送</li>
     <li>📎 直接文件（pdf/epub 等）原样发送；清洗失败自动回退原文件</li>
+    <li>📖 <code>马克思段落</code>：随机从文库文档中选一段话发送</li>
+    <li>🔌 注入 <code>redarchive</code> 服务，供其他插件通过 <code>ctx.redarchive</code> 调用</li>
   </ul>
 </div>
 
@@ -54,5 +57,6 @@ export const Config: Schema<ConfigType> = Schema.object({
 });
 
 export function apply(ctx: Context, config: ConfigType) {
+    ctx.plugin(RedarchiveService, config);
     registerCommand(ctx, config);
 }

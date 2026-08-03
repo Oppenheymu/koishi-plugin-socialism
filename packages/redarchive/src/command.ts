@@ -160,4 +160,39 @@ export function registerCommand(ctx: Context, config: Config): void {
                 activeChannels.delete(channelId);
             }
         });
+
+    // ── 随机段落 ──────────────────────────────────
+
+    ctx.command("马克思段落", "从文库文档中随机选一段话")
+        .alias("marxists段落")
+        .action(async ({ session }) => {
+            if (!session?.channelId || !session?.userId) return "当前上下文不支持会话交互。";
+
+            const { userId, channelId } = session;
+            const now = Date.now();
+
+            if (activeChannels.has(channelId))
+                return "⚠️ 当前频道已有正在进行的任务，请稍后再试。";
+
+            if (config.cooldownMs > 0) {
+                const remain = config.cooldownMs - (now - (cooldownMap.get(userId) ?? 0));
+                if (remain > 0)
+                    return `🕒 操作过于频繁，请 ${(remain / 1000).toFixed(1)} 秒后再试。`;
+            }
+
+            activeChannels.add(channelId);
+            cooldownMap.set(userId, now);
+
+            try {
+                await session.send("📖 正在随机选取文库段落...");
+                const sent = await ctx.redarchive.send(session);
+                if (!sent) return "❌ 暂时没有可用的文库段落，请稍后再试。";
+            } catch (e) {
+                logger.error(`[Paragraph Error] ${e}`);
+                return `❌ 随机段落过程中发生错误：${e instanceof Error ? e.message : "未知错误"}`;
+            } finally {
+                activeChannels.delete(channelId);
+            }
+        });
 }
+

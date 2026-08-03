@@ -10,10 +10,22 @@
 - 自动检测页面编码（GB2312/GBK/UTF-8）
 - **HTML 页面自动清洗正文**：去除导航/页脚/注释噪音，转换为 Markdown 文件发送（`.md`）
 - **直接文件（pdf/epub 等）原样发送**；清洗失败时自动回退为原文件
+- **注入 `redarchive` 服务**，供其他插件通过 `ctx.redarchive` 调用
 
 ## 命令
 
 - `马克思` / `marxists` — 交互式选择分类和文件，获取下载链接
+- `马克思段落` — 随机从文库文档中选一段话发送
+
+## 服务 API
+
+| API | 说明 |
+|-----|------|
+| `ctx.redarchive.listCategories()` | 分类列表（带缓存） |
+| `ctx.redarchive.listDocuments(categoryUrl)` | 某分类下的文档列表（带缓存） |
+| `ctx.redarchive.getMarkdown(url)` | 抓取并清洗文档为 Markdown（带缓存） |
+| `ctx.redarchive.randomParagraph()` | 随机选一篇文档中的一段话（含出处） |
+| `ctx.redarchive.send(session)` | 直接发送一段随机语录 |
 
 ## 配置项
 
