@@ -15,7 +15,8 @@
         "./package.json": "./package.json"
     },
     "files": [
-        "lib"
+        "lib",
+        "assets/poster-index.json"
     ],
     "license": "MIT",
     "publishConfig": {
@@ -31,7 +32,9 @@
         "chatbot",
         "koishi",
         "plugin",
-        "poster"
+        "poster",
+        "propaganda",
+        "crawler"
     ],
     "scripts": {
         "build": "tsc -b"
@@ -39,10 +42,13 @@
     "peerDependencies": {
         "koishi": "^4.17.5"
     },
+    "devDependencies": {
+        "cheerio": "^1.0.0"
+    },
     "koishi": {
         "description": {
-            "en": "Generate red-style text posters",
-            "zh": "生成红底白字风格文本海报，注入 ctx 供其它插件使用"
+            "en": "Chinese propaganda posters from Chineseposters.net",
+            "zh": "从 chineseposters.net 抓取的中国宣传画海报库，支持按主题/关键词发送海报图片，注入 ctx.redposter 供其它插件使用"
         },
         "service": {
             "implements": [
