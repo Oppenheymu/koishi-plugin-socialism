@@ -50,10 +50,12 @@ export async function ensureImage(ctx: Context, entry: PosterEntry): Promise<str
     const url = new URL(entry.image, loadIndex().source).href;
     try {
         mkdirSync(_cacheDir, { recursive: true });
-        const buffer = await ctx.http.get<Buffer>(url, {
+        const data = await ctx.http.get<ArrayBuffer>(url, {
             responseType: "arraybuffer",
             timeout: 60000,
         });
+        // arraybuffer 响应返回 ArrayBuffer，需转为 Buffer 才能写入文件
+        const buffer = Buffer.from(data);
         writeFileSync(filePath, buffer);
         logger.info("已缓存海报图片 %s（%d 字节）", filename, buffer.byteLength);
         return filePath;
