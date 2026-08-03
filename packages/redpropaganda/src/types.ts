@@ -1,5 +1,5 @@
 /** 内容来源类型 */
-export type SourceType = "slogan" | "quote" | "paragraph" | "music" | "poster";
+export type SourceType = "quote" | "paragraph" | "music" | "poster";
 
 /** 单个内容来源配置 */
 export interface SourceConfig {

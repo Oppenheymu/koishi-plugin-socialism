@@ -49,13 +49,10 @@
     },
     "koishi": {
         "description": {
-            "en": "Propaganda broadcast messages and slogans",
-            "zh": "红色宣传口号语料与定时推送，注入 ctx 供其它插件使用"
+            "en": "Scheduled propaganda broadcast via red plugins",
+            "zh": "定时向群内推送红色宣传内容（语录/文库/歌曲/海报）"
         },
         "service": {
-            "implements": [
-                "redpropaganda"
-            ],
             "required": [
                 "cron"
             ],
