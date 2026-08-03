@@ -1,6 +1,6 @@
 import type { Context, Session } from 'koishi';
 import { Schema, Service } from 'koishi';
-import { countByTheme, filterPosters, listThemes, loadIndex } from './catalog';
+import { countByTheme, filterPosters, listThemes, loadIndex, setSensitiveFilter } from './catalog';
 import {
     buildImageElement,
     clearCache,
@@ -19,7 +19,8 @@ export const usage = `
   <p>🖼️ 发送「红色海报」即可随机收到一张中国社会主义宣传画海报图片</p>
   <p>🗂️ 海报数据来自 <a href="https://chineseposters.net" style="color:#4a6ee0;">chineseposters.net</a>（Stefan Landsberger 的中国宣传画收藏站），索引随包发布，图片按需下载缓存到本地 <code>data/redposter/</code></p>
   <p>🔤 支持中文别名（大跃进、文革、雷锋、毛主席…）与英文关键词（leap、mao、leifeng…），也支持按年份（如 1958）筛选</p>
-  <p>🔌 注入 <code>redposter</code> 服务，其他插件可通过 <code>ctx.redposter</code> 调用</p>
+  <p>�️ 默认开启<strong>国内政治敏感过滤器</strong>，过滤习近平、文化大革命、江青、四人帮等主题的海报，可在插件配置中关闭</p>
+  <p>�🔌 注入 <code>redposter</code> 服务，其他插件可通过 <code>ctx.redposter</code> 调用</p>
 </div>
 
 <div style="border-radius: 10px; border: 1px solid #ddd; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -51,11 +52,16 @@ export interface Config {
     cooldown: number;
     /** 发图前是否显示海报标题 */
     showTitle: boolean;
+    /** 是否过滤国内平台敏感主题（习近平、文化大革命、江青、四人帮） */
+    filterSensitive: boolean;
 }
 
 export const Config: Schema<Config> = Schema.object({
     cooldown: Schema.number().default(30).min(0).description('发送海报冷却时间（秒）'),
     showTitle: Schema.boolean().default(true).description('发图前是否显示海报标题'),
+    filterSensitive: Schema.boolean()
+        .default(true)
+        .description('国内政治敏感过滤器：过滤习近平、文化大革命、江青、四人帮等主题的海报'),
 });
 
 // ── Service ──────────────────────────────────────────────
@@ -119,6 +125,7 @@ declare module 'koishi' {
 
 export function apply(ctx: Context, config: Config) {
     ctx.plugin(RedPosterService);
+    setSensitiveFilter(config.filterSensitive);
 
     // 启动时校验索引可用，尽早暴露数据问题
     loadIndex();

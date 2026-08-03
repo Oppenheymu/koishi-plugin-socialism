@@ -8,6 +8,35 @@ const logger = new Logger('redposter');
 let _index: PosterIndex | null = null;
 
 /**
+ * 国内平台敏感主题 slug（启用 filterSensitive 时过滤）。
+ * 由用户点名：习近平、文化大革命、江青、四人帮。
+ * 注意：大跃进、人民公社等主题不在此列，不做过度过滤。
+ */
+const SENSITIVE_THEMES: string[] = [
+    'xijinping', // 习近平
+    'cultural-revolution-campaigns', // 文化大革命
+    'jiangqing', // 江青
+    'gang-of-four', // 四人帮
+];
+
+let _filterSensitive = true;
+
+/** 由入口按配置设置是否过滤国内敏感主题 */
+export function setSensitiveFilter(enabled: boolean): void {
+    _filterSensitive = enabled;
+}
+
+function isSensitiveTheme(id: string): boolean {
+    return SENSITIVE_THEMES.includes(id);
+}
+
+/** 过滤掉属于任何敏感主题的海报 */
+function applySensitiveFilter(posters: PosterEntry[]): PosterEntry[] {
+    if (!_filterSensitive) return posters;
+    return posters.filter((p) => !p.themes.some((t) => isSensitiveTheme(t)));
+}
+
+/**
  * 定位并加载海报索引（assets/poster-index.json）。
  * 生产环境位于 <pkg>/lib/../assets/，开发环境位于 <pkg>/src/../assets/，
  * 二者在包根目录下，用同一相对路径即可。
@@ -29,7 +58,10 @@ export function loadIndex(): PosterIndex {
 /** 列出主题（支持关键词过滤：中文别名、主题名、slug） */
 export function listThemes(keyword?: string): ThemeEntry[] {
     const index = loadIndex();
-    if (!keyword) return index.themes;
+    const base = _filterSensitive
+        ? index.themes.filter((t) => !isSensitiveTheme(t.id))
+        : index.themes;
+    if (!keyword) return base;
 
     const raw = keyword.trim();
     const kw = raw.toLowerCase();
@@ -39,7 +71,7 @@ export function listThemes(keyword?: string): ThemeEntry[] {
             .map(([, slug]) => slug)
     );
 
-    return index.themes.filter(
+    return base.filter(
         (t) => aliasSlugs.has(t.id) || t.id.includes(kw) || t.name.toLowerCase().includes(kw)
     );
 }
@@ -47,9 +79,8 @@ export function listThemes(keyword?: string): ThemeEntry[] {
 /** 按筛选条件过滤海报 */
 export function filterPosters(filter?: PosterFilter): PosterEntry[] {
     const index = loadIndex();
-    if (!filter) return index.posters;
-
-    let result = index.posters;
+    let result = applySensitiveFilter(index.posters);
+    if (!filter) return result;
 
     if (filter.themes?.length) {
         const themes = filter.themes;
@@ -87,7 +118,7 @@ export function filterPosters(filter?: PosterFilter): PosterEntry[] {
 /** 每个主题的海报数量（供列表命令展示） */
 export function countByTheme(): Map<string, number> {
     const counts = new Map<string, number>();
-    for (const p of loadIndex().posters) {
+    for (const p of applySensitiveFilter(loadIndex().posters)) {
         for (const t of p.themes) {
             counts.set(t, (counts.get(t) ?? 0) + 1);
         }

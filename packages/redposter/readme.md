@@ -33,6 +33,7 @@
 | --- | --- | --- | --- |
 | `cooldown` | number | 30 | 发送海报冷却时间（秒） |
 | `showTitle` | boolean | true | 发图前是否显示海报标题 |
+| `filterSensitive` | boolean | true | 国内政治敏感过滤器：过滤习近平、文化大革命、江青、四人帮等主题的海报 |
 
 ## 缓存目录
 
