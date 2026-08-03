@@ -1,5 +1,5 @@
-import * as cheerio from 'cheerio';
-import type { AnyNode, Element as DomElement } from 'domhandler';
+import * as cheerio from "cheerio";
+import type { AnyNode, Element as DomElement } from "domhandler";
 
 /**
  * 从 marxists.org 中文文库的「上古 HTML」（多为 GB2312 编码、<p>/<br> 混排）中
@@ -44,24 +44,24 @@ function isBlockTag(name: string): boolean {
 function htmlToText(el: DomElement): string {
     const parts: string[] = [];
     for (const child of el.children) {
-        if (child.type === 'text') {
+        if (child.type === "text") {
             parts.push(child.data);
-        } else if (child.type === 'tag') {
+        } else if (child.type === "tag") {
             const tag = child.tagName.toLowerCase();
-            if (tag === 'br') {
-                parts.push('\n');
+            if (tag === "br") {
+                parts.push("\n");
             } else if (isBlockTag(tag)) {
                 // 块级元素内的文本递归处理
-                parts.push('\n', htmlToText(child), '\n');
+                parts.push("\n", htmlToText(child), "\n");
             } else {
                 // 行内元素（b/strong/i/em/u/font/span/a 等）：只取文本
                 parts.push(htmlToText(child));
             }
-        } else if (child.type === 'comment') {
-            parts.push('\n');
+        } else if (child.type === "comment") {
+            parts.push("\n");
         }
     }
-    return parts.join('');
+    return parts.join("");
 }
 
 /**
@@ -69,9 +69,9 @@ function htmlToText(el: DomElement): string {
  */
 export function normalizeText(raw: string): string {
     return raw
-        .replace(/[ \t]+/g, ' ')
-        .replace(/\n{3,}/g, '\n\n')
-        .replace(/^[　 ]+/gm, '')
+        .replace(/[ \t]+/g, " ")
+        .replace(/\n{3,}/g, "\n\n")
+        .replace(/^[　 ]+/gm, "")
         .trim();
 }
 
@@ -82,8 +82,8 @@ export function normalizeText(raw: string): string {
  */
 export function extractMarkdown(html: string): string {
     const $ = cheerio.load(html);
-    const body = $('body').first();
-    if (!body.length) return '';
+    const body = $("body").first();
+    if (!body.length) return "";
 
     const paragraphs: string[] = [];
 
@@ -94,23 +94,23 @@ export function extractMarkdown(html: string): string {
     const bodyChildren = body.contents().toArray() as AnyNode[];
     let started = false; // 是否已进入正文（遇到首个「有意义」内容）
     let inNotes = false; // 是否已进入注释区
-    let pendingText = ''; // 累积的自由文本（<br> 分隔）
+    let pendingText = ""; // 累积的自由文本（<br> 分隔）
 
     /** 把累积的自由文本刷入段落列表 */
     const flushPending = () => {
         const text = normalizeText(pendingText);
         if (text) paragraphs.push(text);
-        pendingText = '';
+        pendingText = "";
     };
 
     for (const node of bodyChildren) {
-        if (node.type === 'text') {
+        if (node.type === "text") {
             // 自由文本（如 mao2/mao4 中 <br> 分隔的正文）
             const text = node.data;
             if (text.trim() && started) pendingText += text;
             continue;
         }
-        if (node.type !== 'tag') continue;
+        if (node.type !== "tag") continue;
 
         const el = $(node);
         const tag = node.tagName.toLowerCase();
@@ -121,11 +121,11 @@ export function extractMarkdown(html: string): string {
 
         // ── 未进入正文时：识别头部导航并跳过 ──
         if (!started) {
-            if (tag === 'a' || tag === 'font') {
+            if (tag === "a" || tag === "font") {
                 const t = normalizeText(text);
                 if (HEADER_LINK_RE.test(t) || t.length <= 10) continue;
             }
-            if (tag === 'hr' || tag === 'br') continue;
+            if (tag === "hr" || tag === "br") continue;
             // 第一个有意义的内容：可能是标题 <p>、简介 <blockquote>、或正文
             started = true;
         }
@@ -141,7 +141,7 @@ export function extractMarkdown(html: string): string {
         if (isNoiseBlock(el)) continue;
 
         // ── 处理内容块 ──
-        if (tag === 'blockquote') {
+        if (tag === "blockquote") {
             // 正文中的引文块（也可能是简介题解）。若在正文中（前面已有内容），保留；
             // 若是页首简介（首个内容块且很短），跳过。
             const inner = normalizeText(htmlToText(node));
@@ -150,35 +150,35 @@ export function extractMarkdown(html: string): string {
                     // 页首简介/题解：跳过
                 } else {
                     flushPending();
-                    paragraphs.push(`> ${inner.replace(/\n+/g, '\n> ')}`);
+                    paragraphs.push(`> ${inner.replace(/\n+/g, "\n> ")}`);
                 }
             }
         } else if (
-            tag === 'h1' ||
-            tag === 'h2' ||
-            tag === 'h3' ||
-            tag === 'h4' ||
-            tag === 'h5' ||
-            tag === 'h6'
+            tag === "h1" ||
+            tag === "h2" ||
+            tag === "h3" ||
+            tag === "h4" ||
+            tag === "h5" ||
+            tag === "h6"
         ) {
             flushPending();
             const level = Number(tag[1]);
-            paragraphs.push(`${'#'.repeat(level)} ${normalizeText(htmlToText(node))}`);
-        } else if (tag === 'p' || tag === 'div' || tag === 'center') {
+            paragraphs.push(`${"#".repeat(level)} ${normalizeText(htmlToText(node))}`);
+        } else if (tag === "p" || tag === "div" || tag === "center") {
             flushPending();
             const inner = normalizeText(htmlToText(node));
             if (inner) paragraphs.push(inner);
-        } else if (tag === 'table') {
+        } else if (tag === "table") {
             flushPending();
             const inner = extractTableText(node);
             if (inner) paragraphs.push(inner);
-        } else if (tag === 'a') {
+        } else if (tag === "a") {
             // 孤立链接（非导航）：可能是正文中的 [n] 引用，直接丢弃
             const t = normalizeText(text);
             if (t && !ANCHOR_RE.test(t)) flushPending();
-        } else if (tag === 'br') {
+        } else if (tag === "br") {
             // 分隔符，不处理（自由文本会累积）
-        } else if (tag === 'hr') {
+        } else if (tag === "hr") {
             // 分隔线：正文内视为段落分隔
             flushPending();
         }
@@ -197,7 +197,7 @@ export function extractMarkdown(html: string): string {
         cleaned.shift();
     }
 
-    return cleaned.join('\n\n');
+    return cleaned.join("\n\n");
 }
 
 /**
@@ -238,12 +238,12 @@ function extractTableText(el: DomElement): string {
 
     const walk = (node: DomElement) => {
         for (const child of node.children) {
-            if (child.type === 'tag') {
+            if (child.type === "tag") {
                 const tag = child.tagName.toLowerCase();
-                if (tag === 'td' || tag === 'th') {
+                if (tag === "td" || tag === "th") {
                     // 单元格内可能有 <br> 分隔的多行正文
                     const inner = normalizeText(htmlToText(child));
-                    for (const line of inner.split('\n')) {
+                    for (const line of inner.split("\n")) {
                         const t = line.trim();
                         if (t) rows.push(t);
                     }
@@ -261,5 +261,5 @@ function extractTableText(el: DomElement): string {
         .filter((line) => !TRAILER_RE.test(line)) // 页脚导航
         .filter((line) => !ANCHOR_RE.test(line)) // 孤立锚点 [n]
         .filter((line) => !/^【附(录|件)?/.test(line)) // 相关链接区的附录条目
-        .join('\n\n');
+        .join("\n\n");
 }

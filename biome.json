@@ -11,7 +11,8 @@
     "formatter": {
         "enabled": true,
         "indentStyle": "space",
-        "indentWidth": 4
+        "indentWidth": 4,
+        "lineWidth": 100
     },
     "linter": {
         "enabled": true,
@@ -21,7 +22,9 @@
     },
     "javascript": {
         "formatter": {
-            "quoteStyle": "double"
+            "quoteStyle": "double",
+            "semicolons": "always",
+            "trailingCommas": "all"
         }
     },
     "assist": {
