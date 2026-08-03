@@ -34,7 +34,7 @@ export const Config: Schema<ConfigType> = Schema.object({
 	navigationTimeout: Schema.number()
 		.default(30_000)
 		.description("页面导航超时（毫秒）"),
-	cacheDir: Schema.string().default("cache/red/redarchive").description("缓存目录"),
+	cacheDir: Schema.string().default("cache/redseries/redarchive").description("缓存目录"),
 	categoryCacheTtlMs: Schema.number()
 		.min(0)
 		.default(10 * 60 * 1000)

@@ -10,9 +10,9 @@ const logger = new Logger('redposter');
 
 let _cacheDir: string | null = null;
 
-/** 计算图片缓存目录：<baseDir>/data/red/redposter（红色系列统一聚合在 data/red/ 下） */
+/** 计算图片缓存目录：<baseDir>/data/redseries/redposter（红色系列统一聚合在 data/redseries/ 下） */
 export function getCacheDir(ctx: Context): string {
-    return resolve(ctx.baseDir, 'data', 'red', 'redposter');
+    return resolve(ctx.baseDir, 'data', 'redseries', 'redposter');
 }
 
 /** 由入口注入缓存目录（启动时） */

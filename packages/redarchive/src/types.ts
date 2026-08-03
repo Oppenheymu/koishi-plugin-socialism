@@ -4,7 +4,7 @@ export interface CrawlConfig {
 	entryUrls: string[];
 	/** 页面导航超时(ms) */
 	navigationTimeout: number;
-	/** 缓存目录（默认 cache/red/redarchive） */
+	/** 缓存目录（默认 cache/redseries/redarchive） */
 	cacheDir: string;
 	/** 分类缓存 TTL(ms) */
 	categoryCacheTtlMs: number;
