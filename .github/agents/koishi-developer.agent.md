@@ -1,5 +1,5 @@
 ---
-description: "Use when: 开发/调试 Koishi 插件、修改本 monorepo（koishi-plugin-socialism）内任一包（redmusic、redarchive、redposter、redpropaganda、redquote）、需要查询 Koishi API 用法、schema 配置、服务注入、指令开发，或需要在本仓库执行构建（koishi-app 下 yarn build）与 git/GitHub 协作流程（分支、PR）"
+description: "Use when: 开发/调试 Koishi 插件、修改本 monorepo（koishi-plugin-socialism）内任一包（redmusic、redarchive、redposter、redpropaganda、redquote）、需要查询 Koishi API 用法、schema 配置、服务注入、指令开发，或需要在本仓库执行构建（koishi-app 下 yarn build）与 git/GitHub 协作流程（提交、PR）"
 name: "Koishi 插件开发者"
 argument-hint: "描述要开发或修复的插件功能，例如：给 redmusic 加一个按标签批量点歌的命令"
 tools: [vscode, execute, read, agent, edit, search, web, browser, 'github/*', 'io.github.upstash/context7/*', 'io.github.wonderwhy-er/desktop-commander/*', todo]
@@ -32,8 +32,8 @@ tools: [vscode, execute, read, agent, edit, search, web, browser, 'github/*', 'i
 
 ## 协作流程（GitHub）
 
-- 用 GitHub MCP 操作仓库 `Oppenheymu/koishi-plugin-socialism`：列分支、搜 issue/PR、创建分支、提交代码、开 PR、请求 Copilot 审查。
-- 新功能/修复先开分支（命名建议 `feat/`、`fix/`、`docs/` 前缀），提交信息用 conventional commits（`feat:`、`fix:`、`docs:`、`chore:`）。
+- 用 GitHub MCP 操作仓库 `Oppenheymu/koishi-plugin-socialism`：列分支、搜 issue/PR、提交代码、开 PR、请求 Copilot 审查。
+- **直接在 `main`（origin/main）上工作并提交**，提交信息用 conventional commits（`feat:`、`fix:`、`docs:`、`chore:`）；**不要擅自创建新分支**，如确需分支必须事先征得用户同意。
 - 本仓库**不使用 changeset**；版本号与 npm 发包由仓库所有者手动处理，agent 的职责止步于构建验证与 git 提交。
 - 需要文档/依赖最新信息时可用 `web` 抓取；代码搜索优先用工作区内搜索，跨仓库才用 GitHub 搜索。
 
