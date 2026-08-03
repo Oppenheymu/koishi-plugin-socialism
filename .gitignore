@@ -23,6 +23,7 @@ pnpm-debug.log*
 # OS / IDE
 .DS_Store
 .idea/
+.VSCodeCounter
 .vscode/*.local.json
 .vscode/*.code-workspace
 
