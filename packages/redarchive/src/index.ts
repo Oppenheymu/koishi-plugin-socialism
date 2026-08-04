@@ -154,5 +154,8 @@ export function apply(ctx: Context, config: ConfigType) {
   ctx.i18n.define("en", require("../locales/en"));
 
   ctx.plugin(RedarchiveService, config);
-  registerCommand(ctx, config);
+
+  // 「马克思段落」命令依赖本插件提供的 redarchive 服务，用 inject 声明
+  // 以消除「property redarchive is not registered」警告
+  ctx.inject(["redarchive"], (ctx) => registerCommand(ctx, config));
 }

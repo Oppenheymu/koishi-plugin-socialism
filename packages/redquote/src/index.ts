@@ -217,57 +217,61 @@ export function apply(ctx: Context, config: Config) {
     // 启动时校验索引可用，尽早暴露数据问题
     loadIndex();
 
-    // ── 红色语录 ──────────────────────────────────────
+    // 命令依赖本插件提供的 redquote 服务，用 inject 声明以消除
+    // 「property redquote is not registered」警告
+    ctx.inject(["redquote"], (ctx) => {
+        // ── 红色语录 ──────────────────────────────────────
 
-    ctx.command("红色语录 [作者:text] [数量:number]", "随机获取革命导师语录")
-        .alias("红语录")
-        .usage(
-            "直接输入「红色语录」随机一条；输入「红色语录 毛泽东」按作者；" +
-            "输入「红色语录 3」取 3 条；支持「红色语录 毛泽东 2」组合",
-        )
-        .example("红色语录")
-        .example("红色语录 毛泽东")
-        .example("红色语录 3")
-        .example("红色语录 列宁 2")
-        .action(async ({ session }, author, count) => {
-            if (!session?.userId) return;
+        ctx.command("红色语录 [作者:text] [数量:number]", "随机获取革命导师语录")
+            .alias("红语录")
+            .usage(
+                "直接输入「红色语录」随机一条；输入「红色语录 毛泽东」按作者；" +
+                "输入「红色语录 3」取 3 条；支持「红色语录 毛泽东 2」组合",
+            )
+            .example("红色语录")
+            .example("红色语录 毛泽东")
+            .example("红色语录 3")
+            .example("红色语录 列宁 2")
+            .action(async ({ session }, author, count) => {
+                if (!session?.userId) return;
 
-            // 解析：作者可能是数字（数量），也可能是名字
-            let authorName: string | undefined;
-            let n = config.count;
-            if (author && /^\d+$/.test(author)) {
-                n = Number(author);
-            } else if (author) {
-                authorName = author;
-            }
-            if (count) n = count;
+                // 解析：作者可能是数字（数量），也可能是名字
+                let authorName: string | undefined;
+                let n = config.count;
+                if (author && /^\d+$/.test(author)) {
+                    n = Number(author);
+                } else if (author) {
+                    authorName = author;
+                }
+                if (count) n = count;
 
-            const filter: QuoteFilter | undefined = authorName ? { author: authorName } : undefined;
-            const pool = ctx.redquote.list(filter);
-            if (!pool.length) {
-                return authorName
-                    ? session.text(".author-not-found", [authorName])
-                    : session.text(".no-quotes");
-            }
+                const filter: QuoteFilter | undefined = authorName ? { author: authorName } : undefined;
+                const pool = ctx.redquote.list(filter);
+                if (!pool.length) {
+                    return authorName
+                        ? session.text(".author-not-found", [authorName])
+                        : session.text(".no-quotes");
+                }
 
-            const quotes = ctx.redquote.pick(Math.min(n, pool.length), filter);
-            if (!quotes.length) return session.text(".no-quotes");
-            return quotes.map((q) => ctx.redquote.format(q, config.showSource)).join("\n\n");
-        });
-
-    // ── 红色语录列表 ──────────────────────────────────
-
-    ctx.command("红色语录列表", "查看所有作者及语录数量")
-        .alias("红色语录list")
-        .action(({ session }) => {
-            if (!session) return;
-            const authors = listAuthors();
-            if (!authors.length) return session.text(".no-quotes");
-            const counts = countByAuthor();
-            const lines = authors.map((a) => {
-                const n = counts.get(a.id) ?? 0;
-                return session.text(".author-line", [a.name, a.nameEn, n]);
+                const quotes = ctx.redquote.pick(Math.min(n, pool.length), filter);
+                if (!quotes.length) return session.text(".no-quotes");
+                return quotes.map((q) => ctx.redquote.format(q, config.showSource)).join("\n\n");
             });
-            return session.text(".author-list", [authors.length, lines.join("\n")]);
-        });
+
+        // ── 红色语录列表 ──────────────────────────────────
+
+        ctx.command("红色语录列表", "查看所有作者及语录数量")
+            .alias("红色语录list")
+            .action(({ session }) => {
+                if (!session) return;
+                const authors = listAuthors();
+                if (!authors.length) return session.text(".no-quotes");
+                const counts = countByAuthor();
+                const lines = authors.map((a) => {
+                    const n = counts.get(a.id) ?? 0;
+                    return session.text(".author-line", [a.name, a.nameEn, n]);
+                });
+                return session.text(".author-list", [authors.length, lines.join("\n")]);
+            });
+    });
 }

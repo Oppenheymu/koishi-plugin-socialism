@@ -237,101 +237,105 @@ export function apply(ctx: Context, config: Config) {
         return Math.max(0, remaining);
     }
 
-    // ── 红色海报 ──────────────────────────────────────
+    // 命令依赖本插件提供的 redposter 服务，用 inject 声明以消除
+    // 「property redposter is not registered」警告
+    ctx.inject(["redposter"], (ctx) => {
+        // ── 红色海报 ──────────────────────────────────────
 
-    ctx.command("红色海报 [关键词:text]", "随机发送一张中国宣传画海报，或按主题/关键词筛选")
-        .alias("红海报")
-        .usage(
-            "直接输入「红色海报」随机发送一张；输入「红色海报 大跃进」按主题筛选；" +
-            "支持中文别名与英文关键词，也支持年份（如 1958）",
-        )
-        .example("红色海报")
-        .example("红色海报 大跃进")
-        .example("红色海报 leap")
-        .example("红色海报 1958")
-        .action(async ({ session }, keyword) => {
-            if (!session?.userId) return;
+        ctx.command("红色海报 [关键词:text]", "随机发送一张中国宣传画海报，或按主题/关键词筛选")
+            .alias("红海报")
+            .usage(
+                "直接输入「红色海报」随机发送一张；输入「红色海报 大跃进」按主题筛选；" +
+                "支持中文别名与英文关键词，也支持年份（如 1958）",
+            )
+            .example("红色海报")
+            .example("红色海报 大跃进")
+            .example("红色海报 leap")
+            .example("红色海报 1958")
+            .action(async ({ session }, keyword) => {
+                if (!session?.userId) return;
 
-            if (!isCacheReady()) {
-                return session.text(".cache-not-ready");
-            }
-
-            const remaining = checkCooldown(session.userId);
-            if (remaining > 0) {
-                return session.text(".cooldown", [(remaining / 1000).toFixed(0)]);
-            }
-
-            const raw = keyword?.trim();
-            const filter: PosterFilter | undefined = raw ? { keyword: raw } : undefined;
-            // 先检查是否有匹配（纯元数据，不下载），区分「无匹配」与「下载失败」
-            const matched = ctx.redposter.list(filter);
-            if (!matched.length) {
-                return raw ? session.text(".not-found", [raw]) : session.text(".no-posters");
-            }
-            const result = await ctx.redposter.random(filter);
-            if (!result.hit) {
-                // 有匹配但图片下载失败（网络问题等），避免误报「未找到」
-                return session.text(".download-failed");
-            }
-
-            cooldowns.set(session.userId, Date.now());
-
-            const entry = result.entry;
-            const parts: string[] = [];
-            if (config.showTitle) {
-                const year = entry.year ? `（${entry.year}）` : "";
-                parts.push(`🖼️ ${entry.title}${year}`);
-            }
-            parts.push(result.image);
-            await session.send(parts.join("\n"));
-        });
-
-    // ── 红色海报列表 ──────────────────────────────────
-
-    ctx.command("红色海报列表 [关键词:text]", "查看所有可用主题及海报数量")
-        .alias("红色海报list")
-        .action(({ session }, keyword) => {
-            if (!session) return;
-
-            const themes = listThemes(keyword?.trim());
-            if (!themes.length) {
-                return keyword
-                    ? session.text(".theme-not-found", [keyword.trim()])
-                    : session.text(".no-themes");
-            }
-
-            const counts = countByTheme();
-            const groups = new Map<string, ThemeEntry[]>();
-            for (const t of themes) {
-                const list = groups.get(t.category) ?? [];
-                list.push(t);
-                groups.set(t.category, list);
-            }
-
-            const lines: string[] = [];
-            for (const [category, items] of groups) {
-                lines.push(`【${category}】`);
-                for (const t of items) {
-                    lines.push(`- ${t.name} [${counts.get(t.id) ?? 0}]`);
+                if (!isCacheReady()) {
+                    return session.text(".cache-not-ready");
                 }
-            }
 
-            const note = keyword ? "" : session.text(".theme-hint");
-            return session.text(".theme-list", [themes.length, lines.join("\n"), note]);
-        });
+                const remaining = checkCooldown(session.userId);
+                if (remaining > 0) {
+                    return session.text(".cooldown", [(remaining / 1000).toFixed(0)]);
+                }
 
-    // ── 红色海报重载（管理员） ────────────────────────
+                const raw = keyword?.trim();
+                const filter: PosterFilter | undefined = raw ? { keyword: raw } : undefined;
+                // 先检查是否有匹配（纯元数据，不下载），区分「无匹配」与「下载失败」
+                const matched = ctx.redposter.list(filter);
+                if (!matched.length) {
+                    return raw ? session.text(".not-found", [raw]) : session.text(".no-posters");
+                }
+                const result = await ctx.redposter.random(filter);
+                if (!result.hit) {
+                    // 有匹配但图片下载失败（网络问题等），避免误报「未找到」
+                    return session.text(".download-failed");
+                }
 
-    ctx.command("红色海报重载", "清空海报图片缓存（管理员）")
-        .alias("红色海报reload")
-        .userFields(["authority"])
-        .action(async ({ session }) => {
-            if (!session) return;
-            const user = session.user as { authority?: number } | undefined;
-            if ((user?.authority ?? 0) < 2) {
-                return session.text(".permission-denied");
-            }
-            clearCache();
-            return session.text(".cache-cleared");
-        });
+                cooldowns.set(session.userId, Date.now());
+
+                const entry = result.entry;
+                const parts: string[] = [];
+                if (config.showTitle) {
+                    const year = entry.year ? `（${entry.year}）` : "";
+                    parts.push(`🖼️ ${entry.title}${year}`);
+                }
+                parts.push(result.image);
+                await session.send(parts.join("\n"));
+            });
+
+        // ── 红色海报列表 ──────────────────────────────────
+
+        ctx.command("红色海报列表 [关键词:text]", "查看所有可用主题及海报数量")
+            .alias("红色海报list")
+            .action(({ session }, keyword) => {
+                if (!session) return;
+
+                const themes = listThemes(keyword?.trim());
+                if (!themes.length) {
+                    return keyword
+                        ? session.text(".theme-not-found", [keyword.trim()])
+                        : session.text(".no-themes");
+                }
+
+                const counts = countByTheme();
+                const groups = new Map<string, ThemeEntry[]>();
+                for (const t of themes) {
+                    const list = groups.get(t.category) ?? [];
+                    list.push(t);
+                    groups.set(t.category, list);
+                }
+
+                const lines: string[] = [];
+                for (const [category, items] of groups) {
+                    lines.push(`【${category}】`);
+                    for (const t of items) {
+                        lines.push(`- ${t.name} [${counts.get(t.id) ?? 0}]`);
+                    }
+                }
+
+                const note = keyword ? "" : session.text(".theme-hint");
+                return session.text(".theme-list", [themes.length, lines.join("\n"), note]);
+            });
+
+        // ── 红色海报重载（管理员） ────────────────────────
+
+        ctx.command("红色海报重载", "清空海报图片缓存（管理员）")
+            .alias("红色海报reload")
+            .userFields(["authority"])
+            .action(async ({ session }) => {
+                if (!session) return;
+                const user = session.user as { authority?: number } | undefined;
+                if ((user?.authority ?? 0) < 2) {
+                    return session.text(".permission-denied");
+                }
+                clearCache();
+                return session.text(".cache-cleared");
+            });
+    });
 }
