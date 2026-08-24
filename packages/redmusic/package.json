@@ -1,65 +1,66 @@
 {
-	"name": "koishi-plugin-redmusic",
-	"version": "1.4.0",
-	"contributors": [
-		"Oppenheymu <oppenheymu@gmail.com>"
-	],
-	"main": "lib/index.js",
-	"types": "lib/index.d.ts",
-	"exports": {
-		".": {
-			"types": "./lib/index.d.ts",
-			"development": "./src/index.ts",
-			"default": "./lib/index.js"
-		},
-		"./package.json": "./package.json"
-	},
-	"files": [
-		"lib",
-		"locales",
-		"assets/index.json"
-	],
-	"license": "MIT",
-	"publishConfig": {
-		"access": "public"
-	},
-	"homepage": "https://github.com/Oppenheymu/koishi-plugin-socialism/tree/main/packages/redmusic",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Oppenheymu/koishi-plugin-socialism.git",
-		"directory": "packages/redmusic"
-	},
-	"keywords": [
-		"chatbot",
-		"koishi",
-		"plugin"
-	],
-	"scripts": {
-		"build": "tsc -b"
-	},
-	"peerDependencies": {
-		"koishi": "^4.17.5"
-	},
-	"dependencies": {
-		"adm-zip": "^0.5.17"
-	},
-	"koishi": {
-		"des": "Recopila canciones rojas, inyectadas en ctx para que las usen otros plugins",
-		"fr": "Collecte des chansons rouges, injectées dans ctx pour être utilisées par d'autres plugins",
-		"ja": "赤い歌を収集し、ctx に注入して他のプラグインが使用できるようにする",
-		"de": "Sammelt rote Lieder, die in ctx injiziert werden, damit andere Plugins sie verwenden können",
-		"ru": "Собирает красные песни, внедряемые в ctx для использования другими плагинами",
-		"escription": {
-			"en": "Collect some redmusic",
-			"zh": "收集了一些红歌，注入到ctx供其它插件使用"
-		},
-		"service": {
-			"implements": [
-				"redmusic"
-			]
-		}
-	},
-	"devDependencies": {
-		"@types/adm-zip": "^0.5.8"
-	}
+    "name": "koishi-plugin-redmusic",
+    "version": "1.4.0",
+    "contributors": [
+        "Oppenheymu <oppenheymu@gmail.com>"
+    ],
+    "main": "lib/index.cjs",
+    "types": "lib/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./lib/index.d.ts",
+            "development": "./src/index.ts",
+            "default": "./lib/index.cjs"
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "lib",
+        "locales",
+        "assets/index.json"
+    ],
+    "license": "MIT",
+    "type": "module",
+    "publishConfig": {
+        "access": "public"
+    },
+    "homepage": "https://github.com/Oppenheymu/koishi-plugin-socialism/tree/main/packages/redmusic",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Oppenheymu/koishi-plugin-socialism.git",
+        "directory": "packages/redmusic"
+    },
+    "keywords": [
+        "chatbot",
+        "koishi",
+        "plugin"
+    ],
+    "scripts": {
+        "build": "pnpm --dir ../.. exec tsdown -W -F koishi-plugin-redmusic"
+    },
+    "peerDependencies": {
+        "koishi": "^4.17.5"
+    },
+    "dependencies": {
+        "adm-zip": "^0.5.17"
+    },
+    "koishi": {
+        "des": "Recopila canciones rojas, inyectadas en ctx para que las usen otros plugins",
+        "fr": "Collecte des chansons rouges, injectées dans ctx pour être utilisées par d'autres plugins",
+        "ja": "赤い歌を収集し、ctx に注入して他のプラグインが使用できるようにする",
+        "de": "Sammelt rote Lieder, die in ctx injiziert werden, damit andere Plugins sie verwenden können",
+        "ru": "Собирает красные песни, внедряемые в ctx для использования другими плагинами",
+        "escription": {
+            "en": "Collect some redmusic",
+            "zh": "收集了一些红歌，注入到ctx供其它插件使用"
+        },
+        "service": {
+            "implements": [
+                "redmusic"
+            ]
+        }
+    },
+    "devDependencies": {
+        "@types/adm-zip": "^0.5.8"
+    }
 }

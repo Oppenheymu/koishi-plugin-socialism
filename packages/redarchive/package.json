@@ -4,13 +4,13 @@
     "contributors": [
         "Oppenheymu <oppenheymu@gmail.com>"
     ],
-    "main": "lib/index.js",
+    "main": "lib/index.cjs",
     "types": "lib/index.d.ts",
     "exports": {
         ".": {
             "types": "./lib/index.d.ts",
             "development": "./src/index.ts",
-            "default": "./lib/index.js"
+            "default": "./lib/index.cjs"
         },
         "./package.json": "./package.json"
     },
@@ -19,6 +19,7 @@
         "locales"
     ],
     "license": "MIT",
+    "type": "module",
     "publishConfig": {
         "access": "public"
     },
@@ -36,7 +37,7 @@
         "archive"
     ],
     "scripts": {
-        "build": "tsc -b"
+        "build": "pnpm --dir ../.. exec tsdown -W -F koishi-plugin-redarchive"
     },
     "peerDependencies": {
         "koishi": "^4.17.5"
